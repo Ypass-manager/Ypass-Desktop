@@ -5,11 +5,11 @@ namespace YpassDesktop.ViewModels
     public class ExempleViewModel : BaseViewModel
     {
 
-        private ExempleViewModel exempleViewModel;
+        private MainViewModel mainViewModel;
 
-        public ExempleViewModel(ExempleViewModel viewModel)
+        public ExempleViewModel(MainViewModel viewModel)
         {
-            this.exempleViewModel = viewModel;
+            this.mainViewModel = viewModel;
         }
     }
 }
