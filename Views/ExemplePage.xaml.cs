@@ -15,11 +15,6 @@ namespace YpassDesktop.Views
         {
             InitializeComponent();
         }
-
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
-        }
     }
 
 }
