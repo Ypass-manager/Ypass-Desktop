@@ -43,7 +43,7 @@ on:
     branches: [ "integration-test" ]
   pull_request:
     branches: [ "integration-test" ]
-
+  workflow_dispatch:
 jobs:
 
   build:
