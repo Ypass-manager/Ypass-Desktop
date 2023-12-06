@@ -10,13 +10,15 @@ namespace YpassDesktop.Utils
     internal class HashTool
     {
 
-        public static string HashPassword(string password, string salt)
+        public static string DeriveKey(string password, string? salt ="!!!")
         {
+
             using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, Encoding.UTF8.GetBytes(salt), 10000, HashAlgorithmName.SHA256))
             {
                 byte[] hashBytes = pbkdf2.GetBytes(32); // 32 bytes pour SHA-256
                 return BitConverter.ToString(hashBytes).Replace("-", String.Empty);
             }
+
         }
 
         public static string GenerateRandomSalt()
@@ -43,5 +45,6 @@ namespace YpassDesktop.Utils
 
             return new string(saltChars);
         }
+
     }
 }
