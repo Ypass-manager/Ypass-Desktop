@@ -1,29 +1,24 @@
-﻿using DynamicData;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
-using System.Windows.Input;
+using YpassDesktop.Service;
+
 
 namespace YpassDesktop.ViewModels;
 public class MainWindowViewModel : BaseViewModel
 {
+    private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-        // Set current page to first on start up
-        _CurrentPage = new SimplePageViewModel();
+        var simplePageViewModel= new SimplePageViewModel();
+        NavigationService.Initialize(simplePageViewModel);
+        
+        //Subscribe to the service to know when a page has been change, and set the page
+        NavigationService.NavigationChanged += newPage => setCurrentPage(newPage);
 
-        // Subscribe to the ChangePageObservable to handle page changes
-        (_CurrentPage as BasePageViewModel)?.ChangePageObservable
-                .Subscribe(newPage => setCurrentPage(newPage));
-
+        // First Page by default
+        _CurrentPage = simplePageViewModel;
     }
 
-
-    // The default is the first page
-    private BaseViewModel _CurrentPage;
-
-    /// <summary>
-    /// Gets the current page. The property is read-only
-    /// </summary>
     public BaseViewModel CurrentPage
     {
         get { return _CurrentPage; }

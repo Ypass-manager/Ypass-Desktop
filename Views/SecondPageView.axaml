@@ -33,5 +33,7 @@
 				 UseFloatingWatermark="True"/>
 		<Button VerticalAlignment="Center"
 				Command="{Binding NavigateNextCommand}" Content="Next" />
+        <Button VerticalAlignment="Center"
+				Command="{Binding GoBackCommand}" Content="Go back" />
     </StackPanel>
 </UserControl>

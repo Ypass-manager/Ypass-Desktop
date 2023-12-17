@@ -17,6 +17,8 @@
 	<StackPanel Spacing="10">
 		
 		<TextBox Text="{Binding Message}" />
+        <Button VerticalAlignment="Center"
+				Command="{Binding GoBackCommand}" Content="Go Back" />
 	</StackPanel>
 
 </UserControl>

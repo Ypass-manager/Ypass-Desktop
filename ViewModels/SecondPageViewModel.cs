@@ -1,11 +1,10 @@
 using ReactiveUI;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Reactive;
 using System.Windows.Input;
 
 namespace YpassDesktop.ViewModels;
-public class SecondPageViewModel : BasePageViewModel
+public class SecondPageViewModel : BaseViewModel
 {
     public SecondPageViewModel()
     {
@@ -17,6 +16,7 @@ public class SecondPageViewModel : BasePageViewModel
         var canNavNext = this.WhenAnyValue(x => x.CanNavigateNext);
 
         NavigateNextCommand = ReactiveCommand.Create(NavigateNext, canNavNext);
+        GoBackCommand = ReactiveCommand.Create(GoBack);
     }
 
     private string? _MailAddress;
@@ -67,7 +67,15 @@ public class SecondPageViewModel : BasePageViewModel
     private void NavigateNext()
     {
         Console.WriteLine("heyyyyyyyyy");
-        ChangePage(new ThirdPageViewModel());
+        Service.NavigationService.NavigateTo(new ThirdPageViewModel());
+        
+    }
+
+    public ICommand GoBackCommand { get; }
+    private void GoBack()
+    {
+        Console.WriteLine("GO BACK TO HE PREVIOUS PAGE");
+        Service.NavigationService.GoBack();
         
     }
 }
