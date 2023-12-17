@@ -1,6 +1,6 @@
 bin/*
 obj/*
-packages/*
 .vs/*
 extra/*
 YpassDesktop.sln
+*.sln
