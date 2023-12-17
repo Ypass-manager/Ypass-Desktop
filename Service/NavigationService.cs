@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using YpassDesktop.ViewModels;
 
 namespace YpassDesktop.Service
@@ -14,10 +15,17 @@ namespace YpassDesktop.Service
         {
             _navigationHistory.Push(firstPage); // Add the first page to the history
         }
-        public static void NavigateTo(BaseViewModel newPage)
+        public static void NavigateTo(BaseViewModel newPage, ParameterBuilder? parameterBuilder = null)
         {
+            newPage.NavigationParameter = parameterBuilder;
             _navigationHistory.Push(newPage); // Store the current page in the history
             OnNavigationChanged(newPage);
+
+            // Check if the newPage has an Initialize method and call it
+            if (newPage is IInitializable initializablePage)
+            {
+                initializablePage.Initialize();
+            }
         }
 
         public static void GoBack()
