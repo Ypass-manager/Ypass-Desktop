@@ -10,26 +10,28 @@ namespace YpassDesktop.Utils
     internal class HashTool
     {
 
-        public static string DeriveKey(string password, string? salt ="!!!")
+        public static byte[] DeriveKey(byte[] password, byte[] salt)
         {
+            // Permet de hasher un mot de passe en SHA-256 avec un salt specific.
 
-            using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, Encoding.UTF8.GetBytes(salt), 10000, HashAlgorithmName.SHA256))
+            using (Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(password, salt, 10000, HashAlgorithmName.SHA256))
             {
                 byte[] hashBytes = pbkdf2.GetBytes(32); // 32 bytes pour SHA-256
-                return BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+                return hashBytes;
+                //return BitConverter.ToString(hashBytes).Replace("-", String.Empty);
             }
 
         }
 
-        public static string GenerateRandomSalt()
+        public static byte[] GenerateRandomSalt()
         {
             const string charString = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?/";
             char[] chars = charString.ToCharArray();
 
             // Génère une longueur de sel aléatoire entre 16 et 20 caractères
-            int saltLength = new Random().Next(16, 20); // Modification pour inclure 20 dans la plage
+            int saltLength = 32; // On utilise 32 bytes pour être compatible avec AES-256
 
-            char[] saltChars = new char[saltLength];
+            byte[] saltBytes = new byte[saltLength];
 
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
@@ -39,11 +41,12 @@ namespace YpassDesktop.Utils
                     rng.GetBytes(randomBytes);
 
                     int charIndex = randomBytes[0] % chars.Length;
-                    saltChars[i] = chars[charIndex];
+                    saltBytes[i] = (byte)chars[charIndex];
                 }
             }
 
-            return new string(saltChars);
+            return saltBytes;
+
         }
 
     }

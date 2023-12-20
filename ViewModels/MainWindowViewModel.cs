@@ -9,14 +9,14 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-        var simplePageViewModel= new SimplePageViewModel();
-        NavigationService.Initialize(simplePageViewModel);
+        var testEncryptPage= new EncryptTestPageViewModel();
+        NavigationService.Initialize(testEncryptPage);
         
         //Subscribe to the service to know when a page has been change, and set the page
         NavigationService.NavigationChanged += newPage => setCurrentPage(newPage);
 
         // First Page by default
-        _CurrentPage = simplePageViewModel;
+        _CurrentPage = testEncryptPage;
     }
 
     public BaseViewModel CurrentPage
