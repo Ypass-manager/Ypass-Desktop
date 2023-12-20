@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="YpassDesktop.Views.NewDatabase">
+	<StackPanel Spacing="10">
+		<Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
+		<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Create a new database" Margin="62,-3,0,0"/>
+		<TextBlock>. The name of your account list :</TextBlock>
+		<TextBox Text="{Binding databaseName}" />
+		<Button Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Command="{Binding NavigateNextCommand}"/>
+	</StackPanel>
+</UserControl>

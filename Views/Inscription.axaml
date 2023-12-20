@@ -3,17 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="YpassDesktop.Views.Inscription"
-             Title="Inscription">
+             x:Class="YpassDesktop.Views.Inscription">
   <StackPanel Spacing="10">
-	  <Button Content="Return" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="0,0,0,0"/>
+	  <Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Sign up" Margin="62,-3,0,0"/>
-        <TextBlock>. Your username :</TextBlock>
-        <TextBox Text="{Binding username}" />
+	    <TextBlock>. The name of your account list :</TextBlock>
+	    <TextBox Text="{Binding databaseName}" />
         <TextBlock>. Your password :</TextBlock>
         <TextBox Text="{Binding password}" />
-        <TextBlock>. The name of your account list :</TextBlock>
-        <TextBox Text="{Binding databaseName}" />
-        <Button Content="Enter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="35,3,0,0"/>
+	    <TextBlock>. Confirm your password : </TextBlock>
+	    <TextBox Text="{Binding confirmPassword}" />
+        <Button Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Command="{Binding NavigateNextCommand}"/>
   </StackPanel>
 </UserControl>

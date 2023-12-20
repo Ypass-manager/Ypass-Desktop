@@ -30,7 +30,7 @@
     <Compile Update="Views\SimplePageView.axaml.cs">
       <DependentUpon>SimplePageView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\inscription.axaml.cs">
+    <Compile Update="Views\Inscription.axaml.cs">
       <DependentUpon>Inscription.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
