@@ -8,7 +8,7 @@
 		<Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
 		<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Create a new database" Margin="62,-3,0,0"/>
 		<TextBlock>. The name of your account list :</TextBlock>
-		<TextBox Text="{Binding databaseName}" />
+		<TextBox Text="{Binding DatabaseName}" />
 		<Button Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Command="{Binding NavigateNextCommand}"/>
 	</StackPanel>
 </UserControl>

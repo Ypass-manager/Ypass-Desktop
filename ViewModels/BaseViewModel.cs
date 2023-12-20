@@ -1,4 +1,5 @@
 ﻿using ReactiveUI;
+using static YpassDesktop.ViewModels.InscriptionViewModel;
 using static YpassDesktop.ViewModels.SecondPageViewModel;
 namespace YpassDesktop.ViewModels;
 

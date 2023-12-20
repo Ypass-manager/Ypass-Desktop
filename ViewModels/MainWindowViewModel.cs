@@ -16,6 +16,8 @@ public class MainWindowViewModel : BaseViewModel
         NavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
 
         // First Page by default
+        // _CurrentPage = simplePageViewModel;
+        // Test value for inscription
         _CurrentPage = simplePageViewModel;
     }
 

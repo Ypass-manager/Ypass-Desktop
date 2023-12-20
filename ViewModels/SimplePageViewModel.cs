@@ -51,6 +51,7 @@ namespace YpassDesktop.ViewModels
                 else if (Name.Equals("NEXT"))
                 {
                     Service.NavigationService.NavigateTo(new SecondPageViewModel());
+                    // Service.NavigationService.NavigateTo(new InscriptionViewModel());
                     return string.Empty;
                 }
                 else
