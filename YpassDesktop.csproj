@@ -30,5 +30,13 @@
     <Compile Update="Views\SimplePageView.axaml.cs">
       <DependentUpon>SimplePageView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\inscription.axaml.cs">
+      <DependentUpon>Inscription.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\yoann\Documents\Ydays\Ypass\Projet\Ypass-Desktop\Views\.editorconfig" />
   </ItemGroup>
 </Project>
