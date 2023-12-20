@@ -17,10 +17,10 @@ namespace YpassDesktop.ViewModels
             .Subscribe(o => this.RaisePropertyChanged(nameof(Greeting)));
 
             //Subscribe to be notify when the page change
-            NavigationService.NavigationChanged += resetName;
+            NavigationService.NavigationChanged += ResetName;
         }
 
-        private void resetName(BaseViewModel newPage)
+        private void ResetName(BaseViewModel newPage)
         {
             Name = "Welcome back from the Login page ;) I do I know ? hehe";
         }

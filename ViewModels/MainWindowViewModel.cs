@@ -13,7 +13,7 @@ public class MainWindowViewModel : BaseViewModel
         NavigationService.Initialize(simplePageViewModel);
         
         //Subscribe to the service to know when a page has been change, and set the page
-        NavigationService.NavigationChanged += newPage => setCurrentPage(newPage);
+        NavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
 
         // First Page by default
         _CurrentPage = simplePageViewModel;
@@ -25,7 +25,7 @@ public class MainWindowViewModel : BaseViewModel
         private set { this.RaiseAndSetIfChanged(ref _CurrentPage, value); }
     }
 
-    public bool setCurrentPage(BaseViewModel page)
+    public bool SetCurrentPage(BaseViewModel page)
     {
         if (_CurrentPage != page)
         {
