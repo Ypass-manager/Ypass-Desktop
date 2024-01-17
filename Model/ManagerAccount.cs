@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YpassDesktop.DataAccess;
-
-namespace YpassDesktop.Model;
 public class ManagerAccount
 {
     private readonly YpassDbContext _dbContext;

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using Tmds.DBus.Protocol;
 using YpassDesktop.DataAccess;
-using YpassDesktop.Model;
 namespace YpassDesktop.Service
 {
     public static class EncryptionService
