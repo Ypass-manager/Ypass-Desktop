@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tmds.DBus.Protocol;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels
@@ -15,9 +16,11 @@ namespace YpassDesktop.ViewModels
         public EncryptTestPageViewModel() {
 
 
+            using var db = new YpassDbContext();
+
             password = "LeMotdePasseDeToto";
 
-            EncryptionService.InitializeDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat");
+            EncryptionService.InitializeDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "");
 
             string _encryptPassword = EncryptionService.EncryptPassword(password);
             string _decryptPassword = EncryptionService.DecryptPassword(_encryptPassword);
