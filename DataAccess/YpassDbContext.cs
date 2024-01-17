@@ -8,8 +8,11 @@ public class YpassDbContext : DbContext
 {
 
 
-    public DbSet<Blog> Blogs { get; set; }
-    public DbSet<Post> Posts { get; set; }
+    public DbSet<ManagerAccount> ManagerAccount { get; set; }
+    public DbSet<Account> Account { get; set; }
+    public DbSet<HistoryConnection> HistoryConnection { get; set; }
+    public DbSet<Setting> Setting { get; set; }
+
 
     public string DbPath { get; }
 
