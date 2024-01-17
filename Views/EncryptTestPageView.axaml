@@ -19,14 +19,14 @@
 		<StackPanel>
 			<TextBox Text="Test concernant le chiffrement"></TextBox>
 
-			<!-- Display SALT_CRITICAL -->
-			<TextBox Text="{Binding SaltCritical}"></TextBox>
+			<TextBox Text="{Binding password}"></TextBox>
+			<TextBox Text="{Binding encryptPassword}"></TextBox>
+			
+			
+			
 
-			<!-- Display SALT_CRITICAL_ENCRYPT -->
-			<TextBox Text="{Binding SaltCriticalEncrypt}"></TextBox>
-
-			<!-- Display salt_critical_decrypt -->
-			<TextBox Text="{Binding SaltCriticalDecrypt}"></TextBox>
+			
+			<TextBox Text="{Binding decryptPassword}"></TextBox>
 		</StackPanel>
 		
 		
