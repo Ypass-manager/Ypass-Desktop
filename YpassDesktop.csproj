@@ -27,11 +27,20 @@
 
 
   <ItemGroup>
+    <Compile Update="Views\ConnectionPageView.axaml.cs">
+      <DependentUpon>ConnectionPageView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewDatabasePageView.axaml.cs">
+      <DependentUpon>NewDatabasePageView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewOrExistentDatabasePageView.axaml.cs">
+      <DependentUpon>NewOrExistentDatabasePageView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SimplePageView.axaml.cs">
       <DependentUpon>SimplePageView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Inscription.axaml.cs">
-      <DependentUpon>Inscription.axaml</DependentUpon>
+    <Compile Update="Views\InscriptionPageView.axaml.cs">
+      <DependentUpon>InscriptionPageView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
