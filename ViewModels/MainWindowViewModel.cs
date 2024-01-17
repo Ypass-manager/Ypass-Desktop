@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
 using System;
+using System.Linq;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 
 
@@ -9,14 +11,34 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-        var testEncryptPage= new EncryptTestPageViewModel();
-        NavigationService.Initialize(testEncryptPage);
+        var simplePageViewModel= new SimplePageViewModel();
+        NavigationService.Initialize(simplePageViewModel);
         
         //Subscribe to the service to know when a page has been change, and set the page
         NavigationService.NavigationChanged += newPage => setCurrentPage(newPage);
 
         // First Page by default
-        _CurrentPage = testEncryptPage;
+        _CurrentPage = simplePageViewModel;
+
+
+        // Load Database
+
+        using var db = new YpassDbContext();
+        Console.WriteLine($"Database path: {db.DbPath}.");
+        
+
+        // Read
+        Console.WriteLine("Querying for a blog");
+        
+
+        // Update
+        Console.WriteLine("Updating the blog and adding a post");
+        
+
+        // Delete
+        Console.WriteLine("Delete the blog");
+        
+        db.SaveChanges();
     }
 
     public BaseViewModel CurrentPage
