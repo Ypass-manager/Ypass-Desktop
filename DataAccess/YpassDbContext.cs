@@ -16,11 +16,11 @@ public class YpassDbContext : DbContext
 
     public string DbPath { get; }
 
-    public YpassDbContext()
+    public YpassDbContext(string database_name)
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
-        DbPath = System.IO.Path.Join(path, "YpassDB.db");
+        DbPath = System.IO.Path.Join(path, database_name);
 
         Database.Migrate();
     }

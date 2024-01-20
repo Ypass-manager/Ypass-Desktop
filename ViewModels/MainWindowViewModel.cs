@@ -21,24 +21,7 @@ public class MainWindowViewModel : BaseViewModel
         _CurrentPage = simplePageViewModel;
 
 
-        // Load Database
-
-        using var db = new YpassDbContext();
-        Console.WriteLine($"Database path: {db.DbPath}.");
-        
-
-        // Read
-        Console.WriteLine("Querying for a blog");
-        
-
-        // Update
-        Console.WriteLine("Updating the blog and adding a post");
-        
-
-        // Delete
-        Console.WriteLine("Delete the blog");
-        
-        db.SaveChanges();
+       
     }
 
     public BaseViewModel CurrentPage
