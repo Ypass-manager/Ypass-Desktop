@@ -16,11 +16,11 @@ namespace YpassDesktop.ViewModels
         public EncryptTestPageViewModel() {
 
 
-            using var db = new YpassDbContext();
 
             password = "LeMotdePasseDeToto";
 
-            EncryptionService.InitializeDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "");
+            //EncryptionService.InitializeDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "YpassDB.db");
+            EncryptionService.LoadDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "YpassDB.db");
 
             string _encryptPassword = EncryptionService.EncryptPassword(password);
             string _decryptPassword = EncryptionService.DecryptPassword(_encryptPassword);

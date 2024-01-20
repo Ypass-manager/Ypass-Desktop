@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using Tmds.DBus.Protocol;
 using YpassDesktop.DataAccess;
+using System.Linq.Expressions;
+using System.Security.Cryptography;
 namespace YpassDesktop.Service
 {
     public static class EncryptionService
@@ -15,13 +17,13 @@ namespace YpassDesktop.Service
         private static byte[]? SALT_CRITICAL_ENCRYPT;
         private static byte[]? derivation_key_with_salt;
         private static byte[]? IV;
-        public static void InitializeDatabaseWithMasterPassword(string master_password, string DatabaseName)
+        public static void InitializeDatabaseWithMasterPassword(string master_password, string database_name)
         {
             if (master_password == null)
             {
                 throw new Exception("Master Password should be set");
             }
-            var ManagerAccountDB = new ManagerAccount(new YpassDbContext());
+            var ManagerAccountDB = new ManagerAccount(new YpassDbContext(database_name));
             var PASSWORD = Encoding.UTF8.GetBytes(master_password);
 
             // Generate the SALT_DERIVED KEY
@@ -46,26 +48,34 @@ namespace YpassDesktop.Service
 
             ManagerAccountDB.SetSaltCritical(SALT_CRITICAL_ENCRYPT);
 
+            ManagerAccountDB.SetDatabase(database_name);
 
             ManagerAccountDB.Save();
         }
 
 
-        public static void LoadDatabaseWithMasterPassword(string master_password, string DatabaseName)
+        public static void LoadDatabaseWithMasterPassword(string master_password, string database_name)
 
         {
             if (master_password == null) { throw new Exception("Master Password should be set"); }
+            
+            var ManagerAccountDB = new ManagerAccount(new YpassDbContext(database_name));
+
+            ManagerAccount? manager_account_object = ManagerAccountDB.GetManagerAccountByDatabaseName(database_name);
+
+            if(manager_account_object == null)
+            {
+                throw new Exception("Database has not been found");
+            }
 
             var PASSWORD = Encoding.UTF8.GetBytes(master_password);
-            var salt_derived_key = Utils.HashTool.GenerateRandomSalt(); // TODO : SHOULD GET IT FROM DATABASE
+            var salt_derived_key = manager_account_object.GetSalt();
 
-            //Let's derivate it to obtain the derivation key for AES (the key part)
-            //derivation_key_with_salt = Utils.HashTool.DeriveKey(PASSWORD, salt_derived_key);
+            derivation_key_with_salt = Utils.HashTool.DeriveKey(PASSWORD, salt_derived_key);
 
-            //IV = ""; // TODO : SHOULD GET IT FROM DATABASE
+            IV = manager_account_object.GetIV();
 
-            //SALT_CRITICAL_ENCRYPT = ""; // TODO : Should get it from database
-
+            SALT_CRITICAL_ENCRYPT = manager_account_object.GetSaltCritical();
 
         }
 
@@ -78,9 +88,9 @@ namespace YpassDesktop.Service
                 // (e.g., throw an exception, log an error, etc.)
                 throw new ArgumentNullException("One or more required parameters are null");
             }
+
             var salt_critical_decrypt = DecryptSaltCritical();
             var encryptPassword = Utils.EncryptionTool.EncryptStringToBytes_Aes(password, salt_critical_decrypt, IV);
-
             return Convert.ToBase64String(encryptPassword);
 
         }
@@ -95,8 +105,16 @@ namespace YpassDesktop.Service
 
         private static byte[] DecryptSaltCritical()
         {
-            string decrypt_pass = Utils.EncryptionTool.DecryptStringFromBytes_Aes(SALT_CRITICAL_ENCRYPT!, derivation_key_with_salt!, IV!); // IV EST RECUPERER DE LA BASE DE DONNES AINSI QUE SALT CRITICAL ENCRYPT
-            return Encoding.UTF8.GetBytes(decrypt_pass);
+            try
+            {
+                string decrypt_pass = Utils.EncryptionTool.DecryptStringFromBytes_Aes(SALT_CRITICAL_ENCRYPT!, derivation_key_with_salt!, IV!);
+                return Encoding.UTF8.GetBytes(decrypt_pass);
+            }
+            catch(CryptographicException ex)
+            {
+                throw new Exception("Master password is incorrect.");
+            }
+            
         }
     }
 }

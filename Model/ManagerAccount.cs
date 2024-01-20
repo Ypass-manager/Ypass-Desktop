@@ -66,6 +66,21 @@ public class ManagerAccount
             _dbContext.ManagerAccount.Add(this);
             _dbContext.SaveChanges();
         }
-    
 
+    public void SetDatabase(string database_name)
+    {
+        DatabaseName = database_name ?? string.Empty;
+    }
+
+    public string GetDatabase()
+    {
+        return DatabaseName;
+    }
+
+    // Fonctions to query in the ManagerAccount table
+
+    public ManagerAccount? GetManagerAccountByDatabaseName(string database_name)
+    {
+        return _dbContext.ManagerAccount.FirstOrDefault(account => account.DatabaseName == database_name);
+    }
 }
