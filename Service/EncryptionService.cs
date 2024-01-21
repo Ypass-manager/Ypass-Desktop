@@ -112,9 +112,15 @@ namespace YpassDesktop.Service
             }
             catch(CryptographicException ex)
             {
-                throw new Exception("Master password is incorrect.");
+                throw new IncorrectMasterPasswordException("Master password is incorrect.");
             }
             
+        }
+
+
+        public class IncorrectMasterPasswordException : Exception
+        {
+            public IncorrectMasterPasswordException(string message) : base(message) { }
         }
     }
 }

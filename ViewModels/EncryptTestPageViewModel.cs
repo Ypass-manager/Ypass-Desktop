@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tmds.DBus.Protocol;
 using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
+using static YpassDesktop.Service.EncryptionService;
 
 namespace YpassDesktop.ViewModels
 {
@@ -20,12 +21,23 @@ namespace YpassDesktop.ViewModels
             password = "LeMotdePasseDeToto";
 
             //EncryptionService.InitializeDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "YpassDB.db");
-            EncryptionService.LoadDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "YpassDB.db");
-
+            try
+            {
+                EncryptionService.LoadDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "YpassDB.db");
+               
             string _encryptPassword = EncryptionService.EncryptPassword(password);
             string _decryptPassword = EncryptionService.DecryptPassword(_encryptPassword);
             encryptPassword = _encryptPassword;
             decryptPassword = _decryptPassword;
+            }
+            catch(IncorrectMasterPasswordException ex)
+            {
+                Console.Write(ex.Message);
+                decryptPassword = "Incorrect Master Password";
+            }
+            
+
+            
 
         }
 
