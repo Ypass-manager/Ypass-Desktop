@@ -3,10 +3,13 @@ name: .NET Core Desktop Build
 on:
   push:
     branches:
-      - integration-test
+      - '*'
+      - '!main'
+      - '!develop'
   pull_request:
     branches:
-      -  integration-test
+      - develop
+      - main
 
 jobs:
   build:
