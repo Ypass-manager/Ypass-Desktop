@@ -6,8 +6,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpassDesktop.Views.ConnectionPageView"
              x:CompileBindings="True"
-             x:DataType="vm:ConnectionViewModel">
+             x:DataType="vm:ConnectionPageViewModel">
 
+
+	
+	
 	<StackPanel Spacing="10">
 		<Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
 		<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Log up" Margin="62,-3,0,0"/>

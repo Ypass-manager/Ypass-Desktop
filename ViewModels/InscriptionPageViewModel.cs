@@ -7,9 +7,9 @@ using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels;
 
-public class InscriptionViewModel : BaseViewModel
+public class InscriptionPageViewModel : BaseViewModel
 {
-    public InscriptionViewModel()
+    public InscriptionPageViewModel()
     {
         // Listen to changes of DatabaseName, Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.DatabaseName, x => x.Password)

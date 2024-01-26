@@ -6,11 +6,9 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpassDesktop.Views.InscriptionPageView"
 			 x:CompileBindings="True"
-             x:DataType="vm:InscriptionViewModel">
+             x:DataType="vm:InscriptionPageViewModel">
 
-  <Design.DataContext>
-		<vm:InscriptionViewModel />
-  </Design.DataContext>
+
 	
   <StackPanel Spacing="10">
 	  <Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
