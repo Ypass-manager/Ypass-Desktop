@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
 using System;
+using System.Linq;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 using YpassDesktop.Views;
 
@@ -20,6 +22,9 @@ public class MainWindowViewModel : BaseViewModel
         // _CurrentPage = simplePageViewModel;
         // Test value for inscription
         _CurrentPage = simplePageViewModel;
+
+
+       
     }
 
     public BaseViewModel CurrentPage
