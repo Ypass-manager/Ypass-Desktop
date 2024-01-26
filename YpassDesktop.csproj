@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
@@ -22,11 +23,22 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.6" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
+	  <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.5.0" />
+  
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <Compile Update="Views\EncryptTestPageView.axaml.cs">
+      <DependentUpon>EncryptTestPageView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SimplePageView.axaml.cs">
       <DependentUpon>SimplePageView.axaml</DependentUpon>
     </Compile>

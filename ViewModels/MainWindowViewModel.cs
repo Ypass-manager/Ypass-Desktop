@@ -1,5 +1,7 @@
 ﻿using ReactiveUI;
 using System;
+using System.Linq;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 
 
@@ -9,7 +11,7 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-        var simplePageViewModel= new SimplePageViewModel();
+        var simplePageViewModel= new EncryptTestPageViewModel();
         NavigationService.Initialize(simplePageViewModel);
         
         //Subscribe to the service to know when a page has been change, and set the page
@@ -17,6 +19,9 @@ public class MainWindowViewModel : BaseViewModel
 
         // First Page by default
         _CurrentPage = simplePageViewModel;
+
+
+       
     }
 
     public BaseViewModel CurrentPage
