@@ -1,4 +1,4 @@
-using ReactiveUI;
+﻿using ReactiveUI;
 using static YpassDesktop.ViewModels.SecondPageViewModel;
 namespace YpassDesktop.ViewModels;
 
@@ -14,3 +14,4 @@ public class BaseViewModel : ReactiveObject, IInitializable
     {
     }
 }
+
