@@ -3,8 +3,7 @@ name: .NET Core Desktop Build
 on:
   push:
     branches:
-      - develop
-      - main
+      - '*'
   pull_request:
     branches:
       - develop
