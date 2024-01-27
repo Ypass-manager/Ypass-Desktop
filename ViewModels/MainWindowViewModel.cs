@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
+using YpassDesktop.Views;
 
 
 namespace YpassDesktop.ViewModels;
@@ -11,13 +12,15 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-        var simplePageViewModel= new SimplePageViewModel();
+        var simplePageViewModel= new EncryptTestPageViewModel();
         NavigationService.Initialize(simplePageViewModel);
         
         //Subscribe to the service to know when a page has been change, and set the page
-        NavigationService.NavigationChanged += newPage => setCurrentPage(newPage);
+        NavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
 
         // First Page by default
+        // _CurrentPage = simplePageViewModel;
+        // Test value for inscription
         _CurrentPage = simplePageViewModel;
 
 
@@ -30,7 +33,7 @@ public class MainWindowViewModel : BaseViewModel
         private set { this.RaiseAndSetIfChanged(ref _CurrentPage, value); }
     }
 
-    public bool setCurrentPage(BaseViewModel page)
+    public bool SetCurrentPage(BaseViewModel page)
     {
         if (_CurrentPage != page)
         {
