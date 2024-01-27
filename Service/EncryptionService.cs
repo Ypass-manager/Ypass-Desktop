@@ -13,10 +13,16 @@ namespace YpassDesktop.Service
     public static class EncryptionService
     {
 
-        private static string? DatabaseName;
+        private static string? database_name;
         private static byte[]? SALT_CRITICAL_ENCRYPT;
         private static byte[]? derivation_key_with_salt;
         private static byte[]? IV;
+
+        /// <summary>
+        /// Initializes a new database with the specified master password. To be use only when the user register for the first time.
+        /// </summary>
+        /// <param name="master_password">The master password for accessing the database.</param>
+        /// <param name="database_name">The name of the database to initialize.</param>
         public static void InitializeDatabaseWithMasterPassword(string master_password, string database_name)
         {
             if (master_password == null)
@@ -51,9 +57,15 @@ namespace YpassDesktop.Service
             ManagerAccountDB.SetDatabase(database_name);
 
             ManagerAccountDB.Save();
+            
         }
 
-
+        /// <summary>
+        /// Loads the specified database with the provided master password.
+        /// </summary>
+        /// <param name="master_password">The master password for accessing the database.</param>
+        /// <param name="database_name">The name of the database to load.</param>
+        /// <exception cref="IncorrectMasterPasswordException">Thrown when the provided master password is incorrect.</exception>
         public static void LoadDatabaseWithMasterPassword(string master_password, string database_name)
 
         {
@@ -77,9 +89,17 @@ namespace YpassDesktop.Service
 
             SALT_CRITICAL_ENCRYPT = manager_account_object.GetSaltCritical();
 
+            //Let's verify now if the master password is good
+                
+            DecryptSaltCritical();
+            
         }
 
-
+        /// <summary>
+        /// Encrypts the provided password using a secure encryption algorithm. The LoadDatabaseWithMasterPassword() should be call before.
+        /// </summary>
+        /// <param name="password">The password to encrypt.</param>
+        /// <returns>The encrypted password.</returns>
         public static string EncryptPassword(string password)
         {
             if (SALT_CRITICAL_ENCRYPT == null || derivation_key_with_salt == null || IV == null)
@@ -95,6 +115,11 @@ namespace YpassDesktop.Service
 
         }
 
+        /// <summary>
+        /// Decrypts the provided encrypted password. The LoadDatabaseWithMasterPassword() should be call before.
+        /// </summary>
+        /// <param name="encrypt_password">The encrypted password to decrypt.</param>
+        /// <returns>The decrypted password.</returns>
         public static string DecryptPassword(string encrypt_password)
         {
             var salt_critical_decrypt = DecryptSaltCritical();

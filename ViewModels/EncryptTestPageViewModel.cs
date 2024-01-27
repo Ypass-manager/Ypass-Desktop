@@ -24,17 +24,19 @@ namespace YpassDesktop.ViewModels
             try
             {
                 EncryptionService.LoadDatabaseWithMasterPassword("J'adore7!mon$dechaTBec1ause;it1sLakeThat", "YpassDB.db");
-               
+            }
+            catch (IncorrectMasterPasswordException ex)
+            {
+                Console.Write(ex.Message);
+                decryptPassword = "Incorrect Master Password";
+                return;
+            }
             string _encryptPassword = EncryptionService.EncryptPassword(password);
             string _decryptPassword = EncryptionService.DecryptPassword(_encryptPassword);
             encryptPassword = _encryptPassword;
             decryptPassword = _decryptPassword;
-            }
-            catch(IncorrectMasterPasswordException ex)
-            {
-                Console.Write(ex.Message);
-                decryptPassword = "Incorrect Master Password";
-            }
+            
+            
             
 
             
