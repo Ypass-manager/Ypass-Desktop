@@ -12,6 +12,7 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
+
         var simplePageViewModel= new InscriptionPageViewModel();
         NavigationService.Initialize(simplePageViewModel);
         
