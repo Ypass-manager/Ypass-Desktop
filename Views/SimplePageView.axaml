@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:YpassDesktop.ViewModels"
-             d:DesignHeight="450"
+             d:DesignHeight="400"
              d:DesignWidth="800"
              x:CompileBindings="True"
              x:DataType="vm:SimplePageViewModel"
@@ -14,12 +14,46 @@
 	</Design.DataContext>
 
 
-	<StackPanel Spacing="10">
-		<TextBlock>Enter your Name:</TextBlock>
-		<TextBox Text="{Binding Name}" />
-		<TextBox Text="{Binding Greeting, Mode=OneWay}"
-				 IsReadOnly="True"
-				 FontWeight="Bold" />
-	</StackPanel>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="150*"/>
+			<ColumnDefinition Width="500*"/>
+			<ColumnDefinition Width="150*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50*"/>
+			<RowDefinition Height="175*"/>
+			<RowDefinition Height="25*"/>
+		</Grid.RowDefinitions>
+
+
+		<!-- Nouveau Border de la colonne 0 à 2 et de la ligne 0 -->
+		<Border BorderBrush="Black" BorderThickness="1" Grid.Row="0" Grid.Column="0" Background="#F0F0F0" Grid.ColumnSpan="3">
+		</Border>
+
+		<!-- Placer le TextBlock au-dessus du Border -->
+		<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Ypass" Margin="20,10,10,20" Grid.Row="0" Grid.Column="1" FontSize="30" Foreground="Black"/>
+
+		<!-- Placer le bouton au-dessus du Border -->
+		<Button Content="Connexion" HorizontalAlignment="Center" VerticalAlignment="Center" Width="145" Margin="10,20,10,20" Grid.Row="0" Grid.Column="2" Background="#844cf9" OpacityMask="#fcfbff" Foreground="#ffffff" FontSize="25" Height="42"/>
+
+		<!-- Border de la colonne 0 à 2 et de la ligne 1 à 3 -->
+		<Border BorderBrush="White" BorderThickness="1" Grid.Row="1" Grid.Column="0" Background="#D9D9D9" Grid.RowSpan="3" Grid.ColumnSpan="3">
+		</Border>
+
+		<!-- StackPanel dans la colonne 1 et ligne 1 avec un Border -->
+		<Border Background="White" BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1" Margin="0">
+			<StackPanel>
+				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Text="Créez votre base de données :" Margin="0,40,0,0" Foreground="Black" FontWeight="Bold" FontSize="20" />
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Nom de votre base de données :" Margin="60,60,0,0" Foreground="Black" FontWeight="Bold" FontSize="16"/>
+				<TextBox HorizontalAlignment="Left" VerticalAlignment="Top"  TextWrapping="Wrap" MinWidth="150" Margin="60,10,0,0"/>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Créez un mot de passe maître :" Margin="60,20,0,0" Foreground="Black" FontWeight="Bold" FontSize="15"/>
+				<TextBox HorizontalAlignment="Left" VerticalAlignment="Top"  TextWrapping="Wrap" Margin="60,10,0,0"/>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="Confirmation du mot de passe maître :" Margin="60,20,0,0" Foreground="Black" FontWeight="Bold" FontSize="15"/>
+				<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="60,10,0,0"/>
+				<Button Content="Inscription" HorizontalAlignment="Center" VerticalAlignment="Top" Width="145" Height="42" Background="#844cf9" FontSize="25"/>
+			</StackPanel>
+		</Border>
+	</Grid>
 
 </UserControl>
