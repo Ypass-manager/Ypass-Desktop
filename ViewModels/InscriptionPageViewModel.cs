@@ -8,7 +8,7 @@ using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels;
 
-public class InscriptionViewModel : BaseViewModel
+public class InscriptionPageViewModel : BaseViewModel
 {
     private readonly YpassDbContext _dbContext;
     private ManagerAccount _managerAccount;

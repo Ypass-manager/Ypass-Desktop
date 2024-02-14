@@ -8,9 +8,9 @@ using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels;
 
-public class ConnectionViewModel : BaseViewModel
+public class ConnectionPageViewModel : BaseViewModel
 {
-    public ConnectionViewModel()
+    public ConnectionPageViewModel()
     {
         // Listen to user's input and compare it to data from a database and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.DatabaseName, x => x.PasswordInput)
