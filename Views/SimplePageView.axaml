@@ -15,43 +15,84 @@
 
 
 	<Grid>
+		<!--Définir 2 bandes, une pour l'entête, et une autre pour le stack pannel -->
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="140*"/>
-			<ColumnDefinition Width="100*"/>
-			<ColumnDefinition Width="150*"/>
-			<ColumnDefinition Width="100*"/>
-			<ColumnDefinition Width="150*"/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-
 		<Grid.RowDefinitions>
-			<RowDefinition Height="75*"/>
-			<RowDefinition Height="235*"/>
-			<RowDefinition Height="50*"/>
+			<RowDefinition Height="*"/>
+			<!-- Entête -->
+			<RowDefinition Height="5*"/>
+			<!-- Stack pannel -->
 		</Grid.RowDefinitions>
+		<!-- Pour l'entête Ypass et connexion -->
 
-		<!-- Border gris -->
-		<Border BorderBrush="Black" BorderThickness="1" Background="#d9d9d9" Grid.RowSpan="3" Grid.ColumnSpan="5" Grid.Row="1" Grid.Column="0">
+		<Border BorderBrush="Black" BorderThickness="1" Background="#d9d9d9" Grid.Row="0" Grid.Column="0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="140*"/>
+					<ColumnDefinition Width="100*"/>
+					<ColumnDefinition Width="150*"/>
+					<ColumnDefinition Width="100*"/>
+					<ColumnDefinition Width="150*"/>
+				</Grid.ColumnDefinitions>
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Ypass" Grid.Row="0" Grid.Column="2" FontSize="22" FontWeight="Bold"/>
+
+				<Button Content="Connexion" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4" Width="135" Height="45" Margin="0" Background="#844cf9" FontSize="20" Foreground="#ffffff" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+			</Grid>
 		</Border>
+		<!-- Fin de l'entête -->
+		
+		<!-- Place pour le stack pannel-->
 
-		<Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Grid.Column="2"  Background="#ffffff" Margin="0,30,0,30" CornerRadius="20">
-			<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-				<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-					<!-- Contenu du StackPanel à ajouter ici -->
-					<Button Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-					<TextBlock Text="Créez votre base de données" FontSize="17" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-					<TextBlock Text="Nom de votre base de données :" FontSize="13" Margin="40,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-					<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
-					<TextBlock Text="Créez un mot de passe :" FontSize="13" Margin="40,15,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-					<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
-					<TextBlock Text="Confirmation de votre mot de passe :" FontSize="13" Margin="40,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-					<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
-					<Button Content="Inscription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-				</StackPanel>
-			</ScrollViewer>
-		</Border>
-		<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Ypass" Grid.Row="0" Grid.Column="2" FontSize="22" FontWeight="Bold"/>
 
-		<Button Content="Connexion" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4" Width="135" Height="45" Margin="0" Background="#844cf9" FontSize="20" Foreground="#ffffff" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+
+
+
+		<Grid Grid.Row="1" Grid.Column="0">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<!-- Border gris -->
+
+			
+				<ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+					<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,30" CornerRadius="20">
+						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<!-- Contenu du StackPanel à ajouter ici -->
+							<Button Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+							<TextBlock Text="Créez votre base de données" FontSize="17" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+							<TextBlock Text="Nom de votre base de données :" FontSize="13" Margin="40,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+							<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
+							<TextBlock Text="Créez un mot de passe :" FontSize="13" Margin="40,15,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+							<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
+							<TextBlock Text="Confirmation de votre mot de passe :" FontSize="13" Margin="40,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+							<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
+							<Button Content="Inscription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						</StackPanel>
+					</Border>
+				</ScrollViewer>
+
+
+			
+
+
+		</Grid>
+			
+		
+		
 	</Grid>
 
 
