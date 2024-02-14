@@ -3,14 +3,21 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels;
 
 public class InscriptionViewModel : BaseViewModel
 {
-    public InscriptionViewModel()
+    private readonly YpassDbContext _dbContext;
+    private ManagerAccount _managerAccount;
+
+    public InscriptionViewModel(YpassDbContext dbContext)
     {
+        _dbContext = dbContext;
+        _managerAccount = new ManagerAccount(_dbContext);
+
         // Listen to changes of DatabaseName, Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.DatabaseName, x => x.Password)
             .Subscribe(_ => UpdateCanNavigateNext());
@@ -70,12 +77,28 @@ public class InscriptionViewModel : BaseViewModel
     public ICommand NavigateNextCommand { get; }
     private void NavigateNext()
     {
+        try
+        {
+            // Create a new ManagerAccount
+            _managerAccount.SetDatabase(DatabaseName);
+            _managerAccount.Save();
 
-        var parameterBuilder = new ParameterBuilder();
-        parameterBuilder.Add("email", DatabaseName);
-        parameterBuilder.Add("password", Password);
+            EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
+            // Database initialization successful, navigate to the next page or perform any additional logic
+            var parameterBuilder = new ParameterBuilder();
+            parameterBuilder.Add("email", DatabaseName);
+            parameterBuilder.Add("password", Password);
 
-        Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+            AuthenticationService.Login(Password);
+
+            Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions appropriately
+            Console.WriteLine($"Error initializing database: {ex.Message}");
+            // Optionally, show a message to the user indicating that there was an error
+        }
 
     }
 

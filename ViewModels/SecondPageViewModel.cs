@@ -67,10 +67,11 @@ public class SecondPageViewModel : BaseViewModel
     public ICommand NavigateNextCommand { get; }
     private void NavigateNext()
     {
-        
         var parameterBuilder = new ParameterBuilder();
         parameterBuilder.Add("email", MailAddress);
         parameterBuilder.Add("password", Password);
+
+        AuthenticationService.Login(Password);
 
         Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
         

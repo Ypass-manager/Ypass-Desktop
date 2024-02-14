@@ -41,6 +41,7 @@ public class ConnectionViewModel : BaseViewModel
         set { this.RaiseAndSetIfChanged(ref _passwordInput, value); }
     }
 
+    /*
     private string? _databasePassword;
 
     [Required]
@@ -50,8 +51,7 @@ public class ConnectionViewModel : BaseViewModel
         get { return _databasePassword; }
         set { this.RaiseAndSetIfChanged(ref _databasePassword, value); }
     }
-
-    // WIP
+    */
 
     private bool _canLogin;
 
@@ -68,12 +68,26 @@ public class ConnectionViewModel : BaseViewModel
 
     public ICommand LoginCommand { get; }
     private void Login()
-    {
-        var parameterBuilder = new ParameterBuilder();
-        parameterBuilder.Add("databaseName", DatabaseName);
-        parameterBuilder.Add("passwordInput", PasswordInput);
+    {   
+        if (AuthenticationService.IsLoggedIn)
+        {
+            try
+            {
+                EncryptionService.LoadDatabaseWithMasterPassword(PasswordInput, DatabaseName);
 
-        Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+                var parameterBuilder = new ParameterBuilder();
+                parameterBuilder.Add("databaseName", DatabaseName);
+                parameterBuilder.Add("passwordInput", PasswordInput);
+
+                Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions appropriately
+                Console.WriteLine($"Error can't connect to database: {ex.Message}");
+                // Optionally, show a message to the user indicating that there was an error
+            }
+        }
     }
 
     public ICommand GoBackCommand { get; }

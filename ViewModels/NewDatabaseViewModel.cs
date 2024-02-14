@@ -29,8 +29,6 @@ public class NewDatabaseViewModel : BaseViewModel
         set { this.RaiseAndSetIfChanged(ref _databaseName, value); }
     }
 
-    // WIP
-
     private bool _CanNavigateNext;
 
     public bool CanNavigateNext
@@ -50,12 +48,28 @@ public class NewDatabaseViewModel : BaseViewModel
     public ICommand NavigateNextCommand { get; }
     private void NavigateNext()
     {
+        if (AuthenticationService.IsLoggedIn)
+        {
+            try
+            {
+                EncryptionService.InitializeDatabaseWithMasterPassword("YOUR_MASTER_PASSWORD", DatabaseName);
+                // Database initialization successful, navigate to the next page or perform any additional logic
+                var parameterBuilder = new ParameterBuilder();
+                parameterBuilder.Add("email", DatabaseName);
 
-        var parameterBuilder = new ParameterBuilder();
-        parameterBuilder.Add("email", DatabaseName);
-
-        Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
-
+                Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions appropriately
+                Console.WriteLine($"Error initializing database: {ex.Message}");
+                // Optionally, show a message to the user indicating that there was an error
+            }
+        }
+        else
+        {
+            Console.WriteLine("User is not logged in. Please log in first.");
+        }
     }
 
     public ICommand GoBackCommand { get; }
