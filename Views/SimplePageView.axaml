@@ -54,12 +54,11 @@
 
 
 
-		<Grid Grid.Row="1" Grid.Column="0">
-
+		<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+		
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 			
 			<Grid.RowDefinitions>
@@ -67,10 +66,16 @@
 			</Grid.RowDefinitions>
 			<!-- Border gris -->
 
+
+
+			<Panel  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<Image Margin="20" Height="500" Width="500"  Stretch="UniformToFill"
+         Source="avares:/Assets/cutlery-377700_640.jpg"/>
+			</Panel>
 			
 				<ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 					<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,30" CornerRadius="20">
-						<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+						<StackPanel VerticalAlignment="Stretch">
 							<!-- Contenu du StackPanel à ajouter ici -->
 							<Button Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 							<TextBlock Text="Créez votre base de données" FontSize="17" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
