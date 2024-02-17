@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using Microsoft.EntityFrameworkCore;
+using ReactiveUI;
 using System;
 using System.Linq;
 using YpassDesktop.DataAccess;
@@ -12,7 +13,6 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-
         var simplePageViewModel= new InscriptionPageViewModel();
         NavigationService.Initialize(simplePageViewModel);
         

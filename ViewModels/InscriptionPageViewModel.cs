@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using Microsoft.EntityFrameworkCore;
+using ReactiveUI;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -10,14 +11,10 @@ namespace YpassDesktop.ViewModels;
 
 public class InscriptionPageViewModel : BaseViewModel
 {
-    private readonly YpassDbContext _dbContext;
     private ManagerAccount _managerAccount;
 
-    public InscriptionViewModel(YpassDbContext dbContext)
+    public InscriptionPageViewModel()
     {
-        _dbContext = dbContext;
-        _managerAccount = new ManagerAccount(_dbContext);
-
         // Listen to changes of DatabaseName, Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.DatabaseName, x => x.Password)
             .Subscribe(_ => UpdateCanNavigateNext());
@@ -79,6 +76,8 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         try
         {
+            var dbContext = new YpassDbContext(DatabaseName);
+            _managerAccount = new ManagerAccount(dbContext);
             // Create a new ManagerAccount
             _managerAccount.SetDatabase(DatabaseName);
             _managerAccount.Save();
