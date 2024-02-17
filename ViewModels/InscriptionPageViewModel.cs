@@ -16,7 +16,7 @@ public class InscriptionPageViewModel : BaseViewModel
     public InscriptionPageViewModel()
     {
         // Listen to changes of DatabaseName, Password and update CanNavigateNext accordingly
-        this.WhenAnyValue(x => x.DatabaseName, x => x.Password)
+        this.WhenAnyValue(x => x.DatabaseName, x => x.Password, x => x.ConfirmPassword)
             .Subscribe(_ => UpdateCanNavigateNext());
 
         var canNavNext = this.WhenAnyValue(x => x.CanNavigateNext);
@@ -67,7 +67,11 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         CanNavigateNext =
                 !string.IsNullOrEmpty(_databaseName)
-            && !string.IsNullOrEmpty(_password);
+            && !string.IsNullOrEmpty(_password) && !string.IsNullOrEmpty(_confirmPassword)
+            && (_password.Equals(_confirmPassword));
+
+
+
     }
 
 
