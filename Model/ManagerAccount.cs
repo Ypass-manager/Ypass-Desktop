@@ -4,13 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YpassDesktop.DataAccess;
-public class ManagerAccount
+public class ManagerAccount : IDisposable
 {
     private readonly YpassDbContext _dbContext;
     public ManagerAccount(YpassDbContext dbContext)
     {
-        _dbContext = dbContext;
+        _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
+    }
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _dbContext.DisposeAsync();
+        }
+    }
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
     public int ManagerAccountId { get; set; } = 0;
     public string AccountName { get; set; } = string.Empty;
