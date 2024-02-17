@@ -6,9 +6,9 @@ using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels;
 
-public class NewDatabaseViewModel : BaseViewModel
+public class NewDatabasePageViewModel : BaseViewModel
 {
-    public NewDatabaseViewModel()
+    public NewDatabasePageViewModel()
     {
         // Listen to changes of DatabaseName and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.DatabaseName)
@@ -75,7 +75,7 @@ public class NewDatabaseViewModel : BaseViewModel
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
-        Console.WriteLine("GO BACK TO HE PREVIOUS PAGE");
+        Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
         Service.NavigationService.GoBack();
 
     }

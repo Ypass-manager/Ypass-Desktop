@@ -4,9 +4,9 @@ using System.Windows.Input;
 
 namespace YpassDesktop.ViewModels;
 
-public class NewOrExistentDatabaseViewModel : BaseViewModel
+public class NewOrExistentDatabasePageViewModel : BaseViewModel
 {
-    public NewOrExistentDatabaseViewModel()
+    public NewOrExistentDatabasePageViewModel()
     {
         // Let the user choose if they want to create a new database or if they want to use an existent one
         NavigateNextCommand = ReactiveCommand.Create<string>(NavigateNext);
@@ -24,7 +24,7 @@ public class NewOrExistentDatabaseViewModel : BaseViewModel
         }
         else if (userChoice == "NewListCommand")
         {
-            Service.NavigationService.NavigateTo(new NewDatabaseViewModel());
+            Service.NavigationService.NavigateTo(new NewDatabasePageViewModel());
         }
 
     }

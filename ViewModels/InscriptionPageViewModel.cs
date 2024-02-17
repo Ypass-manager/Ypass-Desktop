@@ -104,7 +104,7 @@ public class InscriptionPageViewModel : BaseViewModel
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
-        Console.WriteLine("GO BACK TO HE PREVIOUS PAGE");
+        Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
         Service.NavigationService.GoBack();
 
     }
