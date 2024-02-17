@@ -76,12 +76,7 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         try
         {
-            var dbContext = new YpassDbContext(DatabaseName);
-            _managerAccount = new ManagerAccount(dbContext);
-            // Create a new ManagerAccount
-            _managerAccount.SetDatabase(DatabaseName);
-            _managerAccount.Save();
-
+            
             EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
             // Database initialization successful, navigate to the next page or perform any additional logic
             var parameterBuilder = new ParameterBuilder();
