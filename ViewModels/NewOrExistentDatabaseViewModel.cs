@@ -20,7 +20,7 @@ public class NewOrExistentDatabaseViewModel : BaseViewModel
     {
         if (userChoice == "ExistentListCommand")
         {
-            // Service.NavigationService.NavigateTo(new ThirdPageViewModel());
+            Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
         }
         else if (userChoice == "NewListCommand")
         {
@@ -32,7 +32,7 @@ public class NewOrExistentDatabaseViewModel : BaseViewModel
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
-        Console.WriteLine("GO BACK TO HE PREVIOUS PAGE");
+        Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
         Service.NavigationService.GoBack();
 
     }

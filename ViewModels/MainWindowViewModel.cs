@@ -13,7 +13,9 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-        var simplePageViewModel= new InscriptionPageViewModel();
+        var simplePageViewModel= new SimplePageViewModel();
+        var InscriptionPageViewModel = new InscriptionPageViewModel();
+        var NewOrExistentDatabaseViewModel = new NewOrExistentDatabaseViewModel();
         NavigationService.Initialize(simplePageViewModel);
         
         //Subscribe to the service to know when a page has been change, and set the page
