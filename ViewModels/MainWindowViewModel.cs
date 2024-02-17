@@ -12,7 +12,8 @@ public class MainWindowViewModel : BaseViewModel
 {
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
-    {
+    {   
+        // PageViewModels available for testing
         var simplePageViewModel= new SimplePageViewModel();
         var InscriptionPageViewModel = new InscriptionPageViewModel();
         var NewOrExistentDatabaseViewModel = new NewOrExistentDatabasePageViewModel();
