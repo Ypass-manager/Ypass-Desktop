@@ -29,34 +29,39 @@ namespace YpassDesktop.Service
             {
                 throw new Exception("Master Password should be set");
             }
-            var ManagerAccountDB = new ManagerAccount(new YpassDbContext(database_name));
-            var PASSWORD = Encoding.UTF8.GetBytes(master_password);
+            using (var ManagerAccountDB = new ManagerAccount(new YpassDbContext(database_name)))
+            {
 
-            // Generate the SALT_DERIVED KEY
-            var salt_derived_key = Utils.HashTool.GenerateRandomSalt();
-            // WE STORE IT TO THE DATABASE AND GET IT LATER
-            ManagerAccountDB.SetSalt(salt_derived_key);
+                var PASSWORD = Encoding.UTF8.GetBytes(master_password);
 
-            //Let's derivate it to obtain the derivation key for AES (the key part)
-            derivation_key_with_salt = Utils.HashTool.DeriveKey(PASSWORD, salt_derived_key);
+                // Generate the SALT_DERIVED KEY
+                var salt_derived_key = Utils.HashTool.GenerateRandomSalt();
+                // WE STORE IT TO THE DATABASE AND GET IT LATER
+                ManagerAccountDB.SetSalt(salt_derived_key);
 
-            // We generate the unique IV for aes
-            IV = Utils.EncryptionTool.GenerateIV();
-            // WE STORE THE IV IN THE DATABASE
-            ManagerAccountDB.SetIV(IV);
+                //Let's derivate it to obtain the derivation key for AES (the key part)
+                derivation_key_with_salt = Utils.HashTool.DeriveKey(PASSWORD, salt_derived_key);
 
-            // Now we generate the CRITICAL SALT that will be encrypt with AES
-            var SALT_CRITICAL = Encoding.UTF8.GetString(Utils.HashTool.GenerateRandomSalt());
+                // We generate the unique IV for aes
+                IV = Utils.EncryptionTool.GenerateIV();
+                // WE STORE THE IV IN THE DATABASE
+                ManagerAccountDB.SetIV(IV);
 
-            SALT_CRITICAL_ENCRYPT = Utils.EncryptionTool.EncryptStringToBytes_Aes(SALT_CRITICAL, derivation_key_with_salt, IV);
+                // Now we generate the CRITICAL SALT that will be encrypt with AES
+                var SALT_CRITICAL = Encoding.UTF8.GetString(Utils.HashTool.GenerateRandomSalt());
 
-            // WE STORE IN THE DATABASE THE SALT_CRITICAL_ENCRYPT
+                SALT_CRITICAL_ENCRYPT = Utils.EncryptionTool.EncryptStringToBytes_Aes(SALT_CRITICAL, derivation_key_with_salt, IV);
 
-            ManagerAccountDB.SetSaltCritical(SALT_CRITICAL_ENCRYPT);
+                // WE STORE IN THE DATABASE THE SALT_CRITICAL_ENCRYPT
 
-            ManagerAccountDB.SetDatabase(database_name);
+                ManagerAccountDB.SetSaltCritical(SALT_CRITICAL_ENCRYPT);
 
-            ManagerAccountDB.Save();
+                ManagerAccountDB.SetDatabase(database_name);
+
+                ManagerAccountDB.Save();
+
+            }
+            
             
         }
 
