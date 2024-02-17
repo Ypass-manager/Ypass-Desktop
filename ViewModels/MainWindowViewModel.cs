@@ -27,7 +27,7 @@ public class MainWindowViewModel : BaseViewModel
         // First Page by default
         // _CurrentPage = simplePageViewModel;
         // Test value for inscription
-        _CurrentPage = SimplePageViewModel;
+        _CurrentPage = InscriptionPageViewModel;
 
        
     }
