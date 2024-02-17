@@ -15,7 +15,7 @@ namespace YpassDesktop.Service
             private set { _isLoggedIn = value; }
         }
 
-        public static void Login(string password)
+        public static void Login()
         {
             // Perform authentication
             // If authentication is successful:

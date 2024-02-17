@@ -83,7 +83,7 @@ public class InscriptionPageViewModel : BaseViewModel
             parameterBuilder.Add("email", DatabaseName);
             parameterBuilder.Add("password", Password);
 
-            AuthenticationService.Login(Password);
+            AuthenticationService.Login();
 
             Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
         }
