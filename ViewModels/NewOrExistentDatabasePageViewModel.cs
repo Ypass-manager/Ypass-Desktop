@@ -16,6 +16,8 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
     // WIP
 
     public ICommand NavigateNextCommand { get; }
+
+    // Lead to another PageViewModel among two (ConnectionPageViewModel() and NewDatabasePageViewModel())
     private void NavigateNext(string userChoice)
     {
         if (userChoice == "ExistentListCommand")
