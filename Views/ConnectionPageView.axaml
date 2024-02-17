@@ -14,6 +14,8 @@
 	<StackPanel Spacing="10">
 		<Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
 		<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Log up" Margin="62,-3,0,0"/>
+		<TextBlock>. Your account list name :</TextBlock>
+		<TextBox Text="{Binding DatabaseName}" />
 		<TextBlock>. Your password :</TextBlock>
 		<TextBox Text="{Binding PasswordInput}" />
 		<Button Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Command="{Binding LoginCommand}"/>
