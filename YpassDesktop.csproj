@@ -15,11 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaXaml Remove="Views\ConnectDbViewModel.axaml" />
-  </ItemGroup>
-
-
-  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.6" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6" />
@@ -38,13 +33,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Compile Update="Views\EncryptTestPageView.axaml.cs">
-      <DependentUpon>EncryptTestPageView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SimplePageView.axaml.cs">
-      <DependentUpon>SimplePageView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>

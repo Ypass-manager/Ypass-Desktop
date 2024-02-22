@@ -11,8 +11,8 @@ using YpassDesktop.DataAccess;
 namespace YpassDesktop.Migrations
 {
     [DbContext(typeof(YpassDbContext))]
-    [Migration("20240117152230_update-security-properties")]
-    partial class updatesecurityproperties
+    [Migration("20240222150831_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,33 +22,33 @@ namespace YpassDesktop.Migrations
 
             modelBuilder.Entity("Account", b =>
                 {
-                    b.Property<int>("accountId")
+                    b.Property<int>("AccountId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("isFavorite")
+                    b.Property<bool>("IsFavorite")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("lastModification")
+                    b.Property<DateTime>("LastModification")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("password")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("username")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("websiteName")
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("websiteUrl")
+                    b.Property<string>("WebsiteUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("accountId");
+                    b.HasKey("AccountId");
 
                     b.ToTable("Account");
                 });

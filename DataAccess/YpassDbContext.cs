@@ -16,7 +16,7 @@ public class YpassDbContext : DbContext
 
     public string DbPath { get; }
 
-    public YpassDbContext(string database_name)
+    public YpassDbContext(string database_name="Default_database.db")
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);

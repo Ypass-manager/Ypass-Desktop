@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="YpassDesktop.Views.AccountPageView"
+<UserControl x:Class="YpassDesktop.Views.AccountPageView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,24 +14,28 @@
 	</Design.DataContext>
 
 	<StackPanel Spacing="10">
-		<TextBlock>Enter the Website name</TextBlock>
-		<TextBox Text="{Binding title}" FontWeight="Bold"/>
+		
+		<TextBox Text="{Binding Title}" FontWeight="Bold"/>
 		<TextBlock>Enter the Website url</TextBlock>
-		<TextBox Text="{Binding websiteUrl}"/>
+		<TextBox Text="{Binding WebsiteUrl}"/>
 
-		<TextBlock>Enter your Account username</TextBlock>
-		<TextBox Text="{Binding accountUsername}"/>
-		<TextBlock>Enter your Account password</TextBlock>
+        <TextBlock>Enter your Account username</TextBlock>
+		<TextBox Text="{Binding AccountUsername}"/>
+        
+        <TextBlock>Enter your Account password</TextBlock>
+		
+        <TextBlock>Enter your Account password</TextBlock>
 		<TextBox VerticalAlignment="Center"
                  FontSize="16"
                  PasswordChar="$"
-                 Text="{Binding accountPassword}"
+                 Text="{Binding AccountPassword}"
                  Watermark="Password"
                  UseFloatingWatermark="True"/>
+
+
 		<!--<CheckBox Content="Add to favorite"
 				  IsChecked="{binding isChecked}"/>-->
-		<button Text="{Binding sendForm}">Ajouter le site</button>
-		
+		<Button Command="{Binding AddAccountCommand}" Content="Ajouter le compte"/>
 
-	</StackPanel>
+    </StackPanel>
 </UserControl>

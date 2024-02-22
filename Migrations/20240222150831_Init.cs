@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace YpassDesktop.Migrations
 {
     /// <inheritdoc />
-    public partial class InitiateTable : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,18 +15,18 @@ namespace YpassDesktop.Migrations
                 name: "Account",
                 columns: table => new
                 {
-                    accountId = table.Column<int>(type: "INTEGER", nullable: false)
+                    AccountId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    username = table.Column<string>(type: "TEXT", nullable: false),
-                    password = table.Column<string>(type: "TEXT", nullable: false),
-                    lastModification = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    isFavorite = table.Column<bool>(type: "INTEGER", nullable: false),
-                    websiteUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    websiteName = table.Column<string>(type: "TEXT", nullable: false)
+                    Username = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    LastModification = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    IsFavorite = table.Column<bool>(type: "INTEGER", nullable: false),
+                    WebsiteUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Account", x => x.accountId);
+                    table.PrimaryKey("PK_Account", x => x.AccountId);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,16 +46,18 @@ namespace YpassDesktop.Migrations
                 name: "ManagerAccount",
                 columns: table => new
                 {
-                    managerAccountId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ManagerAccountId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    accountName = table.Column<string>(type: "TEXT", nullable: false),
-                    saltCrypt = table.Column<string>(type: "TEXT", nullable: false),
-                    hashPass = table.Column<string>(type: "TEXT", nullable: false),
-                    databaseName = table.Column<string>(type: "TEXT", nullable: false)
+                    AccountName = table.Column<string>(type: "TEXT", nullable: false),
+                    Salt = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    SaltCritical = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    IV = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    HashPass = table.Column<string>(type: "TEXT", nullable: false),
+                    DatabaseName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ManagerAccount", x => x.managerAccountId);
+                    table.PrimaryKey("PK_ManagerAccount", x => x.ManagerAccountId);
                 });
 
             migrationBuilder.CreateTable(
