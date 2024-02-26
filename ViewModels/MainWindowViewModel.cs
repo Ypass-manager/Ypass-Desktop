@@ -14,7 +14,7 @@ public class MainWindowViewModel : BaseViewModel
     public MainWindowViewModel()
     {   
         // PageViewModels available for testing
-        var SimplePageViewModel= new ConnectionPageViewModel();
+        var SimplePageViewModel= new InscriptionPageViewModel();
         var InscriptionPageViewModel = new InscriptionPageViewModel();
         var NewOrExistentDatabaseViewModel = new NewOrExistentDatabasePageViewModel();
 
