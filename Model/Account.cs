@@ -3,14 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YpassDesktop.DataAccess;
 
 public class Account
-{ 
-    public int accountId { get; set; }
-    public String username { get; set; }
-    public String password { get; set; }
-    public DateTime lastModification { get; set; }
-    public bool isFavorite { get; set; }
-    public String websiteUrl { get; set; }
-    public String websiteName { get; set; }
+{
+    private YpassDbContext _dbContext;
+    
+    public Account(YpassDbContext dbContext){
+        _dbContext = dbContext;
+    }
+    public int AccountId { get; set; } = 0;
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+    public DateTime LastModification { get; set; } = new DateTime();
+    public bool IsFavorite { get; set; } = false;
+    public string WebsiteUrl { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
+
+    public void Save()
+    {
+        _dbContext.Account.Add(this);
+        _dbContext.SaveChanges();
+    }
+
+    public Account? GetAccountByTitle(string title)
+    {
+        return _dbContext.Account.FirstOrDefault(account => account.Title == title);
+    }
 }

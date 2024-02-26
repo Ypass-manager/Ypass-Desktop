@@ -74,10 +74,10 @@ public class ManagerAccount : IDisposable
 
 
     public void Save()
-        {
-            _dbContext.ManagerAccount.Add(this);
-            _dbContext.SaveChanges();
-        }
+    {
+        _dbContext.ManagerAccount.Add(this);
+        _dbContext.SaveChanges();
+    }
 
     public void SetDatabase(string database_name)
     {
