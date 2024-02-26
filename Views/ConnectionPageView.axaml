@@ -17,7 +17,9 @@
 		<TextBlock>. Your account list name :</TextBlock>
 		<TextBox Text="{Binding DatabaseName}" />
 		<TextBlock>. Your password :</TextBlock>
-		<TextBox Text="{Binding PasswordInput}" />
+		<TextBox PasswordChar="$" Text="{Binding PasswordInput}" Watermark="Password" UseFloatingWatermark="True"/>
 		<Button Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Command="{Binding LoginCommand}"/>
+		<TextBlock Text="{Binding ConnectionStatus}" HorizontalAlignment="Center" VerticalAlignment="Top" 
+			IsVisible="{Binding IsConnectionStatusVisible}" Foreground="Red" />
 	</StackPanel>
 </UserControl>

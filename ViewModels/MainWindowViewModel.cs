@@ -14,7 +14,7 @@ public class MainWindowViewModel : BaseViewModel
     public MainWindowViewModel()
     {   
         // PageViewModels available for testing
-        var SimplePageViewModel= new SimplePageViewModel();
+        var SimplePageViewModel= new ConnectionPageViewModel();
         var InscriptionPageViewModel = new InscriptionPageViewModel();
         var NewOrExistentDatabaseViewModel = new NewOrExistentDatabasePageViewModel();
 
@@ -27,7 +27,7 @@ public class MainWindowViewModel : BaseViewModel
         // First Page by default
         // _CurrentPage = simplePageViewModel;
         // Test value for inscription
-        _CurrentPage = InscriptionPageViewModel;
+        _CurrentPage = SimplePageViewModel;
 
        
     }
