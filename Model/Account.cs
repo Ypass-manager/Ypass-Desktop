@@ -20,13 +20,14 @@ public class Account
     public string WebsiteUrl { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
 
-    public void SetTitle(string title){
-        Title = title;
-    }
-
     public void Save()
     {
         _dbContext.Account.Add(this);
         _dbContext.SaveChanges();
+    }
+
+    public Account? GetAccountByTitle(string title)
+    {
+        return _dbContext.Account.FirstOrDefault(account => account.Title == title);
     }
 }

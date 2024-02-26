@@ -21,6 +21,13 @@ namespace YpassDesktop.ViewModels
 
         var canAddAccount = this.WhenAnyValue(x => x.CanAddAccount);
         _dbContext = new YpassDbContext("YpassDB.db");
+        try {
+            EncryptionService.LoadDatabaseWithMasterPassword("mdp", "YpassDB.db");
+        } catch {
+            EncryptionService.InitializeDatabaseWithMasterPassword("mdp", "YpassDB.db");
+        }
+        
+        
         AddAccountCommand = ReactiveCommand.Create(AddAccount, canAddAccount);
         }
 
@@ -81,22 +88,19 @@ namespace YpassDesktop.ViewModels
         public ICommand AddAccountCommand { get; }
         private void AddAccount()
         {
-            Service.NavigationService.NavigateTo(new ThirdPageViewModel());
+            
             Account account = new Account(_dbContext);
-            //ManagerAccount accountManager = new ManagerAccount(_dbContext);
-            //accountManager.SetDatabase("dede");
-            //accountManager.Save();
-            //account.title ="test";
-            account.SetTitle("test");
+            if(!string.IsNullOrEmpty(Title)){account.Title = Title;}
+            if(!string.IsNullOrEmpty(AccountUsername)) { account.Username = AccountUsername; }
+            
+            if(!string.IsNullOrEmpty(AccountPassword)) { 
+                account.Password = EncryptionService.EncryptPassword(AccountPassword); 
+            }
             account.Save();
-            //var AccountDB = new Account(new YpassDbContext("YpassDB.db"));
-            //if(!string.IsNullOrEmpty(Title)){account.Title = Title;}
-            //if(!string.IsNullOrEmpty(AccountUsername)) { account.Username = AccountUsername; }
-            //if(!string.IsNullOrEmpty(AccountPassword)) { account.Password = AccountPassword; }
-            //_dbContext.Account.Add(account);
-            //_dbContext.SaveChanges();
             
-            
+            var parameterBuilder = new ParameterBuilder();
+            parameterBuilder.Add("title", Title);
+            Service.NavigationService.NavigateTo(new ThirdPageViewModel(),parameterBuilder);
         }
 
     }
