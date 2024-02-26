@@ -2,9 +2,11 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Http.Headers;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using YpassDesktop.Service;
+using static YpassDesktop.Service.EncryptionService;
 
 namespace YpassDesktop.ViewModels;
 
@@ -21,7 +23,22 @@ public class ConnectionPageViewModel : BaseViewModel
         LoginCommand = ReactiveCommand.Create(Login, canLogin);
         GoBackCommand = ReactiveCommand.Create(GoBack);
     }
+    private string _connectionStatus;
+    public string ConnectionStatus
+    {
+        get => _connectionStatus;
+        set {
+            if(IsConnectionStatusVisible != true) {IsConnectionStatusVisible = true; }
+            this.RaiseAndSetIfChanged(ref _connectionStatus, value);
+        }
+    }
 
+    private bool _isConnectionStatusVisible;
+    public bool IsConnectionStatusVisible
+    {
+        get => _isConnectionStatusVisible;
+        set => this.RaiseAndSetIfChanged(ref _isConnectionStatusVisible, value);
+    }
     private string? _databaseName;
 
     [Required]
@@ -63,31 +80,46 @@ public class ConnectionPageViewModel : BaseViewModel
 
     private void UpdateCanLogin()
     {
+        IsConnectionStatusVisible = false;
         CanLogin = !string.IsNullOrEmpty(_databaseName) && !string.IsNullOrEmpty(_passwordInput);
     }
 
     public ICommand LoginCommand { get; }
     private void Login()
     {   
-        if (AuthenticationService.IsLoggedIn)
+        if (!AuthenticationService.IsLoggedIn)
         {
             try
             {
-                EncryptionService.LoadDatabaseWithMasterPassword(PasswordInput, DatabaseName);
+                string? masterPassword = PasswordInput;
+                string? databaseName = DatabaseName;
+                if(string.IsNullOrEmpty(masterPassword) || string.IsNullOrEmpty(databaseName))
+                {
+                    return;
+                }
+                EncryptionService.LoadDatabaseWithMasterPassword(masterPassword, databaseName);
 
                 var parameterBuilder = new ParameterBuilder();
                 parameterBuilder.Add("databaseName", DatabaseName);
                 parameterBuilder.Add("passwordInput", PasswordInput);
-
-                Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+                ConnectionStatus = "Connection successful";
+                AuthenticationService.Login();
+                //Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
             }
-            catch (Exception ex)
+            catch (IncorrectMasterPasswordException ex)
             {
                 // Handle exceptions appropriately
-                Console.WriteLine($"Error can't connect to database: {ex.Message}");
+                Console.WriteLine($"Login failed: {ex.Message}");
+                ConnectionStatus = "Database / Password is incorrect.";
                 // Optionally, show a message to the user indicating that there was an error
             }
+            catch (Exception ex){
+                Console.WriteLine($"Unmanaged error : {ex.Message}");
+                ConnectionStatus = ex.Message.ToString();
+            }
+            return;
         }
+        ConnectionStatus = "Already connect.";
     }
 
     public ICommand GoBackCommand { get; }
