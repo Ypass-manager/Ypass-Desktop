@@ -15,15 +15,23 @@ public class Account
     public int AccountId { get; set; } = 0;
     public string Username { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
-    public DateTime LastModification { get; set; } = new DateTime();
+    public DateTime LastModification { get; set; } = DateTime.Now;
     public bool IsFavorite { get; set; } = false;
     public string WebsiteUrl { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
 
     public void Save()
     {
-        _dbContext.Account.Add(this);
+        var existingAccount = _dbContext.Account.FirstOrDefault(a => a.AccountId == this.AccountId);
+        if(existingAccount == null){
+            _dbContext.Account.Add(this);
+        }
         _dbContext.SaveChanges();
+    }
+
+    public void SetPassword(string password){
+        Password = password;
+        LastModification = DateTime.Now;
     }
 
     public Account? GetAccountByTitle(string title)

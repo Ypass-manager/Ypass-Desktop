@@ -93,8 +93,8 @@ namespace YpassDesktop.ViewModels
             if(!string.IsNullOrEmpty(Title)){account.Title = Title;}
             if(!string.IsNullOrEmpty(AccountUsername)) { account.Username = AccountUsername; }
             
-            if(!string.IsNullOrEmpty(AccountPassword)) { 
-                account.Password = EncryptionService.EncryptPassword(AccountPassword); 
+            if(!string.IsNullOrEmpty(AccountPassword)) {
+                account.SetPassword(EncryptionService.EncryptPassword(AccountPassword));
             }
             account.Save();
             
