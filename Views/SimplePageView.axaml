@@ -90,11 +90,9 @@
 							<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
 							<Button Content="Inscription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 						</StackPanel>
+
 					</Border>
 				</ScrollViewer>
-
-
-			
 
 
 		</Grid>
