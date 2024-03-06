@@ -13,7 +13,7 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<!-- Menu de gauche -->
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="3*"/>
 			<!-- Le reste -->
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
@@ -23,13 +23,47 @@
 			<!-- Stack pannel -->
 		</Grid.RowDefinitions>
 
+		<!-- Pour le menu de gauche -->
+		<Border BorderBrush="Black" BorderThickness="1" Background="#956fc7" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="192*"/>
+				</Grid.ColumnDefinitions>
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="180*"/>
+					<RowDefinition Height="140*"/>
+					<RowDefinition Height="52*"/>
+					<RowDefinition Height="52*"/>
+					<RowDefinition Height="52*"/>
+					<RowDefinition Height="52*"/>
+					<RowDefinition Height="140*"/>
+					<RowDefinition Height="80*"/>
+				</Grid.RowDefinitions>
+
+				<!-- Image de profil -->
+				<Image Source="avares:/Assets/default_user.png" Grid.Row="0" Grid.Column="0" Margin="0,30,0,0"/>
+
+				<Button Content="Profil" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Height="60" Margin="0" FontSize="40" Foreground="#ffffff" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold" Background="Transparent"/>
+
+				<Button Content="Option1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Height="60" Margin="0" FontSize="20" Foreground="#ffffff" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Background="Transparent"/>
+				<Button Content="Option2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Height="60" Margin="0" FontSize="20" Foreground="#ffffff" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Background="Transparent"/>
+				<Button Content="Option3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" Height="60" Margin="0" FontSize="20" Foreground="#ffffff" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Background="Transparent"/>
+				<Button Content="Option4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" Height="60" Margin="0" FontSize="20" Foreground="#ffffff" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Background="Transparent"/>
+
+				<Button Content="Paramètres" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="6" Grid.Column="0" Height="60" Margin="0" FontSize="20" Foreground="#ffffff" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Background="Transparent"/>
+				<Button Content="Aide" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="7" Grid.Column="0" Height="60" Margin="0" FontSize="20" Foreground="#ffffff" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Background="Transparent"/>
+			</Grid>
+		</Border>
+		<!-- Fin du menu -->
+		
 		<!-- Pour l'entête -->
-		<Border BorderBrush="Black" BorderThickness="1" Background="#d9d9d9" Grid.Row="0" Grid.Column="0">
+		<Border BorderBrush="Black" BorderThickness="1" Background="#d9d9d9" Grid.Row="0" Grid.Column="1">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="140*"/>
 					<ColumnDefinition Width="52*"/>
-					<ColumnDefinition Width="380*"/>
+					<ColumnDefinition Width="450*"/>
 					<ColumnDefinition Width="150*"/>
 				</Grid.ColumnDefinitions>
 
@@ -41,7 +75,7 @@
 
 				<Button Content="..." HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Width="50" Height="50" Margin="0" Padding="0,-20,0,0" Background="#ffffff" FontSize="40" Foreground="black" BorderBrush="#ebe8e8" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 
-				<TextBox Text="Rechercher" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Width="360" Height="60" Margin="20,0,0,0" Background="#ffffff" FontSize="30" Foreground="#b3b1b1" BorderBrush="#ebe8e8" CornerRadius="30" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+				<TextBox Text="Rechercher" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Height="60" Margin="20,0,0,0" Background="#ffffff" FontSize="30" Foreground="#b3b1b1" BorderBrush="#ebe8e8" CornerRadius="30" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 
 				<Button Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" Width="50" Height="50" Margin="20,0,0,0" Background="#844cf9" FontSize="30" Foreground="#ffffff" BorderBrush="#844cf9" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 			</Grid>
