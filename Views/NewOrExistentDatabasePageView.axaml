@@ -8,10 +8,80 @@
              x:CompileBindings="True"
              x:DataType="vm:NewOrExistentDatabasePageViewModel">
 
-	<StackPanel Spacing="10">
-		<Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
-		<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Connection" Margin="62,-3,0,0"/>
-		<Button Content="Choose an existent account list" HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Command="{Binding NavigateNextCommand}" CommandParameter="ExistentListCommand"/>
-		<Button Content="Create a new account list" HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Command="{Binding NavigateNextCommand}" CommandParameter="NewListCommand"/>
-	</StackPanel>
+	<Grid>
+		<!--Définir 2 bandes, une pour l'entête, et une autre pour le stack pannel -->
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<!-- Entête -->
+			<RowDefinition Height="5*"/>
+			<!-- Stack pannel -->
+		</Grid.RowDefinitions>
+		<!-- Pour l'entête Ypass et connexion -->
+
+		<Border BorderBrush="Black" BorderThickness="1" Background="#d9d9d9" Grid.Row="0" Grid.Column="0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="140*"/>
+					<ColumnDefinition Width="100*"/>
+					<ColumnDefinition Width="150*"/>
+					<ColumnDefinition Width="100*"/>
+					<ColumnDefinition Width="150*"/>
+				</Grid.ColumnDefinitions>
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Ypass" Grid.Row="0" Grid.Column="2" FontSize="22" FontWeight="Bold"/>
+
+				<Button Command="{Binding NavigateToConnexionPageCommand}" Content="Connexion" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4" Width="135" Height="45" Margin="0" Background="#844cf9" FontSize="20" Foreground="#ffffff" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+			</Grid>
+		</Border>
+		<!-- Fin de l'entête -->
+
+		<!-- Place pour le stack pannel-->
+
+
+
+
+
+		<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<!-- Border gris -->
+
+
+
+			<ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+				<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,30"  CornerRadius="20">
+					<StackPanel VerticalAlignment="Stretch">
+						<!-- Contenu du StackPanel à ajouter ici -->
+						<Button Command="{Binding GoBackCommand}" Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="Connexion" FontSize="25" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<Button Command="{Binding NavigateToConnexionPageCommand}" Margin="70,100,0,0" Content="Choisissez votre base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Width="270" Height="50" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="OU" FontSize="20" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<Button Command="{Binding NavigateToInscriptionPageCommand}" Content="Créez une nouvelle base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,10,0,100" Width="270" Height="50" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+					</StackPanel>
+				</Border>
+			</ScrollViewer>
+
+
+
+
+
+		</Grid>
+
+
+
+	</Grid>
 </UserControl>

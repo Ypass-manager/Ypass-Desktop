@@ -11,15 +11,82 @@
 
 	
 	
-	<StackPanel Spacing="10">
-		<Button Content="Go back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Command="{Binding GoBackCommand}"/>
-		<Label HorizontalAlignment="Left" VerticalAlignment="Top" Content="Log up" Margin="62,-3,0,0"/>
-		<TextBlock>. Your account list name :</TextBlock>
-		<TextBox Text="{Binding DatabaseName}" />
-		<TextBlock>. Your password :</TextBlock>
-		<TextBox PasswordChar="$" Text="{Binding PasswordInput}" Watermark="Password" UseFloatingWatermark="True"/>
-		<Button Content="Enter" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Command="{Binding LoginCommand}"/>
-		<TextBlock Text="{Binding ConnectionStatus}" HorizontalAlignment="Center" VerticalAlignment="Top" 
-			IsVisible="{Binding IsConnectionStatusVisible}" Foreground="Red" />
-	</StackPanel>
+	<Grid>
+		<!--Définir 2 bandes, une pour l'entête, et une autre pour le stack pannel -->
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<!-- Entête -->
+			<RowDefinition Height="5*"/>
+			<!-- Stack pannel -->
+		</Grid.RowDefinitions>
+		<!-- Pour l'entête Ypass et connexion -->
+
+		<Border BorderBrush="Black" BorderThickness="1" Background="#d9d9d9" Grid.Row="0" Grid.Column="0">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="140*"/>
+					<ColumnDefinition Width="100*"/>
+					<ColumnDefinition Width="150*"/>
+					<ColumnDefinition Width="100*"/>
+					<ColumnDefinition Width="150*"/>
+				</Grid.ColumnDefinitions>
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="Ypass" Grid.Row="0" Grid.Column="2" FontSize="22" FontWeight="Bold"/>
+
+				<Button Content="Inscription" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4" Width="135" Height="45" Margin="0" Background="#844cf9" FontSize="20" Foreground="#ffffff" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+			</Grid>
+		</Border>
+		<!-- Fin de l'entête -->
+		
+		<!-- Place pour le stack pannel-->
+
+
+
+
+
+		<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+		
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<!-- Border gris -->
+
+
+			<ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+					<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,50,0,120" CornerRadius="20">
+					<StackPanel VerticalAlignment="Stretch">
+						<!-- Contenu du StackPanel à ajouter ici -->
+						<Button Content="&lt;-" Command="{Binding GoBackCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="Connexion" FontSize="17" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<Button Content="Sélectionnez une base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,30,0,0" Width="300" Height="40" Padding="10" Background="#844cf9" FontSize="14" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBox Text="{Binding DatabaseName}" Margin="40,10,0,0" />
+						<TextBlock Text="Mot de passe :" FontSize="13" Margin="40,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<TextBox PasswordChar="$" Text="{Binding PasswordInput}" Watermark="Password" UseFloatingWatermark="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="350" TextWrapping="Wrap" Margin="40,10,0,0"/>
+						<Button Content="Connexion" Command="{Binding LoginCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Margin="40,10,0,0" Text="{Binding ConnectionStatus}" HorizontalAlignment="Center" VerticalAlignment="Top"
+							IsVisible="{Binding IsConnectionStatusVisible}" Foreground="Red" />
+					</StackPanel>
+
+
+					</Border>
+				</ScrollViewer>
+			
+
+		</Grid>
+			
+		
+		
+	</Grid>
 </UserControl>
