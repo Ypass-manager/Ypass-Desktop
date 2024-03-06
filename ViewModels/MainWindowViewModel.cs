@@ -19,15 +19,14 @@ public class MainWindowViewModel : BaseViewModel
         var NewOrExistentDatabaseViewModel = new NewOrExistentDatabasePageViewModel();
 
         // For testing purposes, replace simplePageViewModel in NavigationService.Initialize() and in _CurrentPage with another PageViewModel
-        NavigationService.Initialize(SimplePageViewModel);
+        NavigationService.Initialize(InscriptionPageViewModel);
         
         //Subscribe to the service to know when a page has been change, and set the page
         NavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
 
         // First Page by default
         // _CurrentPage = simplePageViewModel;
-        // Test value for inscription
-        _CurrentPage = SimplePageViewModel;
+        _CurrentPage = InscriptionPageViewModel;
 
        
     }

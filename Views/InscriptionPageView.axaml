@@ -10,7 +10,7 @@
 
 
 
-	<Grid>
+	<Grid Background="#ffffff">
 		<!--Définir 2 bandes, une pour l'entête, et une autre pour le stack pannel -->
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
