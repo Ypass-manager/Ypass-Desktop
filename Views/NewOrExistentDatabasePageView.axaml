@@ -56,21 +56,21 @@
 			</Grid.ColumnDefinitions>
 
 			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<!-- Border gris -->
 
 
 
 			<ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-				<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,30" CornerRadius="20">
+				<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,30"  CornerRadius="20">
 					<StackPanel VerticalAlignment="Stretch">
 						<!-- Contenu du StackPanel à ajouter ici -->
 						<Button Command="{Binding GoBackCommand}" Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Text="Connexion" FontSize="25" Margin="0,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<Button Command="{Binding NavigateToConnexionPageCommand}" Content="Choisissez votre base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0" Width="270" Height="50" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Text="OU" FontSize="20" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<Button Command="{Binding NavigateToInscriptionPageCommand}" Content="Créez une nouvelle base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0" Width="270" Height="50" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="Connexion" FontSize="25" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<Button Command="{Binding NavigateToConnexionPageCommand}" Margin="70,100,0,0" Content="Choisissez votre base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Width="270" Height="50" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="OU" FontSize="20" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<Button Command="{Binding NavigateToInscriptionPageCommand}" Content="Créez une nouvelle base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,10,0,100" Width="270" Height="50" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 					</StackPanel>
 				</Border>
 			</ScrollViewer>
