@@ -9,28 +9,27 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
     public NewOrExistentDatabasePageViewModel()
     {
         // Let the user choose if they want to create a new database or if they want to use an existent one
-        NavigateNextCommand = ReactiveCommand.Create<string>(NavigateNext);
+        
+        NavigateToConnexionPageCommand = ReactiveCommand.Create(NavigateToConnexionPage);
+        NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
+        
         GoBackCommand = ReactiveCommand.Create(GoBack);
     }
 
-    // WIP
+    public ICommand NavigateToConnexionPageCommand { get; }
+    public ICommand NavigateToInscriptionPageCommand { get; }
 
-    public ICommand NavigateNextCommand { get; }
 
-    // Lead to another PageViewModel among two (ConnectionPageViewModel() and NewDatabasePageViewModel())
-    private void NavigateNext(string userChoice)
+
+    private void NavigateToConnexionPage()
     {
-        if (userChoice == "ExistentListCommand")
-        {
-            Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
-        }
-        else if (userChoice == "NewListCommand")
-        {
-            Service.NavigationService.NavigateTo(new NewDatabasePageViewModel());
-        }
-
+        Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
     }
 
+    private void NavigateToInscriptionPage()
+    {
+        Service.NavigationService.NavigateTo(new InscriptionPageViewModel());
+    }
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
