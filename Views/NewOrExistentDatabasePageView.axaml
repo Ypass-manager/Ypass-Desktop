@@ -67,7 +67,7 @@
 					<StackPanel VerticalAlignment="Stretch">
 						<!-- Contenu du StackPanel à ajouter ici -->
 						<Button Command="{Binding GoBackCommand}" Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Text="Connexion" FontSize="25" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<TextBlock Text="Bienvenue" FontSize="25" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
 						<Border BorderThickness="50,3,50,3" BorderBrush="LightGray" Margin="70,10,0,15"/>
 						<Button Command="{Binding NavigateToConnexionPageCommand}" Margin="70,100,0,0" Content="Choisissez votre base de données" HorizontalAlignment="Center" VerticalAlignment="Top" Width="270" Height="50" Padding="10" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 						<TextBlock Text="OU" FontSize="20" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>

@@ -66,7 +66,7 @@
 
 			<ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 				<Grid Width="500" Height="500">
-					<Image Margin="20" Source="avares:/Assets/cutlery-377700_640.jpg" />
+					<Image Margin="20" Source="avares:/Assets/pc_inscription.png" />
 				</Grid>
 			</ScrollViewer>
 
@@ -76,17 +76,18 @@
 				<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,30" CornerRadius="20">
 					<StackPanel VerticalAlignment="Stretch">
 						<!-- Contenu du StackPanel à ajouter ici -->
-						<Button Command="{Binding GoBackCommand}" Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Text="Créez votre base de données" FontSize="17" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<TextBlock Text="Nom de votre base de données :" FontSize="13" Margin="40,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<TextBox Text="{Binding DatabaseName}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" TextWrapping="Wrap" Margin="40,10,0,0"/>
-						<TextBlock Text="Créez un mot de passe :" FontSize="13" Margin="40,15,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<TextBox PasswordChar="$" Text="{Binding Password}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Margin="40,10,0,0" Watermark="Password"
+						<Button Command="{Binding GoBackCommand}" Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="Créez votre base de données" FontSize="17" Margin="70,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<Border BorderThickness="50,3,50,3" BorderBrush="LightGray" Margin="70,10,0,15"/>
+						<TextBlock Text="Nom de votre base de données :" FontSize="13" Margin="70,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<TextBox Text="{Binding DatabaseName}" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Width="270" Margin="70,10,0,0"/>
+						<TextBlock Text="Créez un mot de passe :" FontSize="13" Margin="70,15,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<TextBox PasswordChar="$" Text="{Binding Password}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Margin="70,10,0,0" Watermark="Password"
                  			UseFloatingWatermark="True"/>
-						<TextBlock Text="Confirmation de votre mot de passe :" FontSize="13" Margin="40,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<TextBox PasswordChar="$" Text="{Binding ConfirmPassword}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" TextWrapping="Wrap" Margin="40,10,0,0" Watermark="Password"
+						<TextBlock Text="Confirmation de votre mot de passe :" FontSize="13" Margin="70,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<TextBox PasswordChar="$" Text="{Binding ConfirmPassword}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" TextWrapping="Wrap" Margin="70,10,0,0" Watermark="Password"
                  			UseFloatingWatermark="True"/>
-						<Button Command="{Binding NavigateNextCommand}" Content="Inscription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<Button Command="{Binding NavigateNextCommand}" Content="Inscription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 					</StackPanel>
 				</Border>
 			</ScrollViewer>
