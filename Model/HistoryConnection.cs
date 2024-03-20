@@ -13,30 +13,16 @@ public class HistoryConnection
     public HistoryConnection(YpassDbContext dbContext)
     {
         _dbContext = dbContext;
-        Connections = new List<DateTime>();
     }
     private DateTime LastConnection { get; set; }
-    public List<DateTime> Connections { get; set; }
 
-
-
-    //Add Each connectionDate
-    public void UpdateHistory()
+    //Save the last connection date
+    public void SaveHistory()
     {
         LastConnection = DateTime.Now;
-        Connections.Add(LastConnection);
+        _dbContext.HistoryConnection.Add(this);
         _dbContext.SaveChanges();
     }
-
-
-    //Foreach Connection in Connections
-    /*public void BrowseHistory()
-    {
-        foreach (DateTime Connection in Connections)
-        {
-            
-        }
-    }*/
 
     
 }
