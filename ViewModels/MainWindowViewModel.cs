@@ -17,7 +17,7 @@ public class MainWindowViewModel : BaseViewModel
         var SimplePageViewModel= new NewOrExistentDatabasePageViewModel();
         var InscriptionPageViewModel = new InscriptionPageViewModel();
         var NewOrExistentDatabaseViewModel = new NewOrExistentDatabasePageViewModel();
-        var HomePageViewModel = new HomePageViewModel();
+        var HomePageViewModel = new NewOrExistentDatabasePageViewModel();
 
         // For testing purposes, replace simplePageViewModel in NavigationService.Initialize() and in _CurrentPage with another PageViewModel
         NavigationService.Initialize(HomePageViewModel);
