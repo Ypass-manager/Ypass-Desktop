@@ -22,6 +22,7 @@ public class ConnectionPageViewModel : BaseViewModel
 
         LoginCommand = ReactiveCommand.Create(Login, canLogin);
         GoBackCommand = ReactiveCommand.Create(GoBack);
+        NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
     }
     private string _connectionStatus;
     public string ConnectionStatus
@@ -122,6 +123,11 @@ public class ConnectionPageViewModel : BaseViewModel
         ConnectionStatus = "Already connect.";
     }
 
+    public ICommand NavigateToInscriptionPageCommand { get; }
+    private void NavigateToInscriptionPage()
+    {
+        Service.NavigationService.NavigateTo(new InscriptionPageViewModel());
+    }
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {

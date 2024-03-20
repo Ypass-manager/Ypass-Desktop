@@ -23,6 +23,7 @@ public class InscriptionPageViewModel : BaseViewModel
 
         NavigateNextCommand = ReactiveCommand.Create(NavigateNext, canNavNext);
         GoBackCommand = ReactiveCommand.Create(GoBack);
+        NavigateToConnexionPageCommand = ReactiveCommand.Create(NavigateToConnexionPage);
     }
 
     private string? _databaseName;
@@ -98,6 +99,12 @@ public class InscriptionPageViewModel : BaseViewModel
             // Optionally, show a message to the user indicating that there was an error
         }
 
+    }
+
+    public ICommand NavigateToConnexionPageCommand { get; }
+    private void NavigateToConnexionPage()
+    {
+        Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
     }
 
     public ICommand GoBackCommand { get; }
