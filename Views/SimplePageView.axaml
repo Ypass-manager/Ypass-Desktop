@@ -70,7 +70,7 @@
 
 			<ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 				<Grid Width="500" Height="500">
-					<Image Margin="20" Source="\Ypass-Desktop\Assets\pc_inscription.png" />
+					<Image Margin="20" Source="C:\Users\mimib\source\repos\Ypass-Desktop\Assets\pc_inscription.png" />
 				</Grid>
 			</ScrollViewer>
 
