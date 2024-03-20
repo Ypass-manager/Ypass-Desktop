@@ -17,6 +17,7 @@ public class HomePageViewModel : BaseViewModel
 
     public HomePageViewModel() {
 
+        _dbContext = new YpassDbContext("HomePageDB.db");
         try
         {
             EncryptionService.LoadDatabaseWithMasterPassword("mdp", "HomePageDB.db");
