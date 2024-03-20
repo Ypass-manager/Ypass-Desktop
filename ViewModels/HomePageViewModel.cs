@@ -13,4 +13,19 @@ public class HomePageViewModel : BaseViewModel
 {
     // For now, exists only to make HomePageView.axaml available for testing
     // Will be worked on later
+    protected readonly YpassDbContext _dbContext;
+
+    public HomePageViewModel() {
+
+        try
+        {
+            EncryptionService.LoadDatabaseWithMasterPassword("mdp", "HomePageDB.db");
+        }
+        catch
+        {
+            EncryptionService.InitializeDatabaseWithMasterPassword("mdp", "HomePageDB.db");
+        }
+
+    }
+
 }
