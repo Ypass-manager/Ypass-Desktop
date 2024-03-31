@@ -88,14 +88,69 @@
 		<!-- Fin de l'entête -->
 		
 		<!-- Corps de la page principale-->
-		<Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1"> <!-- Ne pas modifier cette ligne-->
-			
+		<Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+			<!-- Ne pas modifier cette ligne-->
+
 			<!-- Début de modification possible -->
-			
-			
-			<TextBlock>Enter the Website url</TextBlock>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="225*"/>
+					<ColumnDefinition Width="275*"/>
+					<ColumnDefinition Width="275*"/>
+					<ColumnDefinition Width="225*"/>
+				</Grid.ColumnDefinitions>
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="30*"/>
+					<RowDefinition Height="40*"/>
+					<RowDefinition Height="40*"/>
+					<RowDefinition Height="40*"/>
+					<RowDefinition Height="50*"/>
+				</Grid.RowDefinitions>
 
 
+				<Border BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" CornerRadius="20" >
+					<StackPanel Margin="0,0,0,50" Orientation="Horizontal">
+						<Button Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,15,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Foreground="Black" FontWeight="Bold" Margin="30,25,0,0" FontSize="18">URL</TextBlock>
+					</StackPanel>			
+				</Border>
+
+				<Border Grid.Row="2" Grid.Column="1"> 
+					<StackPanel>
+					<TextBlock Foreground="Black" FontWeight="Bold" Margin="40,0,0,0" FontSize="18">Nom d'utilisateur</TextBlock>
+					<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="220" Height="35" CornerRadius="20" Background="White" Foreground="Black" FontSize="18" FontWeight="Bold"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Row="1" Grid.Column="2">
+					<StackPanel>
+						<Button Content="Sauvegarder" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="00,15,15,0" Width="150" Height="40" Background="#844cf9" FontSize="16" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Row="3" Grid.Column="1">
+					<StackPanel>
+						<TextBlock Foreground="Black" FontWeight="Bold" Margin="40,0,0,0" FontSize="18">Mot de passe</TextBlock>
+						<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="220"  Height="35" CornerRadius="20" Background="White" Foreground="Black" FontSize="18" FontWeight="Bold"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Row="2" Grid.Column="2">
+					<StackPanel>
+						<TextBlock Foreground="Black" FontWeight="Bold" Margin="40,0,0,0" FontSize="18">URL</TextBlock>
+						<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="220"  Height="35" CornerRadius="20" Background="White" Foreground="Black" FontSize="18" FontWeight="Bold"/>
+					</StackPanel>
+				</Border>
+
+				<Border Grid.Row="3" Grid.Column="2">
+					<StackPanel>
+						<TextBlock Foreground="Black" FontWeight="Bold" Margin="40,0,0,0" FontSize="18">Note</TextBlock>
+						<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="220"  Height="35" CornerRadius="20" Background="White" Foreground="Black" FontSize="18" FontWeight="Bold"/>
+					</StackPanel>
+				</Border>
+				
+			</Grid>
 			<!-- Fin de modification possible -->
 		</Border>
 		<!-- Fin du corps -->
