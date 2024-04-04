@@ -105,6 +105,7 @@ public class ConnectionPageViewModel : BaseViewModel
                 parameterBuilder.Add("passwordInput", PasswordInput);
                 ConnectionStatus = "Connection successful";
                 AuthenticationService.Login();
+                Service.NavigationService.NavigateTo(new HomePageViewModel());
                 //Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
             }
             catch (IncorrectMasterPasswordException ex)
@@ -120,6 +121,7 @@ public class ConnectionPageViewModel : BaseViewModel
             }
             return;
         }
+        Service.NavigationService.NavigateTo(new HomePageViewModel());
         ConnectionStatus = "Already connect.";
     }
 

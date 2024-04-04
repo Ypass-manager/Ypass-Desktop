@@ -90,7 +90,7 @@ public class InscriptionPageViewModel : BaseViewModel
 
             AuthenticationService.Login();
 
-            Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+            Service.NavigationService.NavigateTo(new HomePageViewModel());
         }
         catch (Exception ex)
         {
