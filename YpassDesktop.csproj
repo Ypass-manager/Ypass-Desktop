@@ -11,6 +11,8 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <AvaloniaResource Include="Assets\**" />
+    <None Remove="FrontKeep\AccountPageView.text" />
+    <AvaloniaXaml Include="FrontKeep\AccountPageView.text" />
   </ItemGroup>
 
   <ItemGroup>
