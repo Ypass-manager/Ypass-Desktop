@@ -77,7 +77,7 @@
 
 				<TextBox Text="Rechercher" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Height="60" Margin="20,0,0,0" Background="#ffffff" FontSize="30" Foreground="#b3b1b1" BorderBrush="#ebe8e8" CornerRadius="30" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 
-				<Button Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" Width="50" Height="50" Margin="20,0,0,0" Background="#844cf9" FontSize="30" Foreground="#ffffff" BorderBrush="#844cf9" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+				<Button Command="{Binding AddAccountCommand}" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="3" Width="50" Height="50" Margin="20,0,0,0" Background="#844cf9" FontSize="30" Foreground="#ffffff" BorderBrush="#844cf9" CornerRadius="30" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
 			</Grid>
 		</Border>
 		<!-- Fin de l'entête -->

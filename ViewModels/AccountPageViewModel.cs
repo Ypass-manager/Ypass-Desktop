@@ -29,6 +29,7 @@ namespace YpassDesktop.ViewModels
         
         
         AddAccountCommand = ReactiveCommand.Create(AddAccount, canAddAccount);
+        GoBackCommand = ReactiveCommand.Create(GoBack);
         }
 
         private void UpdateCanAddAccount()
@@ -101,6 +102,14 @@ namespace YpassDesktop.ViewModels
             var parameterBuilder = new ParameterBuilder();
             parameterBuilder.Add("title", Title);
             Service.NavigationService.NavigateTo(new ThirdPageViewModel(),parameterBuilder);
+        }
+
+        public ICommand GoBackCommand { get; }
+        private void GoBack()
+        {
+            Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
+            Service.NavigationService.GoBack();
+
         }
 
     }

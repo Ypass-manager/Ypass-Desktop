@@ -13,4 +13,16 @@ public class HomePageViewModel : BaseViewModel
 {
     // For now, exists only to make HomePageView.axaml available for testing
     // Will be worked on later
+    public HomePageViewModel() {
+
+        AddAccountCommand = ReactiveCommand.Create(NavigateToAddAccountPage);
+        
+    }
+
+    public ICommand AddAccountCommand { get; }
+
+    private void NavigateToAddAccountPage()
+    {
+        Service.NavigationService.NavigateTo(new AccountPageViewModel());
+    }
 }
