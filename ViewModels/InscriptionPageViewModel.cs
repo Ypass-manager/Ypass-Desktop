@@ -88,7 +88,7 @@ public class InscriptionPageViewModel : BaseViewModel
             parameterBuilder.Add("email", DatabaseName);
             parameterBuilder.Add("password", Password);
 
-            AuthenticationService.Login();
+            AuthenticationService.Login(DatabaseName);
 
             Service.MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         }

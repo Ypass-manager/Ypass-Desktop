@@ -13,20 +13,12 @@ namespace YpassDesktop.ViewModels
 {
     public class AccountPageViewModel: BaseViewModel
     {
-        protected readonly YpassDbContext _dbContext;
         public AccountPageViewModel() {
             // Listen to changes of MailAddress and Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.Title, x => x.AccountPassword, x => x.AccountUsername)
         .Subscribe(_ => UpdateCanAddAccount());
 
         var canAddAccount = this.WhenAnyValue(x => x.CanAddAccount);
-        _dbContext = new YpassDbContext("YpassDB.db");
-        try {
-            EncryptionService.LoadDatabaseWithMasterPassword("mdp", "YpassDB.db");
-        } catch {
-            EncryptionService.InitializeDatabaseWithMasterPassword("mdp", "YpassDB.db");
-        }
-        
         
         AddAccountCommand = ReactiveCommand.Create(AddAccount, canAddAccount);
         GoBackCommand = ReactiveCommand.Create(GoBack);
@@ -90,7 +82,7 @@ namespace YpassDesktop.ViewModels
         private void AddAccount()
         {
             
-            Account account = new Account(_dbContext);
+            Account account = new Account(new YpassDbContext(AuthenticationService.GetDbName()));
             if(!string.IsNullOrEmpty(Title)){account.Title = Title;}
             if(!string.IsNullOrEmpty(AccountUsername)) { account.Username = AccountUsername; }
             
@@ -101,7 +93,7 @@ namespace YpassDesktop.ViewModels
             
             var parameterBuilder = new ParameterBuilder();
             parameterBuilder.Add("title", Title);
-            //Service.NavigationService.NavigateTo(new ThirdPageViewModel(),parameterBuilder);
+            Service.HomePageNavigationService.GoBack();
         }
 
         public ICommand GoBackCommand { get; }

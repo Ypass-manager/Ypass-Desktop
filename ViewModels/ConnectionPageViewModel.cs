@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Headers;
 using System.Reactive.Linq;
 using System.Windows.Input;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 using static YpassDesktop.Service.EncryptionService;
 
@@ -104,7 +105,7 @@ public class ConnectionPageViewModel : BaseViewModel
                 parameterBuilder.Add("databaseName", DatabaseName);
                 parameterBuilder.Add("passwordInput", PasswordInput);
                 ConnectionStatus = "Connection successful";
-                AuthenticationService.Login();
+                AuthenticationService.Login(databaseName);
                 MainWindowNavigationService.NavigateTo(new HomePageViewModel());
                 //Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
             }

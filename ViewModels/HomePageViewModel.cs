@@ -51,4 +51,15 @@ public class HomePageViewModel : BaseViewModel
     {
         Service.HomePageNavigationService.NavigateTo(new AccountPageViewModel());
     }
+
+    private string? _databaseName;
+
+    [Required]
+    public string? DatabaseName
+    {
+        get
+        {
+            return AuthenticationService.GetDbName();
+        }
+    }
 }
