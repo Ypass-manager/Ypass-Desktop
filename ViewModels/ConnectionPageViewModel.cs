@@ -105,7 +105,7 @@ public class ConnectionPageViewModel : BaseViewModel
                 parameterBuilder.Add("passwordInput", PasswordInput);
                 ConnectionStatus = "Connection successful";
                 AuthenticationService.Login();
-                Service.NavigationService.NavigateTo(new HomePageViewModel());
+                MainWindowNavigationService.NavigateTo(new HomePageViewModel());
                 //Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
             }
             catch (IncorrectMasterPasswordException ex)
@@ -121,19 +121,19 @@ public class ConnectionPageViewModel : BaseViewModel
             }
             return;
         }
-        Service.NavigationService.NavigateTo(new HomePageViewModel());
+        MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         ConnectionStatus = "Already connect.";
     }
 
     public ICommand NavigateToInscriptionPageCommand { get; }
     private void NavigateToInscriptionPage()
     {
-        Service.NavigationService.NavigateTo(new InscriptionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new InscriptionPageViewModel());
     }
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
     }
 }

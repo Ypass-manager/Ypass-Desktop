@@ -23,18 +23,18 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
 
     private void NavigateToConnexionPage()
     {
-        Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new ConnectionPageViewModel());
     }
 
     private void NavigateToInscriptionPage()
     {
-        Service.NavigationService.NavigateTo(new InscriptionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new InscriptionPageViewModel());
     }
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
 
     }
 }

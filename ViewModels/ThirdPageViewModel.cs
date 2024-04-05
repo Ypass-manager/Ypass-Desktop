@@ -68,7 +68,7 @@ public class ThirdPageViewModel : BaseViewModel
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
         
     }
 }

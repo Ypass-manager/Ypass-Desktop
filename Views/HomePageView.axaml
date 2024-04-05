@@ -81,5 +81,15 @@
 			</Grid>
 		</Border>
 		<!-- Fin de l'entête -->
+
+		<!-- Corps de la page principale-->
+
+		<Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+
+			<TransitioningContentControl Content="{Binding CurrentHomePage}" />
+		</Border>
+
+		<!-- Fin du corps de la page principale-->
+		
 	</Grid>
 </UserControl>

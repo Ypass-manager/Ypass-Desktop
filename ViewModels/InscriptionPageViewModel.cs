@@ -90,7 +90,7 @@ public class InscriptionPageViewModel : BaseViewModel
 
             AuthenticationService.Login();
 
-            Service.NavigationService.NavigateTo(new HomePageViewModel());
+            Service.MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         }
         catch (Exception ex)
         {
@@ -104,14 +104,14 @@ public class InscriptionPageViewModel : BaseViewModel
     public ICommand NavigateToConnexionPageCommand { get; }
     private void NavigateToConnexionPage()
     {
-        Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new ConnectionPageViewModel());
     }
 
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
 
     }
 }
