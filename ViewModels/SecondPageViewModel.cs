@@ -72,7 +72,7 @@ public class SecondPageViewModel : BaseViewModel
         parameterBuilder.Add("email", MailAddress);
         parameterBuilder.Add("password", Password);
 
-        AuthenticationService.Login("test");
+        AuthenticationService.Login("test", null);
 
         Service.MainWindowNavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
         

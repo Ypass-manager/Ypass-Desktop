@@ -81,14 +81,14 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         try
         {
-            
-            EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
+
+            byte[] derivation_key_with_salt = EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
             // Database initialization successful, navigate to the next page or perform any additional logic
             var parameterBuilder = new ParameterBuilder();
             parameterBuilder.Add("email", DatabaseName);
             parameterBuilder.Add("password", Password);
 
-            AuthenticationService.Login(DatabaseName);
+            AuthenticationService.Login(DatabaseName, derivation_key_with_salt);
 
             Service.MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         }

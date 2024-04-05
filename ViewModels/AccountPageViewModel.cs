@@ -81,8 +81,14 @@ namespace YpassDesktop.ViewModels
         public ICommand AddAccountCommand { get; }
         private void AddAccount()
         {
-            
-            Account account = new Account(new YpassDbContext(AuthenticationService.GetDbName()));
+            string database_name = AuthenticationService.GetDbName();
+            byte[]? salt_derived_key = AuthenticationService.GetSaltDerivedKey();
+            if (salt_derived_key != null)
+            {
+                EncryptionService.LoadDatabaseWithSaltDerivationKey(salt_derived_key, database_name);
+            }
+                
+            Account account = new Account(new YpassDbContext(database_name));
             if(!string.IsNullOrEmpty(Title)){account.Title = Title;}
             if(!string.IsNullOrEmpty(AccountUsername)) { account.Username = AccountUsername; }
             
@@ -91,9 +97,7 @@ namespace YpassDesktop.ViewModels
             }
             account.Save();
             
-            var parameterBuilder = new ParameterBuilder();
-            parameterBuilder.Add("title", Title);
-            Service.HomePageNavigationService.GoBack();
+            //Service.HomePageNavigationService.GoBack();
         }
 
         public ICommand GoBackCommand { get; }

@@ -11,18 +11,20 @@ namespace YpassDesktop.Service
     {
         private static bool _isLoggedIn = false;
         private static String? _databaseName;
+        private static byte[]? _salt_derived_key;
         
         public static bool IsLoggedIn {
             get { return _isLoggedIn; }
             private set { _isLoggedIn = value; }
         }
 
-        public static void Login(String databaseName)
+        public static void Login(string databaseName, byte[] salt_derived_key)
         {
             // Perform authentication
             // If authentication is successful:
             IsLoggedIn = true;
             _databaseName = databaseName;
+            _salt_derived_key = salt_derived_key;
         }
 
         public static void Logout()
@@ -41,6 +43,12 @@ namespace YpassDesktop.Service
             }
             return "Not connected.";
             
+        }
+
+        public static byte[]? GetSaltDerivedKey()
+        {
+            if(_salt_derived_key != null) return _salt_derived_key;
+            return null;
         }
 
     }

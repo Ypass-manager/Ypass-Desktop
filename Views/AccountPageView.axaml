@@ -65,8 +65,8 @@
 
 				<Border Grid.Row="3" Grid.Column="2">
 					<StackPanel>
-						<TextBlock Foreground="Black" FontWeight="Bold" Margin="40,0,0,0" FontSize="18">Note</TextBlock>
-						<TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="220"  Height="35" CornerRadius="20" Background="White" Foreground="Black" FontSize="18" FontWeight="Bold"/>
+						<TextBlock Foreground="Black" FontWeight="Bold" Margin="40,0,0,0" FontSize="18">Titre</TextBlock>
+						<TextBox Text="{Binding Title}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,10,0,0" Width="220"  Height="35" CornerRadius="20" Background="White" Foreground="Black" FontSize="18" FontWeight="Bold"/>
 					</StackPanel>
 				</Border>
 				
