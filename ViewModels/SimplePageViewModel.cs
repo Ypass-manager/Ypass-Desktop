@@ -17,7 +17,7 @@ namespace YpassDesktop.ViewModels
             .Subscribe(o => this.RaisePropertyChanged(nameof(Greeting)));
 
             //Subscribe to be notify when the page change
-            NavigationService.NavigationChanged += ResetName;
+            MainWindowNavigationService.NavigationChanged += ResetName;
         }
 
         private void ResetName(BaseViewModel newPage)
@@ -50,7 +50,7 @@ namespace YpassDesktop.ViewModels
                 }
                 else if (Name.Equals("NEXT"))
                 {
-                    Service.NavigationService.NavigateTo(new SecondPageViewModel());
+                    Service.MainWindowNavigationService.NavigateTo(new SecondPageViewModel());
                     // Service.NavigationService.NavigateTo(new InscriptionViewModel());
                     return string.Empty;
                 }

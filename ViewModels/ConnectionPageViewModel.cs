@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net.Http.Headers;
 using System.Reactive.Linq;
 using System.Windows.Input;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 using static YpassDesktop.Service.EncryptionService;
 
@@ -98,13 +99,16 @@ public class ConnectionPageViewModel : BaseViewModel
                 {
                     return;
                 }
-                EncryptionService.LoadDatabaseWithMasterPassword(masterPassword, databaseName);
+                byte[] salt_derived_key = EncryptionService.LoadDatabaseWithMasterPassword(masterPassword, databaseName);
 
                 var parameterBuilder = new ParameterBuilder();
                 parameterBuilder.Add("databaseName", DatabaseName);
                 parameterBuilder.Add("passwordInput", PasswordInput);
                 ConnectionStatus = "Connection successful";
-                AuthenticationService.Login();
+                AuthenticationService.Login(databaseName, salt_derived_key);
+                
+                EncryptionService.LoadDatabaseWithMasterPassword(masterPassword, databaseName);
+                MainWindowNavigationService.NavigateTo(new HomePageViewModel());
                 //Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
             }
             catch (IncorrectMasterPasswordException ex)
@@ -120,18 +124,19 @@ public class ConnectionPageViewModel : BaseViewModel
             }
             return;
         }
+        MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         ConnectionStatus = "Already connect.";
     }
 
     public ICommand NavigateToInscriptionPageCommand { get; }
     private void NavigateToInscriptionPage()
     {
-        Service.NavigationService.NavigateTo(new InscriptionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new InscriptionPageViewModel());
     }
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
     }
 }

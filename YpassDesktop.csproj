@@ -11,6 +11,8 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <AvaloniaResource Include="Assets\**" />
+    <None Remove="FrontKeep\AccountPageView.text" />
+    <AvaloniaXaml Include="FrontKeep\AccountPageView.text" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +32,12 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\AddAccountPageView.axaml.cs">
+      <DependentUpon>AddAccountPageView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

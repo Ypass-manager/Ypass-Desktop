@@ -81,16 +81,16 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         try
         {
-            
-            EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
+
+            byte[] derivation_key_with_salt = EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
             // Database initialization successful, navigate to the next page or perform any additional logic
             var parameterBuilder = new ParameterBuilder();
             parameterBuilder.Add("email", DatabaseName);
             parameterBuilder.Add("password", Password);
 
-            AuthenticationService.Login();
+            AuthenticationService.Login(DatabaseName, derivation_key_with_salt);
 
-            Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+            Service.MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         }
         catch (Exception ex)
         {
@@ -104,14 +104,14 @@ public class InscriptionPageViewModel : BaseViewModel
     public ICommand NavigateToConnexionPageCommand { get; }
     private void NavigateToConnexionPage()
     {
-        Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new ConnectionPageViewModel());
     }
 
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
 
     }
 }

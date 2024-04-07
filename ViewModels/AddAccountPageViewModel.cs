@@ -11,24 +11,17 @@ using System.Windows.Input;
 
 namespace YpassDesktop.ViewModels
 {
-    public class AccountPageViewModel: BaseViewModel
+    public class AddAccountPageViewModel: BaseViewModel
     {
-        protected readonly YpassDbContext _dbContext;
-        public AccountPageViewModel() {
+        public AddAccountPageViewModel() {
             // Listen to changes of MailAddress and Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.Title, x => x.AccountPassword, x => x.AccountUsername)
         .Subscribe(_ => UpdateCanAddAccount());
 
         var canAddAccount = this.WhenAnyValue(x => x.CanAddAccount);
-        _dbContext = new YpassDbContext("YpassDB.db");
-        try {
-            EncryptionService.LoadDatabaseWithMasterPassword("mdp", "YpassDB.db");
-        } catch {
-            EncryptionService.InitializeDatabaseWithMasterPassword("mdp", "YpassDB.db");
-        }
-        
         
         AddAccountCommand = ReactiveCommand.Create(AddAccount, canAddAccount);
+        GoBackCommand = ReactiveCommand.Create(GoBack);
         }
 
         private void UpdateCanAddAccount()
@@ -88,8 +81,14 @@ namespace YpassDesktop.ViewModels
         public ICommand AddAccountCommand { get; }
         private void AddAccount()
         {
-            
-            Account account = new Account(_dbContext);
+            string database_name = AuthenticationService.GetDbName();
+            byte[]? salt_derived_key = AuthenticationService.GetSaltDerivedKey();
+            if (salt_derived_key != null)
+            {
+                EncryptionService.LoadDatabaseWithSaltDerivationKey(salt_derived_key, database_name);
+            }
+                
+            Account account = new Account(new YpassDbContext(database_name));
             if(!string.IsNullOrEmpty(Title)){account.Title = Title;}
             if(!string.IsNullOrEmpty(AccountUsername)) { account.Username = AccountUsername; }
             
@@ -97,10 +96,16 @@ namespace YpassDesktop.ViewModels
                 account.SetPassword(EncryptionService.EncryptPassword(AccountPassword));
             }
             account.Save();
-            
-            var parameterBuilder = new ParameterBuilder();
-            parameterBuilder.Add("title", Title);
-            Service.NavigationService.NavigateTo(new ThirdPageViewModel(),parameterBuilder);
+
+            Service.HomePageNavigationService.NavigateTo(new ListAccountPageViewModel());
+        }
+
+        public ICommand GoBackCommand { get; }
+        private void GoBack()
+        {
+            Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
+            Service.HomePageNavigationService.GoBack();
+
         }
 
     }
