@@ -1,4 +1,4 @@
-<UserControl x:Class="YpassDesktop.Views.AccountPageView"
+<UserControl x:Class="YpassDesktop.Views.AddAccountPageView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,10 +7,10 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              x:CompileBindings="True"
-             x:DataType="vm:AccountPageViewModel"
+             x:DataType="vm:AddAccountPageViewModel"
              mc:Ignorable="d">
 	<Design.DataContext>
-		<vm:AccountPageViewModel />
+		<vm:AddAccountPageViewModel />
 	</Design.DataContext>
 			<Grid>
 				<Grid.ColumnDefinitions>

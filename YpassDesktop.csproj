@@ -34,4 +34,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\AddAccountPageView.axaml.cs">
+      <DependentUpon>AddAccountPageView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

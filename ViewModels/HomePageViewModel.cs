@@ -49,7 +49,7 @@ public class HomePageViewModel : BaseViewModel
 
     private void NavigateToAddAccountPage()
     {
-        Service.HomePageNavigationService.NavigateTo(new AccountPageViewModel());
+        Service.HomePageNavigationService.NavigateTo(new AddAccountPageViewModel());
     }
 
     private string? _databaseName;

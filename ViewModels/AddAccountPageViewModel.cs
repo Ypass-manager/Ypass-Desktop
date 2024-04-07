@@ -11,9 +11,9 @@ using System.Windows.Input;
 
 namespace YpassDesktop.ViewModels
 {
-    public class AccountPageViewModel: BaseViewModel
+    public class AddAccountPageViewModel: BaseViewModel
     {
-        public AccountPageViewModel() {
+        public AddAccountPageViewModel() {
             // Listen to changes of MailAddress and Password and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.Title, x => x.AccountPassword, x => x.AccountUsername)
         .Subscribe(_ => UpdateCanAddAccount());
