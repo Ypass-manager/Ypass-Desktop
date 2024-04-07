@@ -28,5 +28,10 @@ namespace YpassDesktop.Service
         {
             _navigationService.GoBack();
         }
+
+        public static void ClearNavigationHistory() {
+            
+            _navigationService.ClearNavigationHistory();
+        }
     }
 }

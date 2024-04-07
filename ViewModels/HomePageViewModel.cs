@@ -3,6 +3,7 @@ using ReactiveUI;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 using System.Windows.Input;
 using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
@@ -28,6 +29,7 @@ public class HomePageViewModel : BaseViewModel
         _CurrentHomePage = HomePageViewModel;
 
         AddAccountCommand = ReactiveCommand.Create(NavigateToAddAccountPage);
+        DisconnectCommand = ReactiveCommand.Create(Disconnect);
     }
 
     public BaseViewModel CurrentHomePage
@@ -50,6 +52,17 @@ public class HomePageViewModel : BaseViewModel
     private void NavigateToAddAccountPage()
     {
         Service.HomePageNavigationService.NavigateTo(new AddAccountPageViewModel());
+    }
+
+    public ICommand DisconnectCommand { get; }
+
+    private void Disconnect()
+    {
+        AuthenticationService.Logout();
+
+        var parameterBuilder = new ParameterBuilder();
+        parameterBuilder.Add("resetHistoryNavigation", true);
+        Service.MainWindowNavigationService.NavigateTo(new NewOrExistentDatabasePageViewModel(), parameterBuilder);
     }
 
     private string? _databaseName;

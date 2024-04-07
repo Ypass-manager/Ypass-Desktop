@@ -45,5 +45,10 @@ namespace YpassDesktop.Service
         {
             NavigationChanged?.Invoke(newPage);
         }
+
+        public void ClearNavigationHistory()
+        {
+            _navigationHistory.Clear();
+        }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using ReactiveUI;
 using System;
 using System.Windows.Input;
+using Tmds.DBus.Protocol;
+using YpassDesktop.DataAccess;
+using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels;
 
@@ -14,6 +17,21 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
         NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
         
         GoBackCommand = ReactiveCommand.Create(GoBack);
+    }
+
+    public override void Initialize()
+    {
+        if (NavigationParameter is ParameterBuilder param)
+        {
+            bool resetHistoryNav = param.Get<bool>("resetHistoryNavigation");
+            if (resetHistoryNav)
+            {
+                MainWindowNavigationService.ClearNavigationHistory();
+                HomePageNavigationService.ClearNavigationHistory();
+            }
+        }
+
+
     }
 
     public ICommand NavigateToConnexionPageCommand { get; }
