@@ -15,8 +15,7 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
         
         NavigateToConnexionPageCommand = ReactiveCommand.Create(NavigateToConnexionPage);
         NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
-        
-        GoBackCommand = ReactiveCommand.Create(GoBack);
+
     }
 
     public override void Initialize()
@@ -47,13 +46,6 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
     private void NavigateToInscriptionPage()
     {
         Service.MainWindowNavigationService.NavigateTo(new InscriptionPageViewModel());
-    }
-    public ICommand GoBackCommand { get; }
-    private void GoBack()
-    {
-        Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.MainWindowNavigationService.GoBack();
-
     }
 }
 
