@@ -96,8 +96,8 @@ namespace YpassDesktop.ViewModels
                 account.SetPassword(EncryptionService.EncryptPassword(AccountPassword));
             }
             account.Save();
-            
-            //Service.HomePageNavigationService.GoBack();
+
+            Service.HomePageNavigationService.NavigateTo(new ListAccountPageViewModel());
         }
 
         public ICommand GoBackCommand { get; }
