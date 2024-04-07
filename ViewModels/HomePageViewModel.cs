@@ -19,7 +19,7 @@ public class HomePageViewModel : BaseViewModel
     private BaseViewModel _CurrentHomePage;
     public HomePageViewModel() {
 
-        var HomePageViewModel = new EncryptTestPageViewModel();
+        var HomePageViewModel = new ListAccountPageViewModel();
 
         HomePageNavigationService.Initialize(HomePageViewModel);
 
