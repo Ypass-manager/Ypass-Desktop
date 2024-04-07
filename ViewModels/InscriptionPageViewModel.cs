@@ -3,6 +3,7 @@ using ReactiveUI;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Windows.Input;
 using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
@@ -81,12 +82,9 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         try
         {
-
+            DatabaseName += ".db";
             byte[] derivation_key_with_salt = EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
             // Database initialization successful, navigate to the next page or perform any additional logic
-            var parameterBuilder = new ParameterBuilder();
-            parameterBuilder.Add("email", DatabaseName);
-            parameterBuilder.Add("password", Password);
 
             AuthenticationService.Login(DatabaseName, derivation_key_with_salt);
 

@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
+	<UseWindowsForms>true</UseWindowsForms>
+	<EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -11,8 +13,6 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <AvaloniaResource Include="Assets\**" />
-    <None Remove="FrontKeep\AccountPageView.text" />
-    <AvaloniaXaml Include="FrontKeep\AccountPageView.text" />
   </ItemGroup>
 
   <ItemGroup>
