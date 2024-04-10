@@ -30,6 +30,7 @@ public class HomePageViewModel : BaseViewModel
 
         AddAccountCommand = ReactiveCommand.Create(NavigateToAddAccountPage);
         ViewHistoryConnectionCommand = ReactiveCommand.Create(NavigateToHistoryConnectionPage);
+        GoHomePageCommand = ReactiveCommand.Create(GoHomePage);
         DisconnectCommand = ReactiveCommand.Create(Disconnect);
     }
 
@@ -68,6 +69,14 @@ public class HomePageViewModel : BaseViewModel
         var parameterBuilder = new ParameterBuilder();
         parameterBuilder.Add("resetHistoryNavigation", true);
         Service.MainWindowNavigationService.NavigateTo(new NewOrExistentDatabasePageViewModel(), parameterBuilder);
+    }
+
+    public ICommand GoHomePageCommand { get;}
+    private void GoHomePage(){
+        Service.HomePageNavigationService.ClearNavigationHistory();
+        BaseViewModel homePage = new ListAccountPageViewModel();
+        Service.HomePageNavigationService.Initialize(homePage);
+        SetCurrentHomePage(homePage);
     }
 
     private string? _databaseName;
