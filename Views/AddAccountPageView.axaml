@@ -28,11 +28,14 @@
 					<RowDefinition Height="50*"/>
 				</Grid.RowDefinitions>
 
+				<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="#1976D2" BorderBrush="#0D47A1" BorderThickness="1" CornerRadius="20" Margin="10">
+            		<TextBlock Text="Ajouter un compte" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        		</Border>
 
-				<Border BorderBrush="Gray" Background="LightGray" BorderThickness="1" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" CornerRadius="20" >
+				<Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="2" CornerRadius="20" >
 					<StackPanel Margin="0,0,0,50" Orientation="Horizontal">
 						<Button Command="{Binding GoBackCommand}" Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,15,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Foreground="Black" FontWeight="Bold" Margin="30,25,0,0" FontSize="18">URL</TextBlock>
+						
 					</StackPanel>			
 				</Border>
 
