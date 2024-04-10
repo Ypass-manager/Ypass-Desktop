@@ -14,14 +14,22 @@ public class HistoryConnection
     {
         _dbContext = dbContext;
     }
-    private DateTime LastConnection { get; set; }
+    public int HistoryConnectionId { get; set; } = 0;
+    public DateTime ConnectionDate { get; set; } = DateTime.Now;
 
     //Save the last connection date
-    public void SaveHistory()
+    public void Save()
     {
-        LastConnection = DateTime.Now;
+        ConnectionDate = DateTime.Now;
         _dbContext.HistoryConnection.Add(this);
         _dbContext.SaveChanges();
+    }
+
+    public List<DateTime> GetListDateConnection(){
+        return _dbContext.HistoryConnection
+                     .OrderByDescending(h => h.ConnectionDate)
+                     .Select(h => h.ConnectionDate)
+                     .ToList();
     }
 
     

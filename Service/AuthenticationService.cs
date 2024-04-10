@@ -25,6 +25,10 @@ namespace YpassDesktop.Service
             IsLoggedIn = true;
             _databaseName = databaseName;
             _salt_derived_key = salt_derived_key;
+            // Add to the database the connection
+
+            HistoryConnection historyConnection = new HistoryConnection(new YpassDbContext(databaseName));
+            historyConnection.Save();
         }
 
         public static void Logout()

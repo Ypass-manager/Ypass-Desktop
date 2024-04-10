@@ -29,6 +29,7 @@ public class HomePageViewModel : BaseViewModel
         _CurrentHomePage = HomePageViewModel;
 
         AddAccountCommand = ReactiveCommand.Create(NavigateToAddAccountPage);
+        ViewHistoryConnectionCommand = ReactiveCommand.Create(NavigateToHistoryConnectionPage);
         DisconnectCommand = ReactiveCommand.Create(Disconnect);
     }
 
@@ -54,6 +55,10 @@ public class HomePageViewModel : BaseViewModel
         Service.HomePageNavigationService.NavigateTo(new AddAccountPageViewModel());
     }
 
+    public ICommand ViewHistoryConnectionCommand {get;}
+    private void NavigateToHistoryConnectionPage(){
+        Service.HomePageNavigationService.NavigateTo(new HistoryConnectionPageViewModel());
+    }
     public ICommand DisconnectCommand { get; }
 
     private void Disconnect()
