@@ -27,6 +27,7 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
             {
                 MainWindowNavigationService.ClearNavigationHistory();
                 HomePageNavigationService.ClearNavigationHistory();
+                MainWindowNavigationService.Initialize(this);
             }
         }
 
