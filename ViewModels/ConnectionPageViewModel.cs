@@ -9,6 +9,7 @@ using System.Windows.Input;
 using YpassDesktop.Service;
 using System.Windows.Forms;
 using static YpassDesktop.Service.EncryptionService;
+using YpassDesktop.DataAccess;
 
 namespace YpassDesktop.ViewModels;
 
@@ -142,8 +143,6 @@ public class ConnectionPageViewModel : BaseViewModel
                 parameterBuilder.Add("passwordInput", PasswordInput);
                 ConnectionStatus = "Connection successful";
                 AuthenticationService.Login(databaseName, salt_derived_key);
-                
-                EncryptionService.LoadDatabaseWithMasterPassword(masterPassword, databaseName);
                 MainWindowNavigationService.NavigateTo(new HomePageViewModel());
             }
             catch (IncorrectMasterPasswordException ex)
