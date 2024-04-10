@@ -3,6 +3,7 @@ using ReactiveUI;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Windows.Input;
 using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
@@ -23,6 +24,7 @@ public class InscriptionPageViewModel : BaseViewModel
 
         NavigateNextCommand = ReactiveCommand.Create(NavigateNext, canNavNext);
         GoBackCommand = ReactiveCommand.Create(GoBack);
+        NavigateToConnexionPageCommand = ReactiveCommand.Create(NavigateToConnexionPage);
     }
 
     private string? _databaseName;
@@ -80,16 +82,13 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         try
         {
-            
-            EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
+            DatabaseName += ".db";
+            byte[] derivation_key_with_salt = EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
             // Database initialization successful, navigate to the next page or perform any additional logic
-            var parameterBuilder = new ParameterBuilder();
-            parameterBuilder.Add("email", DatabaseName);
-            parameterBuilder.Add("password", Password);
 
-            AuthenticationService.Login();
+            AuthenticationService.Login(DatabaseName, derivation_key_with_salt);
 
-            Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+            Service.MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         }
         catch (Exception ex)
         {
@@ -100,11 +99,17 @@ public class InscriptionPageViewModel : BaseViewModel
 
     }
 
+    public ICommand NavigateToConnexionPageCommand { get; }
+    private void NavigateToConnexionPage()
+    {
+        Service.MainWindowNavigationService.NavigateTo(new ConnectionPageViewModel());
+    }
+
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
 
     }
 }

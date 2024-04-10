@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace YpassDesktop.Views
 {
-    internal partial class NewDatabasePageView : UserControl
+    public partial class HomePageView : UserControl
     {
-        public NewDatabasePageView()
+        public HomePageView()
         {
             InitializeComponent();
         }
