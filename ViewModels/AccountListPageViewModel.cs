@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using System;
 using System.ComponentModel;
@@ -13,14 +13,14 @@ using System.Collections.ObjectModel;
 using AccountObj = YpassDesktop.Class.Account;
 namespace YpassDesktop.ViewModels;
 
-public class HomePageViewModel : BaseViewModel, INotifyPropertyChanged
+public class AccountListPageViewModel : BaseViewModel, INotifyPropertyChanged
 {
     // For now, exists only to make HomePageView.axaml available for testing
     // Will be worked on later
     protected readonly YpassDbContext _dbContext;
     private ObservableCollection<AccountObj> _accounts;
 
-    public HomePageViewModel() {
+    public AccountListPageViewModel() {
 
         _dbContext = new YpassDbContext("HomePageDB.db");
         try
