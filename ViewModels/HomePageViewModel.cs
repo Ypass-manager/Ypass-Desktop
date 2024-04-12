@@ -3,46 +3,90 @@ using ReactiveUI;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 using System.Windows.Input;
 using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
-using Avalonia.Collections;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using System.Collections.ObjectModel;
-using AccountObj = YpassDesktop.Class.Account;
+using YpassDesktop.Views;
+
 namespace YpassDesktop.ViewModels;
 
-public class HomePageViewModel : BaseViewModel, INotifyPropertyChanged
+public class HomePageViewModel : BaseViewModel
 {
     // For now, exists only to make HomePageView.axaml available for testing
     // Will be worked on later
-    protected readonly YpassDbContext _dbContext;
-    private ObservableCollection<AccountObj> _accounts;
 
+    private BaseViewModel _CurrentHomePage;
     public HomePageViewModel() {
 
-        _dbContext = new YpassDbContext("HomePageDB.db");
-        try
-        {
-            EncryptionService.LoadDatabaseWithMasterPassword("mdp", "HomePageDB.db");
-        }
-        catch
-        {
-            EncryptionService.InitializeDatabaseWithMasterPassword("mdp", "HomePageDB.db");
-        }
+        var HomePageViewModel = new ListAccountPageViewModel();
 
-        Accounts = new ObservableCollection<AccountObj>
-        {
-            new AccountObj { Email = "custom1@gmail.com", Password = "*******************" },
-            new AccountObj { Email = "custom2@gmail.com", Password = "*******************" },
-        };
+        HomePageNavigationService.Initialize(HomePageViewModel);
 
+        //Subscribe to the service to know when a page has been change, and set the page
+        HomePageNavigationService.NavigationChanged += newPage => SetCurrentHomePage(newPage);
+
+        _CurrentHomePage = HomePageViewModel;
+
+        AddAccountCommand = ReactiveCommand.Create(NavigateToAddAccountPage);
+        ViewHistoryConnectionCommand = ReactiveCommand.Create(NavigateToHistoryConnectionPage);
+        GoHomePageCommand = ReactiveCommand.Create(GoHomePage);
+        DisconnectCommand = ReactiveCommand.Create(Disconnect);
     }
 
-    public ObservableCollection<AccountObj> Accounts
+    public BaseViewModel CurrentHomePage
     {
-        get => _accounts;
-        set => this.RaiseAndSetIfChanged(ref _accounts, value);
+        get { return _CurrentHomePage; }
+        private set { this.RaiseAndSetIfChanged(ref _CurrentHomePage, value); }
+    }
+
+    public bool SetCurrentHomePage(BaseViewModel page)
+    {
+        if (_CurrentHomePage != page)
+        {
+            CurrentHomePage = page;
+            return true;
+        }
+        return false;
+    }
+    public ICommand AddAccountCommand { get; }
+
+    private void NavigateToAddAccountPage()
+    {
+        Service.HomePageNavigationService.NavigateTo(new AddAccountPageViewModel());
+    }
+
+    public ICommand ViewHistoryConnectionCommand {get;}
+    private void NavigateToHistoryConnectionPage(){
+        Service.HomePageNavigationService.NavigateTo(new HistoryConnectionPageViewModel());
+    }
+    public ICommand DisconnectCommand { get; }
+
+    private void Disconnect()
+    {
+        AuthenticationService.Logout();
+
+        var parameterBuilder = new ParameterBuilder();
+        parameterBuilder.Add("resetHistoryNavigation", true);
+        Service.MainWindowNavigationService.NavigateTo(new NewOrExistentDatabasePageViewModel(), parameterBuilder);
+    }
+
+    public ICommand GoHomePageCommand { get;}
+    private void GoHomePage(){
+        Service.HomePageNavigationService.ClearNavigationHistory();
+        BaseViewModel homePage = new ListAccountPageViewModel();
+        Service.HomePageNavigationService.Initialize(homePage);
+        SetCurrentHomePage(homePage);
+    }
+
+    private string? _databaseName;
+
+    [Required]
+    public string? DatabaseName
+    {
+        get
+        {
+            return AuthenticationService.GetDbName();
+        }
     }
 }

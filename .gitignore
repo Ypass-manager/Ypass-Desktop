@@ -4,3 +4,4 @@ obj/*
 extra/*
 YpassDesktop.sln
 *.sln
+YpassDesktop.csproj.*

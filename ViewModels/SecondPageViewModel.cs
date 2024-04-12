@@ -2,6 +2,7 @@ using ReactiveUI;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
+using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 namespace YpassDesktop.ViewModels;
 public class SecondPageViewModel : BaseViewModel
@@ -71,9 +72,9 @@ public class SecondPageViewModel : BaseViewModel
         parameterBuilder.Add("email", MailAddress);
         parameterBuilder.Add("password", Password);
 
-        AuthenticationService.Login();
+        AuthenticationService.Login("test", null);
 
-        Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+        Service.MainWindowNavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
         
     }
 
@@ -81,7 +82,7 @@ public class SecondPageViewModel : BaseViewModel
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO HE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
         
     }
 }

@@ -1,6 +1,9 @@
 ﻿using ReactiveUI;
 using System;
 using System.Windows.Input;
+using Tmds.DBus.Protocol;
+using YpassDesktop.DataAccess;
+using YpassDesktop.Service;
 
 namespace YpassDesktop.ViewModels;
 
@@ -12,8 +15,23 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
         
         NavigateToConnexionPageCommand = ReactiveCommand.Create(NavigateToConnexionPage);
         NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
-        
-        GoBackCommand = ReactiveCommand.Create(GoBack);
+
+    }
+
+    public override void Initialize()
+    {
+        if (NavigationParameter is ParameterBuilder param)
+        {
+            bool resetHistoryNav = param.Get<bool>("resetHistoryNavigation");
+            if (resetHistoryNav)
+            {
+                MainWindowNavigationService.ClearNavigationHistory();
+                HomePageNavigationService.ClearNavigationHistory();
+                MainWindowNavigationService.Initialize(this);
+            }
+        }
+
+
     }
 
     public ICommand NavigateToConnexionPageCommand { get; }
@@ -23,19 +41,12 @@ public class NewOrExistentDatabasePageViewModel : BaseViewModel
 
     private void NavigateToConnexionPage()
     {
-        Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new ConnectionPageViewModel());
     }
 
     private void NavigateToInscriptionPage()
     {
-        Service.NavigationService.NavigateTo(new InscriptionPageViewModel());
-    }
-    public ICommand GoBackCommand { get; }
-    private void GoBack()
-    {
-        Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
-
+        Service.MainWindowNavigationService.NavigateTo(new InscriptionPageViewModel());
     }
 }
 
