@@ -32,11 +32,11 @@ public class ListAccountPageViewModel : BaseViewModel, INotifyPropertyChanged
             EncryptionService.InitializeDatabaseWithMasterPassword("mdp", "HomePageDB.db");
         }
 
-        Accounts = new ObservableCollection<AccountObj>
+        Accounts = new ObservableCollection<AccountObj>();
+        foreach (var account in new Account(_dbContext).GetAllAccount())
         {
-            new AccountObj { Email = "custom1@gmail.com", Password = "*******************" },
-            new AccountObj { Email = "custom2@gmail.com", Password = "*******************" },
-        };
+            Accounts.Add(new AccountObj { Username = account.Username, Password = account.Password, Title = account.Title });
+        }
 
     }
 

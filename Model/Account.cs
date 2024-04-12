@@ -38,4 +38,11 @@ public class Account
     {
         return _dbContext.Account.FirstOrDefault(account => account.Title == title);
     }
+
+    public List<Account> GetAllAccount()
+    {
+        return _dbContext.Account
+                     .OrderByDescending(a => a.Title)
+                     .ToList();
+    }
 }
