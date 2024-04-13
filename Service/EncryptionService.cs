@@ -167,7 +167,7 @@ namespace YpassDesktop.Service
                 string decrypt_pass = Utils.EncryptionTool.DecryptStringFromBytes_Aes(SALT_CRITICAL_ENCRYPT!, derivation_key_with_salt!, IV!);
                 return Encoding.UTF8.GetBytes(decrypt_pass);
             }
-            catch(CryptographicException ex)
+            catch(CryptographicException)
             {
                 throw new IncorrectMasterPasswordException("Master password is incorrect.");
             }

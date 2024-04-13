@@ -74,8 +74,8 @@ public class ConnectionPageViewModel : BaseViewModel
             });
     }
 
-    private string _connectionStatus;
-    public string ConnectionStatus
+    private string? _connectionStatus;
+    public string? ConnectionStatus
     {
         get => _connectionStatus;
         set {
