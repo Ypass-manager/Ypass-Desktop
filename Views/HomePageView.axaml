@@ -56,7 +56,7 @@
 			</Grid>
 		</Border>
 		<!-- Fin du menu -->
-		
+
 		<!-- Pour l'entête -->
 		<Border BorderBrush="Black" BorderThickness="1" Background="#d9d9d9" Grid.Row="0" Grid.Column="1">
 			<Grid>
@@ -83,7 +83,7 @@
 		<!-- Fin de l'entête -->
 
 		<!-- Pour la liste de comptes -->
-		<Border BorderBrush="Black" BorderThickness="1" Background="white" Grid.Row="1" Grid.Column="1">
+		<Border BorderThickness="1" Background="white" Grid.Row="1" Grid.Column="1">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
@@ -109,65 +109,65 @@
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 
+						<!-- Use ItemsControl to dynamically generate Expander controls -->
+						<ItemsControl ItemsSource="{Binding Websites}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<Expander IsExpanded="True" ExpandDirection="Down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
+										<Expander.Header>
+											<Border Padding="10, 5, 10, 0" Margin="0, 0, 0, -10" Background="#BCBCBC" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="#ebe8e8" CornerRadius="30" >
+												<Grid>
+													<Grid.ColumnDefinitions>
+														<ColumnDefinition Width="*"/>
+														<ColumnDefinition Width="5*"/>
+													</Grid.ColumnDefinitions>
 
-						<Expander Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2" IsExpanded="True" ExpandDirection="Down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
-							<Expander.Header>
-								<Border Grid.Row="0" Grid.Column="0" Padding="10, 5, 10, 0" Margin="0, 0, 0, -10" Background="#BCBCBC" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="#ebe8e8" CornerRadius="30" >
-									<Grid>
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*"/>
-											<ColumnDefinition Width="5*"/>
-										</Grid.ColumnDefinitions>
+													<!-- Use data binding for dynamic content -->
+													<TextBlock Text="{Binding WebsiteName}" Grid.Column="0" HorizontalAlignment="Left" Margin="10, 0, 0, 0" Foreground="Black" FontSize="18"/>
+													<!-- Make WebsiteUrl visible only if it's found -->
+													<TextBlock Text="{Binding WebsiteUrl}" Grid.Column="1" HorizontalAlignment="Left" Margin="10, 0, 0, 0" Foreground="Black" FontSize="18"/>
+												</Grid>
+											</Border>
+										</Expander.Header>
+										<!-- Content to be collapsed -->
+										<Border Padding="10, -10, 0,-10">
+											<ItemsControl ItemsSource="{Binding Accounts}">
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<!-- Content for each account -->
+														<Grid>
+															<Grid.ColumnDefinitions>
+																<ColumnDefinition Width="2*"/>
+																<ColumnDefinition Width="2*"/>
+																<ColumnDefinition Width="*"/>
+																<ColumnDefinition Width="*"/>
+															</Grid.ColumnDefinitions>
 
-										<Image Source="avares:/Assets/amazon.png" Grid.Column="0" Margin="0, 0, 0, 0" Height="20" Width="20"/>
-										<TextBlock Text="amazon.com" Grid.Column="1" HorizontalAlignment="Left" Margin="10, 0, 0, 0" Foreground="Black" FontSize="18"/>
-									</Grid>
-								</Border>
-								
-							</Expander.Header>
-							<!-- Add content here -->
-							<Border Padding="10, -10, 0,-10">
-								<!-- Content to be collapsed -->
-								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="2*"/>
-										<ColumnDefinition Width="2*"/>
-										<ColumnDefinition Width="*"/>
-										<ColumnDefinition Width="*"/>
-									</Grid.ColumnDefinitions>
+															<!-- Display account information here -->
+															<TextBlock Text="{Binding Username}" Grid.Column="0" HorizontalAlignment="Left" Background="Transparent" Foreground="Black"/>
+															<!-- Hide password by default -->
+															<TextBlock Text="{Binding Password}" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" Foreground="Black"/>
 
-									<Grid.RowDefinitions>
-										<RowDefinition Height="*"/>
-										<RowDefinition Height="*"/>
-									</Grid.RowDefinitions>
-
-									<TextBlock Text="email1@gmail.com" Grid.Row="0" HorizontalAlignment="Left" Background="Transparent" Foreground="Black"/>
-									<TextBlock Text="*******************" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" Foreground="Black"/>
-									<Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Background="Transparent" Margin="0, -5, 0, 0">
-										<Button.Content>
-											<Image Source="avares:/Assets/eye.png" Width="20" Height="20"/>
-										</Button.Content>
-									</Button>
-									<Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Background="Transparent" Margin="0, -5, 0, 0" FontSize="10">
-										<Button.Content>
-											<Image Source="avares:/Assets/pencil.png" Width="20" Height="20"/>
-										</Button.Content>
-									</Button>
-									<TextBlock Text="email2@gmail.com" Grid.Row="1" HorizontalAlignment="Left" Background="Transparent" Foreground="Black"/>
-									<TextBlock Text="*******************" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" Foreground="Black"/>
-									<Button Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Background="Transparent" Margin="0, -5, 0, 0">
-										<Button.Content>
-											<Image Source="avares:/Assets/eye.png" Width="20" Height="20"/>
-										</Button.Content>
-									</Button>
-									<Button Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right" Background="Transparent" Margin="0, -5, 0, 0" FontSize="10">
-										<Button.Content>
-											<Image Source="avares:/Assets/pencil.png" Width="20" Height="20"/>
-										</Button.Content>
-									</Button>
-								</Grid>
-							</Border>
-						</Expander>
+															<!-- Reveal/hide password -->
+															<Button Grid.Column="2" HorizontalAlignment="Center" Background="Transparent" Margin="0, -5, 0, 0">
+																<Button.Content>
+																	<Image Source="avares:/Assets/eye.png" Width="20" Height="20"/>
+																</Button.Content>
+															</Button>
+															<Button Grid.Column="4" HorizontalAlignment="Right" Background="Transparent" Margin="0, -5, 0, 0" FontSize="10">
+																<Button.Content>
+																	<Image Source="avares:/Assets/pencil.png" Width="20" Height="20"/>
+																</Button.Content>
+															</Button>
+														</Grid>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+										</Border>
+									</Expander>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
 					</Grid>
 				</Border>
 			</Grid>
