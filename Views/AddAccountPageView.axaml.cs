@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace YpassDesktop.Views
 {
-    internal partial class AccountPageView : UserControl
+    internal partial class AddAccountPageView : UserControl
     {
-        public AccountPageView()
+        public AddAccountPageView()
         {
             InitializeComponent();
         }

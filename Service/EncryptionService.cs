@@ -23,7 +23,7 @@ namespace YpassDesktop.Service
         /// </summary>
         /// <param name="master_password">The master password for accessing the database.</param>
         /// <param name="database_name">The name of the database to initialize.</param>
-        public static void InitializeDatabaseWithMasterPassword(string master_password, string database_name)
+        public static byte[] InitializeDatabaseWithMasterPassword(string master_password, string database_name)
         {
             if (master_password == null)
             {
@@ -60,18 +60,20 @@ namespace YpassDesktop.Service
 
                 ManagerAccountDB.Save();
 
+                return derivation_key_with_salt;
+
             }
             
             
         }
 
         /// <summary>
-        /// Loads the specified database with the provided master password.
+        /// Loads the specified database with the provided master password. Return the salt_derived_key
         /// </summary>
         /// <param name="master_password">The master password for accessing the database.</param>
         /// <param name="database_name">The name of the database to load.</param>
         /// <exception cref="IncorrectMasterPasswordException">Thrown when the provided master password is incorrect.</exception>
-        public static void LoadDatabaseWithMasterPassword(string master_password, string database_name)
+        public static byte[] LoadDatabaseWithMasterPassword(string master_password, string database_name)
 
         {
             if (master_password == null) { throw new Exception("Master Password should be set"); }
@@ -97,7 +99,33 @@ namespace YpassDesktop.Service
             //Let's verify now if the master password is good
                 
             DecryptSaltCritical();
+
+            return derivation_key_with_salt;
             
+        }
+
+
+        public static void LoadDatabaseWithSaltDerivationKey(byte[] salt_derived_key, string database_name)
+        {
+
+            var ManagerAccountDB = new ManagerAccount(new YpassDbContext(database_name));
+
+            ManagerAccount? manager_account_object = ManagerAccountDB.GetManagerAccountByDatabaseName(database_name);
+
+            if (manager_account_object == null)
+            {
+                throw new Exception("Database has not been found");
+            }
+
+            derivation_key_with_salt = salt_derived_key;
+
+            IV = manager_account_object.GetIV();
+
+            SALT_CRITICAL_ENCRYPT = manager_account_object.GetSaltCritical();
+
+            //Let's verify now if the master password is good
+
+            DecryptSaltCritical();
         }
 
         /// <summary>

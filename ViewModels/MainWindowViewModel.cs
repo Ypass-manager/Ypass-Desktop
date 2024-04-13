@@ -20,10 +20,10 @@ public class MainWindowViewModel : BaseViewModel
         var HomePageViewModel = new HomePageViewModel();
 
         // For testing purposes, replace simplePageViewModel in NavigationService.Initialize() and in _CurrentPage with another PageViewModel
-        NavigationService.Initialize(HomePageViewModel);
-        
+        MainWindowNavigationService.Initialize(HomePageViewModel);
+
         //Subscribe to the service to know when a page has been change, and set the page
-        NavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
+        MainWindowNavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
 
         // First Page by default
         // _CurrentPage = simplePageViewModel;
