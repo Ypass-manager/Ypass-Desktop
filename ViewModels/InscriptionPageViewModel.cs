@@ -83,10 +83,10 @@ public class InscriptionPageViewModel : BaseViewModel
         try
         {
             DatabaseName += ".db";
-            byte[] derivation_key_with_salt = EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
+            EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
             // Database initialization successful, navigate to the next page or perform any additional logic
 
-            AuthenticationService.Login(DatabaseName, derivation_key_with_salt);
+            AuthenticationService.Login();
 
             Service.MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         }

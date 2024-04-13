@@ -136,13 +136,13 @@ public class ConnectionPageViewModel : BaseViewModel
                 {
                     return;
                 }
-                byte[] salt_derived_key = EncryptionService.LoadDatabaseWithMasterPassword(masterPassword, databaseName);
+                EncryptionService.LoadDatabaseWithMasterPassword(masterPassword, databaseName);
 
                 var parameterBuilder = new ParameterBuilder();
                 parameterBuilder.Add("databaseName", DatabaseName);
                 parameterBuilder.Add("passwordInput", PasswordInput);
                 ConnectionStatus = "Connection successful";
-                AuthenticationService.Login(databaseName, salt_derived_key);
+                AuthenticationService.Login();
                 MainWindowNavigationService.NavigateTo(new HomePageViewModel());
             }
             catch (IncorrectMasterPasswordException ex)

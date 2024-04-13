@@ -86,7 +86,7 @@ public class HomePageViewModel : BaseViewModel
     {
         get
         {
-            return AuthenticationService.GetDbName();
+            return EncryptionService.GetDatabaseName();
         }
     }
 }
