@@ -79,14 +79,12 @@ public class HomePageViewModel : BaseViewModel
         SetCurrentHomePage(homePage);
     }
 
-    private string? _databaseName;
-
     [Required]
     public string? DatabaseName
     {
         get
         {
-            return AuthenticationService.GetDbName();
+            return EncryptionService.GetDatabaseName();
         }
     }
 }
