@@ -92,7 +92,6 @@ public class ConnectionPageViewModel : BaseViewModel
     }
     private string? _databaseName;
 
-    [Required]
     public string? DatabaseName
     {
         get { return _databaseName; }
@@ -101,7 +100,6 @@ public class ConnectionPageViewModel : BaseViewModel
 
     private string? _passwordInput;
 
-    [Required]
     [PasswordPropertyText]
     public string? PasswordInput
     {
