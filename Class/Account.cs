@@ -24,7 +24,7 @@ public class Account : BaseViewModel
         get
         {
             if (IsPasswordVisible)
-                return _passwordEncrypt;
+                return Service.EncryptionService.DecryptPassword(_passwordEncrypt);
             else
                 return new string('*', _passwordEncrypt.Length);
         }
