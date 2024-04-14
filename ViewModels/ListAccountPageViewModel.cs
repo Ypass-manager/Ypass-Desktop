@@ -15,22 +15,12 @@ namespace YpassDesktop.ViewModels;
 
 public class ListAccountPageViewModel : BaseViewModel, INotifyPropertyChanged
 {
-    protected readonly YpassDbContext _dbContext;
     private ObservableCollection<AccountObj> _accounts;
 
     public ListAccountPageViewModel() {
 
-        _dbContext = new YpassDbContext("HomePageDB.db");
-        try
-        {
-            EncryptionService.LoadDatabaseWithMasterPassword("mdp", "HomePageDB.db");
-        }
-        catch
-        {
-            EncryptionService.InitializeDatabaseWithMasterPassword("mdp", "HomePageDB.db");
-        }
-
         Accounts = new ObservableCollection<AccountObj>();
+        YpassDbContext _dbContext = new YpassDbContext(Service.EncryptionService.GetDatabaseName());
         foreach (var account in new Account(_dbContext).GetAllAccount())
         {
             Accounts.Add(new AccountObj { Username = account.Username, Password = account.Password, Title = account.Title });
