@@ -27,7 +27,6 @@ public class InscriptionPageViewModel : BaseViewModel
 
     private string? _databaseName;
 
-    [Required]
     public string? DatabaseName
     {
         get { return _databaseName; }
@@ -36,7 +35,6 @@ public class InscriptionPageViewModel : BaseViewModel
 
     private string? _password;
 
-    [Required]
     [PasswordPropertyText]
     public string? Password
     {
@@ -46,7 +44,6 @@ public class InscriptionPageViewModel : BaseViewModel
 
     private string? _confirmPassword;
 
-    [Required]
     [PasswordPropertyText]
     public string? ConfirmPassword
     {

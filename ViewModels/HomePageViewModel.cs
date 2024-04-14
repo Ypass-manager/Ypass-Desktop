@@ -13,11 +13,9 @@ namespace YpassDesktop.ViewModels;
 
 public class HomePageViewModel : BaseViewModel
 {
-    // For now, exists only to make HomePageView.axaml available for testing
-    // Will be worked on later
-
     private BaseViewModel _CurrentHomePage;
-    public HomePageViewModel() {
+    public HomePageViewModel()
+    {
 
         var HomePageViewModel = new ListAccountPageViewModel();
 
@@ -32,6 +30,7 @@ public class HomePageViewModel : BaseViewModel
         ViewHistoryConnectionCommand = ReactiveCommand.Create(NavigateToHistoryConnectionPage);
         GoHomePageCommand = ReactiveCommand.Create(GoHomePage);
         DisconnectCommand = ReactiveCommand.Create(Disconnect);
+        ParameterCommand = ReactiveCommand.Create(GoParameterPage);
     }
 
     public BaseViewModel CurrentHomePage
@@ -56,8 +55,9 @@ public class HomePageViewModel : BaseViewModel
         Service.HomePageNavigationService.NavigateTo(new AddAccountPageViewModel());
     }
 
-    public ICommand ViewHistoryConnectionCommand {get;}
-    private void NavigateToHistoryConnectionPage(){
+    public ICommand ViewHistoryConnectionCommand { get; }
+    private void NavigateToHistoryConnectionPage()
+    {
         Service.HomePageNavigationService.NavigateTo(new HistoryConnectionPageViewModel());
     }
     public ICommand DisconnectCommand { get; }
@@ -71,12 +71,19 @@ public class HomePageViewModel : BaseViewModel
         Service.MainWindowNavigationService.NavigateTo(new NewOrExistentDatabasePageViewModel(), parameterBuilder);
     }
 
-    public ICommand GoHomePageCommand { get;}
-    private void GoHomePage(){
+    public ICommand GoHomePageCommand { get; }
+    private void GoHomePage()
+    {
         Service.HomePageNavigationService.ClearNavigationHistory();
         BaseViewModel homePage = new ListAccountPageViewModel();
         Service.HomePageNavigationService.Initialize(homePage);
         SetCurrentHomePage(homePage);
+    }
+
+    public ICommand ParameterCommand { get; }
+    private void GoParameterPage()
+    {
+        Service.HomePageNavigationService.NavigateTo(new ParameterPageViewModel());
     }
 
     [Required]
