@@ -30,6 +30,7 @@ public class HomePageViewModel : BaseViewModel
         ViewHistoryConnectionCommand = ReactiveCommand.Create(NavigateToHistoryConnectionPage);
         GoHomePageCommand = ReactiveCommand.Create(GoHomePage);
         DisconnectCommand = ReactiveCommand.Create(Disconnect);
+        ParameterCommand = ReactiveCommand.Create(GoParameterPage);
     }
 
     public BaseViewModel CurrentHomePage
@@ -77,6 +78,12 @@ public class HomePageViewModel : BaseViewModel
         BaseViewModel homePage = new ListAccountPageViewModel();
         Service.HomePageNavigationService.Initialize(homePage);
         SetCurrentHomePage(homePage);
+    }
+
+    public ICommand ParameterCommand { get; }
+    private void GoParameterPage()
+    {
+        Service.HomePageNavigationService.NavigateTo(new ParameterPageViewModel());
     }
 
     [Required]
