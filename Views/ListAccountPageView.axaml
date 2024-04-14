@@ -75,8 +75,9 @@
 									</Grid.RowDefinitions>
 									
 									<TextBlock Text="{Binding Username}" Grid.Row="0" HorizontalAlignment="Left" Background="Transparent" Foreground="Black"/>
-									<TextBox Text="{Binding Password}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" Foreground="Black" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False">
+									<TextBox PasswordChar="*" Text="{Binding Password}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" Foreground="Black" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False">
 									</TextBox>
+									<!-- Command="{Binding TogglePasswordVisibilityCommand}" -->
 									<Button Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Background="Transparent" Margin="0, -5, 0, 0">
 										<Button.Content>
 											<Image Source="avares:/Assets/eye.png" Width="20" Height="20"/>
