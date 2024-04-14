@@ -81,12 +81,7 @@ namespace YpassDesktop.ViewModels
         public ICommand AddAccountCommand { get; }
         private void AddAccount()
         {
-            string database_name = AuthenticationService.GetDbName();
-            byte[]? salt_derived_key = AuthenticationService.GetSaltDerivedKey();
-            if (salt_derived_key != null)
-            {
-                EncryptionService.LoadDatabaseWithSaltDerivationKey(salt_derived_key, database_name);
-            }
+            string database_name = EncryptionService.GetDatabaseName();
                 
             Account account = new Account(new YpassDbContext(database_name));
             if(!string.IsNullOrEmpty(Title)){account.Title = Title;}

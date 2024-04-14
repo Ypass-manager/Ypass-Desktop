@@ -10,24 +10,23 @@ namespace YpassDesktop.Service
     public static class AuthenticationService
     {
         private static bool _isLoggedIn = false;
-        private static String? _databaseName;
-        private static byte[]? _salt_derived_key;
         
         public static bool IsLoggedIn {
             get { return _isLoggedIn; }
             private set { _isLoggedIn = value; }
         }
+        public static bool IsLogin(){
+            return _isLoggedIn;
+        }
 
-        public static void Login(string databaseName, byte[] salt_derived_key)
+        public static void Login()
         {
             // Perform authentication
             // If authentication is successful:
             IsLoggedIn = true;
-            _databaseName = databaseName;
-            _salt_derived_key = salt_derived_key;
             // Add to the database the connection
-
-            HistoryConnection historyConnection = new HistoryConnection(new YpassDbContext(databaseName));
+            string database_name = Service.EncryptionService.GetDatabaseName();
+            HistoryConnection historyConnection = new HistoryConnection(new YpassDbContext(database_name));
             historyConnection.Save();
         }
 
@@ -35,24 +34,7 @@ namespace YpassDesktop.Service
         {
             // Perform logout
             IsLoggedIn = false;
-            _databaseName = null;
-        }
-
-        public static String GetDbName()
-        {
-            if (_isLoggedIn)
-            {
-                if(_databaseName != null)
-                    return _databaseName;
-            }
-            return "Not connected.";
-            
-        }
-
-        public static byte[]? GetSaltDerivedKey()
-        {
-            if(_salt_derived_key != null) return _salt_derived_key;
-            return null;
+            Service.EncryptionService.UnloadDatabase();
         }
 
     }

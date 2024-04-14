@@ -18,7 +18,7 @@ namespace YpassDesktop.ViewModels
 
         public List<string> ConnectionDates{
             get {
-                string database_name = AuthenticationService.GetDbName();
+                string database_name = EncryptionService.GetDatabaseName();
                 HistoryConnection historyConnection = new HistoryConnection(new YpassDbContext(database_name));
 
                 var formattedDates = new List<string>();
