@@ -15,8 +15,6 @@ namespace YpassDesktop.ViewModels;
 
 public class ListAccountPageViewModel : BaseViewModel, INotifyPropertyChanged
 {
-    // For now, exists only to make HomePageView.axaml available for testing
-    // Will be worked on later
     protected readonly YpassDbContext _dbContext;
     private ObservableCollection<AccountObj> _accounts;
 

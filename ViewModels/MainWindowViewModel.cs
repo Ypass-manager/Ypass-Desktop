@@ -12,9 +12,9 @@ public class MainWindowViewModel : BaseViewModel
 {
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
-    {   
+    {
         // PageViewModels available for testing
-        var SimplePageViewModel= new NewOrExistentDatabasePageViewModel();
+        var SimplePageViewModel = new NewOrExistentDatabasePageViewModel();
         var InscriptionPageViewModel = new InscriptionPageViewModel();
         var NewOrExistentDatabaseViewModel = new NewOrExistentDatabasePageViewModel();
         var HomePageViewModel = new HomePageViewModel();
@@ -29,7 +29,7 @@ public class MainWindowViewModel : BaseViewModel
         // _CurrentPage = simplePageViewModel;
         _CurrentPage = HomePageViewModel;
 
-       
+
     }
 
     public BaseViewModel CurrentPage

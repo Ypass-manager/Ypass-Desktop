@@ -82,14 +82,7 @@
 		</Border>
 		<!-- Fin de l'entête -->
 
-		<!-- Pour la liste de comptes -->
-		<Border BorderBrush="Black" BorderThickness="1" Background="white" Grid.Row="1" Grid.Column="1">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="6*"/>
-					<ColumnDefinition Width="*"/>
-				</Grid.ColumnDefinitions>
+		<!-- Corps de la page principale-->
 
 		<Border BorderBrush="Black" BorderThickness="1" Grid.Row="1" Grid.Column="1">
 
@@ -97,6 +90,6 @@
 		</Border>
 
 		<!-- Fin du corps de la page principale-->
-		
+
 	</Grid>
 </UserControl>

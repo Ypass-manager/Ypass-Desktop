@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReactiveUI;
 using System;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
@@ -11,19 +9,13 @@ using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
 using YpassDesktop.Views;
 
-namespace YpassDesktop.ViewModels
-{
-    public class HomePageViewModel : BaseViewModel
-    {
-        private readonly YpassDbContext _dbContext;
+namespace YpassDesktop.ViewModels;
 
 public class HomePageViewModel : BaseViewModel
 {
-    // For now, exists only to make HomePageView.axaml available for testing
-    // Will be worked on later
-
     private BaseViewModel _CurrentHomePage;
-    public HomePageViewModel() {
+    public HomePageViewModel()
+    {
 
         var HomePageViewModel = new ListAccountPageViewModel();
 
@@ -62,8 +54,9 @@ public class HomePageViewModel : BaseViewModel
         Service.HomePageNavigationService.NavigateTo(new AddAccountPageViewModel());
     }
 
-    public ICommand ViewHistoryConnectionCommand {get;}
-    private void NavigateToHistoryConnectionPage(){
+    public ICommand ViewHistoryConnectionCommand { get; }
+    private void NavigateToHistoryConnectionPage()
+    {
         Service.HomePageNavigationService.NavigateTo(new HistoryConnectionPageViewModel());
     }
     public ICommand DisconnectCommand { get; }
@@ -77,8 +70,9 @@ public class HomePageViewModel : BaseViewModel
         Service.MainWindowNavigationService.NavigateTo(new NewOrExistentDatabasePageViewModel(), parameterBuilder);
     }
 
-    public ICommand GoHomePageCommand { get;}
-    private void GoHomePage(){
+    public ICommand GoHomePageCommand { get; }
+    private void GoHomePage()
+    {
         Service.HomePageNavigationService.ClearNavigationHistory();
         BaseViewModel homePage = new ListAccountPageViewModel();
         Service.HomePageNavigationService.Initialize(homePage);
