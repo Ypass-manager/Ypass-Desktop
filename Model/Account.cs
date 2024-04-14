@@ -14,11 +14,29 @@ public class Account
     }
     public int AccountId { get; set; } = 0;
     public string Username { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    private string _password = string.Empty;
+    public string Password
+    {
+        get
+        {
+            if (IsPasswordVisible)
+                return _password;
+            else
+                return new string('*', _password.Length);
+        }
+        set => _password = value;
+    }
     public DateTime LastModification { get; set; } = DateTime.Now;
     public bool IsFavorite { get; set; } = false;
     public string WebsiteUrl { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
+
+    private bool IsPasswordVisible = false;
+
+    public void TogglePasswordVisibility()
+    {
+        IsPasswordVisible = !IsPasswordVisible;
+    }
 
     public void Save()
     {
