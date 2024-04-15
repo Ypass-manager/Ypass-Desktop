@@ -22,12 +22,13 @@ public class ConnectionPageViewModel : BaseViewModel
         this.WhenAnyValue(x => x.DatabaseName, x => x.PasswordInput)
                 .Subscribe(_ => UpdateCanLogin());
 
+        UpdateCanGoBack();
         var canLogin = this.WhenAnyValue(x => x.CanLogin);
+        var canGoBack = this.WhenAnyValue(x => x.CanGoBack);
 
         LoginCommand = ReactiveCommand.Create(Login, canLogin);
-        GoBackCommand = ReactiveCommand.Create(GoBack);
+        GoBackCommand = ReactiveCommand.Create(GoBack, canGoBack);
         NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
-
         // File dialog
 
         openFileDialogInteraction = new Interaction<Unit, string?>();
@@ -115,10 +116,22 @@ public class ConnectionPageViewModel : BaseViewModel
         protected set { this.RaiseAndSetIfChanged(ref _canLogin, value); }
     }
 
+    private bool _canGoBack;
+
+    public bool CanGoBack
+    {
+        get => _canGoBack;
+        set  => this.RaiseAndSetIfChanged(ref _canGoBack, value);
+    }
+
     private void UpdateCanLogin()
     {
         IsConnectionStatusVisible = false;
         CanLogin = !string.IsNullOrEmpty(_databaseName) && !string.IsNullOrEmpty(_passwordInput);
+    }
+    private void UpdateCanGoBack()
+    {
+        CanGoBack = MainWindowNavigationService.CanGoBack();
     }
 
     public ICommand LoginCommand { get; }
