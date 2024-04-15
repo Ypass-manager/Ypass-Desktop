@@ -56,6 +56,23 @@ public class ConnectionPageViewModel : BaseViewModel
         });
     }
 
+    public override void Initialize()
+    {
+        if (NavigationParameter is ParameterBuilder param)
+        {
+            bool resetHistoryNav = param.Get<bool>("resetHistoryNavigation");
+            if (resetHistoryNav)
+            {
+                MainWindowNavigationService.ClearNavigationHistory();
+                HomePageNavigationService.ClearNavigationHistory();
+                MainWindowNavigationService.Initialize(this);
+            }
+            UpdateCanGoBack();
+        }
+
+
+    }
+
     public ReactiveCommand<Unit, Unit> OpenFileDialogCommand { get; }
     private IObservable<Unit> OpenFileDialog()
     {

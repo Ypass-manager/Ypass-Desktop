@@ -15,7 +15,6 @@ public class MainWindowViewModel : BaseViewModel
     {
         var ConnectionViewModel = new ConnectionPageViewModel();
 
-        // For testing purposes, replace simplePageViewModel in NavigationService.Initialize() and in _CurrentPage with another PageViewModel
         MainWindowNavigationService.Initialize(ConnectionViewModel);
 
         //Subscribe to the service to know when a page has been change, and set the page

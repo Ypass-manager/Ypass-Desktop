@@ -68,7 +68,7 @@ public class HomePageViewModel : BaseViewModel
 
         var parameterBuilder = new ParameterBuilder();
         parameterBuilder.Add("resetHistoryNavigation", true);
-        Service.MainWindowNavigationService.NavigateTo(new NewOrExistentDatabasePageViewModel(), parameterBuilder);
+        Service.MainWindowNavigationService.NavigateTo(new ConnectionPageViewModel(), parameterBuilder);
     }
 
     public ICommand GoHomePageCommand { get; }
