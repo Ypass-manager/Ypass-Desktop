@@ -31,8 +31,8 @@ namespace YpassDesktop.ViewModels
                 decryptPassword = "Incorrect Master Password";
                 return;
             }
-            string _encryptPassword = EncryptionService.EncryptPassword(password);
-            string _decryptPassword = EncryptionService.DecryptPassword(_encryptPassword);
+            string? _encryptPassword = EncryptionService.EncryptPassword(password);
+            string? _decryptPassword = EncryptionService.DecryptPassword(_encryptPassword);
             encryptPassword = _encryptPassword;
             decryptPassword = _decryptPassword;
             
@@ -46,8 +46,8 @@ namespace YpassDesktop.ViewModels
 
         
         public string password { get; }
-        public string encryptPassword { get; }
-        public string decryptPassword { get; }
+        public string? encryptPassword { get; }
+        public string? decryptPassword { get; }
 
 
     }

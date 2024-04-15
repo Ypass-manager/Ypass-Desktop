@@ -3,6 +3,7 @@ using ReactiveUI;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Windows.Input;
 using YpassDesktop.DataAccess;
 using YpassDesktop.Service;
@@ -11,8 +12,6 @@ namespace YpassDesktop.ViewModels;
 
 public class InscriptionPageViewModel : BaseViewModel
 {
-    private ManagerAccount _managerAccount;
-
     public InscriptionPageViewModel()
     {
         // Listen to changes of DatabaseName, Password and update CanNavigateNext accordingly
@@ -28,7 +27,6 @@ public class InscriptionPageViewModel : BaseViewModel
 
     private string? _databaseName;
 
-    [Required]
     public string? DatabaseName
     {
         get { return _databaseName; }
@@ -37,7 +35,6 @@ public class InscriptionPageViewModel : BaseViewModel
 
     private string? _password;
 
-    [Required]
     [PasswordPropertyText]
     public string? Password
     {
@@ -47,7 +44,6 @@ public class InscriptionPageViewModel : BaseViewModel
 
     private string? _confirmPassword;
 
-    [Required]
     [PasswordPropertyText]
     public string? ConfirmPassword
     {
@@ -81,16 +77,14 @@ public class InscriptionPageViewModel : BaseViewModel
     {
         try
         {
-            
-            EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
+            DatabaseName += ".db";
+            if(Password != null && DatabaseName != null)
+                EncryptionService.InitializeDatabaseWithMasterPassword(Password, DatabaseName);
             // Database initialization successful, navigate to the next page or perform any additional logic
-            var parameterBuilder = new ParameterBuilder();
-            parameterBuilder.Add("email", DatabaseName);
-            parameterBuilder.Add("password", Password);
 
             AuthenticationService.Login();
 
-            Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+            Service.MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         }
         catch (Exception ex)
         {
@@ -104,14 +98,14 @@ public class InscriptionPageViewModel : BaseViewModel
     public ICommand NavigateToConnexionPageCommand { get; }
     private void NavigateToConnexionPage()
     {
-        Service.NavigationService.NavigateTo(new ConnectionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new ConnectionPageViewModel());
     }
 
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
 
     }
 }

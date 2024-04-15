@@ -1,31 +1,99 @@
 ﻿using ReactiveUI;
 using System;
+using System.IO;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Http.Headers;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using YpassDesktop.Service;
+using System.Windows.Forms;
 using static YpassDesktop.Service.EncryptionService;
+using YpassDesktop.DataAccess;
 
 namespace YpassDesktop.ViewModels;
 
 public class ConnectionPageViewModel : BaseViewModel
 {
+    private Interaction<Unit, string?> openFileDialogInteraction;
     public ConnectionPageViewModel()
     {
         // Listen to user's input and compare it to data from a database and update CanNavigateNext accordingly
         this.WhenAnyValue(x => x.DatabaseName, x => x.PasswordInput)
                 .Subscribe(_ => UpdateCanLogin());
 
+        UpdateCanGoBack();
         var canLogin = this.WhenAnyValue(x => x.CanLogin);
+        var canGoBack = this.WhenAnyValue(x => x.CanGoBack);
 
         LoginCommand = ReactiveCommand.Create(Login, canLogin);
-        GoBackCommand = ReactiveCommand.Create(GoBack);
+        GoBackCommand = ReactiveCommand.Create(GoBack, canGoBack);
         NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
+        // File dialog
+
+        openFileDialogInteraction = new Interaction<Unit, string?>();
+        OpenFileDialogCommand = ReactiveCommand.CreateFromObservable(OpenFileDialog);
+
+        openFileDialogInteraction.RegisterHandler(interaction =>
+        {
+            var localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select Database File";
+            openFileDialog.Filter = "Database Files (*.db)|*.db|All Files (*.*)|*.*";
+            openFileDialog.InitialDirectory = localAppDataPath;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // Pass the selected file path to the interaction result
+                string fileName = Path.GetFileName(openFileDialog.FileName);
+                interaction.SetOutput(fileName);
+            }
+            else
+            {
+                // If the user cancels, set the result to null
+                interaction.SetOutput(null);
+            }
+        });
     }
-    private string _connectionStatus;
-    public string ConnectionStatus
+
+    public override void Initialize()
+    {
+        if (NavigationParameter is ParameterBuilder param)
+        {
+            bool resetHistoryNav = param.Get<bool>("resetHistoryNavigation");
+            if (resetHistoryNav)
+            {
+                MainWindowNavigationService.ClearNavigationHistory();
+                HomePageNavigationService.ClearNavigationHistory();
+                MainWindowNavigationService.Initialize(this);
+            }
+            UpdateCanGoBack();
+        }
+
+
+    }
+
+    public ReactiveCommand<Unit, Unit> OpenFileDialogCommand { get; }
+    private IObservable<Unit> OpenFileDialog()
+    {
+        // Trigger the interaction and return the result
+        return openFileDialogInteraction.Handle(Unit.Default)
+            .Select(selectedFileName =>
+            {
+                // Perform actions with the selected file's name
+                DatabaseName = selectedFileName;
+                return Unit.Default;
+            })
+            .Catch<Unit, Exception>(ex =>
+            {
+                // Handle any errors
+                Console.WriteLine($"Error opening file dialog: {ex.Message}");
+                return Observable.Empty<Unit>();
+            });
+    }
+
+    private string? _connectionStatus;
+    public string? ConnectionStatus
     {
         get => _connectionStatus;
         set {
@@ -42,7 +110,6 @@ public class ConnectionPageViewModel : BaseViewModel
     }
     private string? _databaseName;
 
-    [Required]
     public string? DatabaseName
     {
         get { return _databaseName; }
@@ -51,25 +118,12 @@ public class ConnectionPageViewModel : BaseViewModel
 
     private string? _passwordInput;
 
-    [Required]
     [PasswordPropertyText]
     public string? PasswordInput
     {
         get { return _passwordInput; }
         set { this.RaiseAndSetIfChanged(ref _passwordInput, value); }
     }
-
-    /*
-    private string? _databasePassword;
-
-    [Required]
-    [PasswordPropertyText]
-    public string? DatabasePassword
-    {
-        get { return _databasePassword; }
-        set { this.RaiseAndSetIfChanged(ref _databasePassword, value); }
-    }
-    */
 
     private bool _canLogin;
 
@@ -79,10 +133,22 @@ public class ConnectionPageViewModel : BaseViewModel
         protected set { this.RaiseAndSetIfChanged(ref _canLogin, value); }
     }
 
+    private bool _canGoBack;
+
+    public bool CanGoBack
+    {
+        get => _canGoBack;
+        set  => this.RaiseAndSetIfChanged(ref _canGoBack, value);
+    }
+
     private void UpdateCanLogin()
     {
         IsConnectionStatusVisible = false;
         CanLogin = !string.IsNullOrEmpty(_databaseName) && !string.IsNullOrEmpty(_passwordInput);
+    }
+    private void UpdateCanGoBack()
+    {
+        CanGoBack = MainWindowNavigationService.CanGoBack();
     }
 
     public ICommand LoginCommand { get; }
@@ -105,33 +171,46 @@ public class ConnectionPageViewModel : BaseViewModel
                 parameterBuilder.Add("passwordInput", PasswordInput);
                 ConnectionStatus = "Connection successful";
                 AuthenticationService.Login();
-                //Service.NavigationService.NavigateTo(new ThirdPageViewModel(), parameterBuilder);
+                MainWindowNavigationService.NavigateTo(new HomePageViewModel());
             }
             catch (IncorrectMasterPasswordException ex)
             {
                 // Handle exceptions appropriately
                 Console.WriteLine($"Login failed: {ex.Message}");
-                ConnectionStatus = "Database / Password is incorrect.";
+                ConnectionStatus = "Le mot de passe est incorrect.";
                 // Optionally, show a message to the user indicating that there was an error
+            }
+            catch (DatabaseNotFoundException)
+            {
+                ConnectionStatus = "Le trousseau n'existe pas.";
             }
             catch (Exception ex){
                 Console.WriteLine($"Unmanaged error : {ex.Message}");
                 ConnectionStatus = ex.Message.ToString();
+
+                string logFilePath = "error.log";
+                using (StreamWriter writer = new StreamWriter(logFilePath, append: true))
+                {
+                    writer.WriteLine(ex);
+                    writer.WriteLine($"Stack trace: {ex.StackTrace}");
+                    writer.WriteLine();
+                }
             }
             return;
         }
+        MainWindowNavigationService.NavigateTo(new HomePageViewModel());
         ConnectionStatus = "Already connect.";
     }
 
     public ICommand NavigateToInscriptionPageCommand { get; }
     private void NavigateToInscriptionPage()
     {
-        Service.NavigationService.NavigateTo(new InscriptionPageViewModel());
+        Service.MainWindowNavigationService.NavigateTo(new InscriptionPageViewModel());
     }
     public ICommand GoBackCommand { get; }
     private void GoBack()
     {
         Console.WriteLine("GO BACK TO THE PREVIOUS PAGE");
-        Service.NavigationService.GoBack();
+        Service.MainWindowNavigationService.GoBack();
     }
 }

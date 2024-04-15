@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
+using System.Linq;
 using YpassDesktop.ViewModels;
 
 namespace YpassDesktop.Service
 {
-    public static class NavigationService
+    public class NavigationServiceBase
     {
-        private static readonly Stack<BaseViewModel> _navigationHistory = new Stack<BaseViewModel>();
+        protected readonly Stack<BaseViewModel> _navigationHistory = new Stack<BaseViewModel>();
 
-        public static event Action<BaseViewModel>? NavigationChanged;
+        public event Action<BaseViewModel>? NavigationChanged;
 
-        public static void Initialize(BaseViewModel firstPage)
+        public void Initialize(BaseViewModel firstPage)
         {
             _navigationHistory.Push(firstPage); // Add the first page to the history
         }
-        public static void NavigateTo(BaseViewModel newPage, ParameterBuilder? parameterBuilder = null)
+
+        public void NavigateTo(BaseViewModel newPage, ParameterBuilder? parameterBuilder = null)
         {
             newPage.NavigationParameter = parameterBuilder;
             _navigationHistory.Push(newPage); // Store the current page in the history
@@ -28,7 +29,7 @@ namespace YpassDesktop.Service
             }
         }
 
-        public static void GoBack()
+        public void GoBack()
         {
             if (_navigationHistory.Count > 1)
             {
@@ -39,9 +40,21 @@ namespace YpassDesktop.Service
                 OnNavigationChanged(previousPage);
             }
         }
-        private static void OnNavigationChanged(BaseViewModel newPage)
+
+        public bool CanGoBack(){
+            if (_navigationHistory.Count > 1)
+                return true;
+            else return false;
+        }
+
+        protected void OnNavigationChanged(BaseViewModel newPage)
         {
             NavigationChanged?.Invoke(newPage);
+        }
+
+        public void ClearNavigationHistory()
+        {
+            _navigationHistory.Clear();
         }
     }
 }

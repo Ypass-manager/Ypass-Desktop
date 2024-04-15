@@ -13,7 +13,7 @@ namespace YpassDesktop.Service
     public static class EncryptionService
     {
 
-        private static string? database_name;
+        private static string? DATABASE_NAME;
         private static byte[]? SALT_CRITICAL_ENCRYPT;
         private static byte[]? derivation_key_with_salt;
         private static byte[]? IV;
@@ -60,13 +60,15 @@ namespace YpassDesktop.Service
 
                 ManagerAccountDB.Save();
 
+                DATABASE_NAME = database_name;
+
             }
             
             
         }
 
         /// <summary>
-        /// Loads the specified database with the provided master password.
+        /// Loads the specified database with the provided master password. Return the salt_derived_key
         /// </summary>
         /// <param name="master_password">The master password for accessing the database.</param>
         /// <param name="database_name">The name of the database to load.</param>
@@ -82,7 +84,7 @@ namespace YpassDesktop.Service
 
             if(manager_account_object == null)
             {
-                throw new Exception("Database has not been found");
+                throw new DatabaseNotFoundException("Database has not been found");
             }
 
             var PASSWORD = Encoding.UTF8.GetBytes(master_password);
@@ -98,6 +100,31 @@ namespace YpassDesktop.Service
                 
             DecryptSaltCritical();
             
+            DATABASE_NAME = database_name;
+        }
+
+
+        public static void LoadDatabaseWithSaltDerivationKey(byte[] salt_derived_key, string database_name)
+        {
+
+            var ManagerAccountDB = new ManagerAccount(new YpassDbContext(database_name));
+
+            ManagerAccount? manager_account_object = ManagerAccountDB.GetManagerAccountByDatabaseName(database_name);
+
+            if (manager_account_object == null)
+            {
+                throw new Exception("Database has not been found");
+            }
+
+            derivation_key_with_salt = salt_derived_key;
+
+            IV = manager_account_object.GetIV();
+
+            SALT_CRITICAL_ENCRYPT = manager_account_object.GetSaltCritical();
+
+            //Let's verify now if the master password is good
+
+            DecryptSaltCritical();
         }
 
         /// <summary>
@@ -140,17 +167,42 @@ namespace YpassDesktop.Service
                 string decrypt_pass = Utils.EncryptionTool.DecryptStringFromBytes_Aes(SALT_CRITICAL_ENCRYPT!, derivation_key_with_salt!, IV!);
                 return Encoding.UTF8.GetBytes(decrypt_pass);
             }
-            catch(CryptographicException ex)
+            catch(CryptographicException)
             {
                 throw new IncorrectMasterPasswordException("Master password is incorrect.");
             }
             
         }
 
+        public static String GetDatabaseName()
+        {
+            if (AuthenticationService.IsLogin())
+            {
+                if(DATABASE_NAME != null)
+                    return DATABASE_NAME;
+                else{
+                    return "[not found]";
+                }
+            }
+            return "Not connected.";
+            
+        }
+
+        public static void UnloadDatabase(){
+            DATABASE_NAME = null;
+            SALT_CRITICAL_ENCRYPT = null;
+            derivation_key_with_salt = null;
+            IV = null;
+        }
 
         public class IncorrectMasterPasswordException : Exception
         {
             public IncorrectMasterPasswordException(string message) : base(message) { }
+        }
+
+        public class DatabaseNotFoundException : Exception
+        {
+            public DatabaseNotFoundException(string message) : base(message) {}
         }
     }
 }

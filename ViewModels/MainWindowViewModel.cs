@@ -12,24 +12,19 @@ public class MainWindowViewModel : BaseViewModel
 {
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
-    {   
-        // PageViewModels available for testing
-        var SimplePageViewModel= new NewOrExistentDatabasePageViewModel();
-        var InscriptionPageViewModel = new InscriptionPageViewModel();
-        var NewOrExistentDatabaseViewModel = new NewOrExistentDatabasePageViewModel();
-        var HomePageViewModel = new NewOrExistentDatabasePageViewModel();
+    {
+        var ConnectionViewModel = new ConnectionPageViewModel();
 
-        // For testing purposes, replace simplePageViewModel in NavigationService.Initialize() and in _CurrentPage with another PageViewModel
-        NavigationService.Initialize(HomePageViewModel);
-        
+        MainWindowNavigationService.Initialize(ConnectionViewModel);
+
         //Subscribe to the service to know when a page has been change, and set the page
-        NavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
+        MainWindowNavigationService.NavigationChanged += newPage => SetCurrentPage(newPage);
 
         // First Page by default
         // _CurrentPage = simplePageViewModel;
-        _CurrentPage = HomePageViewModel;
+        _CurrentPage = ConnectionViewModel;
 
-       
+
     }
 
     public BaseViewModel CurrentPage
