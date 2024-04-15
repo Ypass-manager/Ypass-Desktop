@@ -177,12 +177,24 @@ public class ConnectionPageViewModel : BaseViewModel
             {
                 // Handle exceptions appropriately
                 Console.WriteLine($"Login failed: {ex.Message}");
-                ConnectionStatus = "Database / Password is incorrect.";
+                ConnectionStatus = "Le mot de passe est incorrect.";
                 // Optionally, show a message to the user indicating that there was an error
+            }
+            catch (DatabaseNotFoundException)
+            {
+                ConnectionStatus = "Le trousseau n'existe pas.";
             }
             catch (Exception ex){
                 Console.WriteLine($"Unmanaged error : {ex.Message}");
                 ConnectionStatus = ex.Message.ToString();
+
+                string logFilePath = "error.log";
+                using (StreamWriter writer = new StreamWriter(logFilePath, append: true))
+                {
+                    writer.WriteLine(ex);
+                    writer.WriteLine($"Stack trace: {ex.StackTrace}");
+                    writer.WriteLine();
+                }
             }
             return;
         }

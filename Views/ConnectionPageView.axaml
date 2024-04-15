@@ -87,7 +87,7 @@
 						<TextBox PasswordChar="$" Text="{Binding PasswordInput}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Margin="70,10,0,0" Watermark="Password"
                  			UseFloatingWatermark="True"/>
 						<Button Content="Connexion" Command="{Binding LoginCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Margin="40,0,0,0" Text="{Binding ConnectionStatus}" HorizontalAlignment="Center" VerticalAlignment="Top"
+						<TextBlock Margin="70,10,0,0" Text="{Binding ConnectionStatus}" HorizontalAlignment="Center" VerticalAlignment="Top"
 							IsVisible="{Binding IsConnectionStatusVisible}" Foreground="Red" />
 					</StackPanel>
 					</Border>

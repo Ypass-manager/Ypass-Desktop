@@ -1,0 +1,12 @@
+System.Exception: Database has not been found
+   at YpassDesktop.Service.EncryptionService.LoadDatabaseWithMasterPassword(String master_password, String database_name) in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\Service\EncryptionService.cs:line 87
+   at YpassDesktop.ViewModels.ConnectionPageViewModel.Login() in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\ViewModels\ConnectionPageViewModel.cs:line 167
+Stack trace:    at YpassDesktop.Service.EncryptionService.LoadDatabaseWithMasterPassword(String master_password, String database_name) in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\Service\EncryptionService.cs:line 87
+   at YpassDesktop.ViewModels.ConnectionPageViewModel.Login() in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\ViewModels\ConnectionPageViewModel.cs:line 167
+
+System.Exception: Database has not been found
+   at YpassDesktop.Service.EncryptionService.LoadDatabaseWithMasterPassword(String master_password, String database_name) in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\Service\EncryptionService.cs:line 87
+   at YpassDesktop.ViewModels.ConnectionPageViewModel.Login() in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\ViewModels\ConnectionPageViewModel.cs:line 167
+Stack trace:    at YpassDesktop.Service.EncryptionService.LoadDatabaseWithMasterPassword(String master_password, String database_name) in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\Service\EncryptionService.cs:line 87
+   at YpassDesktop.ViewModels.ConnectionPageViewModel.Login() in C:\Users\b05683\Documents\GitHub\Ypass-Desktop\ViewModels\ConnectionPageViewModel.cs:line 167
+
