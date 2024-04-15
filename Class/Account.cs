@@ -18,7 +18,7 @@ public class Account : BaseViewModel
 
     }
     
-    public string Username { get; set; }
+    public string? Username { get; set; }
     public string Password
     {
         get
@@ -34,7 +34,7 @@ public class Account : BaseViewModel
     {
         IsPasswordVisible = !IsPasswordVisible;
     }
-    public string Title { get; set;}
+    public string? Title { get; set;}
     public bool IsPasswordVisible
     {
         get { return _isPasswordVisible; }

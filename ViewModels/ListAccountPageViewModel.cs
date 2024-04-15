@@ -15,7 +15,7 @@ namespace YpassDesktop.ViewModels;
 
 public class ListAccountPageViewModel : BaseViewModel, INotifyPropertyChanged
 {
-    private ObservableCollection<AccountObj> _accounts;
+    private ObservableCollection<AccountObj>? _accounts;
 
     public ListAccountPageViewModel() {
 
@@ -28,7 +28,7 @@ public class ListAccountPageViewModel : BaseViewModel, INotifyPropertyChanged
 
     }
 
-    public ObservableCollection<AccountObj> Accounts
+    public ObservableCollection<AccountObj>? Accounts
     {
         get => _accounts;
         set => this.RaiseAndSetIfChanged(ref _accounts, value);
