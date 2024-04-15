@@ -84,7 +84,7 @@ namespace YpassDesktop.Service
 
             if(manager_account_object == null)
             {
-                throw new Exception("Database has not been found");
+                throw new DatabaseNotFoundException("Database has not been found");
             }
 
             var PASSWORD = Encoding.UTF8.GetBytes(master_password);
@@ -198,6 +198,11 @@ namespace YpassDesktop.Service
         public class IncorrectMasterPasswordException : Exception
         {
             public IncorrectMasterPasswordException(string message) : base(message) { }
+        }
+
+        public class DatabaseNotFoundException : Exception
+        {
+            public DatabaseNotFoundException(string message) : base(message) {}
         }
     }
 }

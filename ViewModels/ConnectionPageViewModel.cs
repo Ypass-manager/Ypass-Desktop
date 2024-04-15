@@ -22,12 +22,13 @@ public class ConnectionPageViewModel : BaseViewModel
         this.WhenAnyValue(x => x.DatabaseName, x => x.PasswordInput)
                 .Subscribe(_ => UpdateCanLogin());
 
+        UpdateCanGoBack();
         var canLogin = this.WhenAnyValue(x => x.CanLogin);
+        var canGoBack = this.WhenAnyValue(x => x.CanGoBack);
 
         LoginCommand = ReactiveCommand.Create(Login, canLogin);
-        GoBackCommand = ReactiveCommand.Create(GoBack);
+        GoBackCommand = ReactiveCommand.Create(GoBack, canGoBack);
         NavigateToInscriptionPageCommand = ReactiveCommand.Create(NavigateToInscriptionPage);
-
         // File dialog
 
         openFileDialogInteraction = new Interaction<Unit, string?>();
@@ -53,6 +54,23 @@ public class ConnectionPageViewModel : BaseViewModel
                 interaction.SetOutput(null);
             }
         });
+    }
+
+    public override void Initialize()
+    {
+        if (NavigationParameter is ParameterBuilder param)
+        {
+            bool resetHistoryNav = param.Get<bool>("resetHistoryNavigation");
+            if (resetHistoryNav)
+            {
+                MainWindowNavigationService.ClearNavigationHistory();
+                HomePageNavigationService.ClearNavigationHistory();
+                MainWindowNavigationService.Initialize(this);
+            }
+            UpdateCanGoBack();
+        }
+
+
     }
 
     public ReactiveCommand<Unit, Unit> OpenFileDialogCommand { get; }
@@ -115,10 +133,22 @@ public class ConnectionPageViewModel : BaseViewModel
         protected set { this.RaiseAndSetIfChanged(ref _canLogin, value); }
     }
 
+    private bool _canGoBack;
+
+    public bool CanGoBack
+    {
+        get => _canGoBack;
+        set  => this.RaiseAndSetIfChanged(ref _canGoBack, value);
+    }
+
     private void UpdateCanLogin()
     {
         IsConnectionStatusVisible = false;
         CanLogin = !string.IsNullOrEmpty(_databaseName) && !string.IsNullOrEmpty(_passwordInput);
+    }
+    private void UpdateCanGoBack()
+    {
+        CanGoBack = MainWindowNavigationService.CanGoBack();
     }
 
     public ICommand LoginCommand { get; }
@@ -147,12 +177,24 @@ public class ConnectionPageViewModel : BaseViewModel
             {
                 // Handle exceptions appropriately
                 Console.WriteLine($"Login failed: {ex.Message}");
-                ConnectionStatus = "Database / Password is incorrect.";
+                ConnectionStatus = "Le mot de passe est incorrect.";
                 // Optionally, show a message to the user indicating that there was an error
+            }
+            catch (DatabaseNotFoundException)
+            {
+                ConnectionStatus = "Le trousseau n'existe pas.";
             }
             catch (Exception ex){
                 Console.WriteLine($"Unmanaged error : {ex.Message}");
                 ConnectionStatus = ex.Message.ToString();
+
+                string logFilePath = "error.log";
+                using (StreamWriter writer = new StreamWriter(logFilePath, append: true))
+                {
+                    writer.WriteLine(ex);
+                    writer.WriteLine($"Stack trace: {ex.StackTrace}");
+                    writer.WriteLine();
+                }
             }
             return;
         }

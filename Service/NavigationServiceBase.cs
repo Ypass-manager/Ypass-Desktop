@@ -41,6 +41,12 @@ namespace YpassDesktop.Service
             }
         }
 
+        public bool CanGoBack(){
+            if (_navigationHistory.Count > 1)
+                return true;
+            else return false;
+        }
+
         protected void OnNavigationChanged(BaseViewModel newPage)
         {
             NavigationChanged?.Invoke(newPage);

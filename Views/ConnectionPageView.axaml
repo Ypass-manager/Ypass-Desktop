@@ -11,7 +11,7 @@
 
 	
 	
-	<Grid>
+	<Grid Background="#ffffff">
 		<!--Définir 2 bandes, une pour l'entête, et une autre pour le stack pannel -->
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
@@ -44,7 +44,7 @@
 			</Grid>
 		</Border>
 		<!-- Fin de l'entête -->
-		
+
 		<!-- Place pour le stack pannel-->
 
 
@@ -52,42 +52,50 @@
 
 
 		<Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
-		
+
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			
+
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<!-- Border gris -->
 
 
+
+			<ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+				<Grid Width="500" Height="500">
+					<Image Margin="20" Source="avares:/Assets/pc_inscription.png" />
+				</Grid>
+			</ScrollViewer>
+
+
+
 			<ScrollViewer Grid.Row="0" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-					<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,80" CornerRadius="20">
+					<Border BorderBrush="Gray" BorderThickness="1" Background="#ffffff" Padding="20,0,100,0" Margin="0,30,0,30" CornerRadius="20">
 					<StackPanel VerticalAlignment="Stretch">
 						<!-- Contenu du StackPanel à ajouter ici -->
-						<Button Content="&lt;-" Command="{Binding GoBackCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Text="Connexion" FontSize="25" Margin="70,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<Border BorderThickness="50,3,50,3" BorderBrush="LightGray" Margin="70,10,0,15"/>
-						<Button Command="{ Binding OpenFileDialogCommand}" Content="Sélectionnez un trousseau" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,30,0,0" Width="300" Height="40" Padding="10" Background="#844cf9" FontSize="14" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBox Text="{Binding DatabaseName}" Margin="40,10,0,0" />
-						<TextBlock Text="Mot de passe :" FontSize="13" Margin="40,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
-						<TextBox PasswordChar="$" Text="{Binding PasswordInput}" Watermark="Password" UseFloatingWatermark="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="350" TextWrapping="Wrap" Margin="40,10,0,0"/>
-						<Button Content="Connexion" Command="{Binding LoginCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
-						<TextBlock Margin="40,0,0,0" Text="{Binding ConnectionStatus}" HorizontalAlignment="Center" VerticalAlignment="Top"
+						<Button Command="{Binding GoBackCommand}" Content="&lt;-" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0" Width="38" Height="38" Background="#844cf9" FontSize="13" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="Se connecter" FontSize="25" Margin="70,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<Border BorderThickness="40,3,50,3" BorderBrush="LightGray" Margin="70,10,0,15"/>
+						<Button Command="{Binding OpenFileDialogCommand}" Content="Sélectionner un trousseau" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,30,0,0" Padding="10" Background="#844cf9" FontSize="14" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Text="Nom de votre trouseau :" FontSize="13" Margin="70,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<TextBox Text="{Binding DatabaseName}" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Width="270" Margin="70,10,0,0"/>
+						<TextBlock Text="Mot de passe :" FontSize="13" Margin="70,15,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" FontWeight="Bold"/>
+						<TextBox PasswordChar="$" Text="{Binding PasswordInput}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="270" Margin="70,10,0,0" Watermark="Password"
+                 			UseFloatingWatermark="True"/>
+						<Button Content="Connexion" Command="{Binding LoginCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="70,30,0,0" Width="135" Height="45" Padding="10" Background="#844cf9" FontSize="20" Foreground="#f8f8f8" BorderBrush="#844cf9" CornerRadius="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontWeight="Bold"/>
+						<TextBlock Margin="70,10,0,0" Text="{Binding ConnectionStatus}" HorizontalAlignment="Center" VerticalAlignment="Top"
 							IsVisible="{Binding IsConnectionStatusVisible}" Foreground="Red" />
 					</StackPanel>
-
-
 					</Border>
-				</ScrollViewer>
-			
+			</ScrollViewer>
+
+
 
 		</Grid>
-			
-		
-		
+
 	</Grid>
 </UserControl>
