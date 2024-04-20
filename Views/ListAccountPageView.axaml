@@ -29,7 +29,7 @@
 			<RowDefinition Height="50" />
 		</Grid.RowDefinitions>
 
-		<Border Grid.Row="2" Grid.Column="1" Background="#d9d9d9" VerticalAlignment="Center">
+		<Border Grid.Row="2" Grid.Column="1" Background="" VerticalAlignment="Center">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"/>
@@ -43,10 +43,11 @@
 				</Grid.RowDefinitions>
 
 				<ScrollViewer Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-					<ListBox ItemsSource="{Binding Accounts}">
-						<ListBox.ItemTemplate>
+					<ItemsControl ItemsSource="{Binding Accounts}">
+
+						<ItemsControl.ItemTemplate>
 							<DataTemplate>
-								<Expander Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2" IsExpanded="True" ExpandDirection="Down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
+								<Expander Margin="0,0,0,10" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2" IsExpanded="True" ExpandDirection="Down" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 									<Expander.Header>
 										<Border Grid.Row="0" Grid.Column="0" Padding="10, 5, 10, 0" Margin="0, 0, 0, -10" Background="#99dde7" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderBrush="#ebe8e8" CornerRadius="30" >
 											<Grid>
@@ -108,8 +109,8 @@
 								</Expander>
 
 							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
 				</ScrollViewer>
 			</Grid>
 		</Border>
