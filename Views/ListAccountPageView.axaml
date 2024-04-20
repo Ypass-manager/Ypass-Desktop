@@ -77,11 +77,23 @@
 									<TextBlock Text="{Binding Username}" Grid.Row="0" HorizontalAlignment="Left" Background="Transparent" Foreground="Black"/>
 									<TextBox Text="{Binding Password}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Background="Transparent" Foreground="Black" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False">
 									</TextBox>
-									<Button Command="{Binding TogglePasswordVisibilityCommand}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Background="Transparent" Margin="0, -5, 0, 0">
-										<Button.Content>
-											<Image Source="avares:/Assets/eye.png" Width="20" Height="20"/>
-										</Button.Content>
-									</Button>
+									<Grid Grid.Column="2" HorizontalAlignment="Center">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<Button Command="{Binding TogglePasswordVisibilityCommand}" Grid.Row="0" Grid.Column="0" Background="Transparent" Margin="0, -5, 0, 0">
+											<Button.Content>
+												<Image Source="avares:/Assets/eye.png" Width="20" Height="20"/>
+											</Button.Content>
+										</Button>
+										<Button Command="{Binding CopyPasswordCommand}" Grid.Row="0" Grid.Column="1" Background="Transparent" Margin="0, -5, 0, 0">
+											<Button.Content>
+												<Image Source="avares:/Assets/copy.png" Width="20" Height="20"/>
+											</Button.Content>
+										</Button>
+									</Grid>
+
 									<Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Background="Transparent" Margin="0, -5, 0, 0" FontSize="10">
 										<Button.Content>
 											<Image Source="avares:/Assets/pencil.png" Width="20" Height="20"/>

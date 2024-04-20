@@ -1,6 +1,7 @@
 using ReactiveUI;
 using System;
 using System.Windows.Input;
+using System.Windows.Forms;
 using YpassDesktop.ViewModels;
 
 namespace YpassDesktop.Class;
@@ -15,7 +16,7 @@ public class Account : BaseViewModel
     public Account() {
 
         TogglePasswordVisibilityCommand = ReactiveCommand.Create(tooglePasswordVisibility);
-
+        CopyPasswordCommand = ReactiveCommand.Create(copyPassword);
     }
     
     public string? Username { get; set; }
@@ -51,5 +52,11 @@ public class Account : BaseViewModel
         TogglePasswordVisibility();
     }
 
+    public ICommand CopyPasswordCommand { get; }
+
+    private void copyPassword()
+    {
+        Clipboard.SetText(Service.EncryptionService.DecryptPassword(_passwordEncrypt));
+    }
 }
 
