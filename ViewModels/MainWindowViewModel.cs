@@ -13,7 +13,7 @@ public class MainWindowViewModel : BaseViewModel
     private BaseViewModel _CurrentPage;
     public MainWindowViewModel()
     {
-        var ConnectionViewModel = new HomePageViewModel();
+        var ConnectionViewModel = new ConnectionPageViewModel();
 
         MainWindowNavigationService.Initialize(ConnectionViewModel);
 

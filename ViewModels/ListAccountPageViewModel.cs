@@ -20,9 +20,6 @@ public class ListAccountPageViewModel : BaseViewModel, INotifyPropertyChanged
     public ListAccountPageViewModel() {
 
         Accounts = new ObservableCollection<AccountObj>();
-
-        Service.EncryptionService.LoadDatabaseWithMasterPassword("mdp", "HomePageDB.db");
-        AuthenticationService.Login();
         YpassDbContext _dbContext = new YpassDbContext(Service.EncryptionService.GetDatabaseName());
         foreach (var account in new Account(_dbContext).GetAllAccount())
         {
